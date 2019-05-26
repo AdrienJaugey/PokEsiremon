@@ -16,7 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package pokesiremon;
+package Main;
+
+import PokEsiremon.Personnage.Pokemon.Pokemon;
+import static PokEsiremon.Personnage.Pokemon.TypePokemon.*;
 
 /**
  *
@@ -24,6 +27,7 @@ package pokesiremon;
  */
 public class Main {
     public static void main(String[] args) {
-        
+        Pokemon pikachu = new Pokemon(ELECTRIK, "Pikachu");
+        System.out.println(pikachu);
     }
 }
