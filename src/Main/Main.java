@@ -26,7 +26,7 @@ import PokEsiremon.Personnage.Pokemon.Pokemon;
  */
 public class Main {
     public static void main(String[] args) {
-        Pokemon pikachu = new Pokemon(1, 58);
+        Pokemon pikachu = new Pokemon(1, 5);
         System.out.println(pikachu);
     
     }

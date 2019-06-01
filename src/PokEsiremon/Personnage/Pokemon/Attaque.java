@@ -23,20 +23,33 @@ package PokEsiremon.Personnage.Pokemon;
  * @author AdrienJaugey
  */
 public class Attaque {
-    private final TypePokemon typePkmn;
-    private final TypeAttaque typeAtq;
+    private final String _nom;
+    private final TypePokemon _typePkmn;
+    private final TypeAttaque _typeAtq;
+    private final int _puissance;
+    private final int _precision;
+    private final double _critModifier;
+    private final double _vitModifier;
+    
 
-    public Attaque(TypePokemon typePkmn, TypeAttaque typeAtq) {
-        this.typePkmn = typePkmn;
-        this.typeAtq = typeAtq;
+    public Attaque(int id) {
+        Pokedex pkdx = Pokedex.get();
+        this._nom = pkdx.getNomCapacite(id);
+        this._typePkmn = pkdx.getTypeCapacite(id);
+        this._typeAtq = TypeAttaque.get(_typePkmn);
+        double stats[] = pkdx.getStatsCapacite(id);
+        _puissance = (int) stats[0];
+        _precision = (int) stats[1];
+        _critModifier = stats[2];
+        _vitModifier = stats[3];
     }
 
     public TypePokemon getTypePkmn() {
-        return typePkmn;
+        return _typePkmn;
     }
 
     public TypeAttaque getTypeAtq() {
-        return typeAtq;
+        return _typeAtq;
     }
     
     public void attaquer(Pokemon pkmn){

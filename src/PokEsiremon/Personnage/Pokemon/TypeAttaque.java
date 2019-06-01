@@ -18,11 +18,27 @@
  */
 package PokEsiremon.Personnage.Pokemon;
 
+import static PokEsiremon.Personnage.Pokemon.TypePokemon.*;
+
 /**
  *
  * @author AdrienJaugey
  */
 public enum TypeAttaque {
     PHYSIQUE,
-    SPECIALE
+    SPECIALE;
+    
+    public static TypeAttaque get(TypePokemon type){
+        if(type == PLANTE 
+        || type == EAU 
+        || type == FEU 
+        || type == ELECTRIK 
+        || type == PSY 
+        || type == GLACE 
+        || type == DRAGON){
+            return SPECIALE;
+        } else {
+            return PHYSIQUE;
+        }
+    }
 }

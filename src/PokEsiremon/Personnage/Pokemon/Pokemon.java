@@ -71,8 +71,8 @@ public class Pokemon extends Personnage{
     
     public Pokemon(int id, int niveau){
         Pokedex pkdx = Pokedex.get();
-        _nom = pkdx.getNom(id);
-        int baseStats[] = pkdx.getBaseStats(id);
+        _nom = pkdx.getNomPkmn(id);
+        int baseStats[] = pkdx.getBaseStatsPkmn(id);
         _vieBase = baseStats[0];
         _atqBase = baseStats[1];
         _defBase = baseStats[2];
@@ -82,7 +82,7 @@ public class Pokemon extends Personnage{
         _niveau = niveau;
         _surnom = null;
         _attaques = new Attaque[4];
-        TypePokemon t[] = pkdx.getTypes(id);
+        TypePokemon t[] = pkdx.getTypesPkmn(id);
         _type1 = t[0];
         _type2 = t[1];
         int IV[] = generateIV();

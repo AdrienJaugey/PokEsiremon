@@ -25,15 +25,25 @@ import java.util.Scanner;
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
 public class Pokedex {
+    public static final int NB_POKEMON = 151;
+    public static final int NB_CAPACITE = 1;
     private static Pokedex _instance;
-    private final String[] _noms;
-    private final TypePokemon[][] _types;
-    private final int[][] _baseStats;
+    private final String[] _pkmnNom;
+    private final TypePokemon[][] _pkmnType;
+    private final int[][] _pkmnBaseStat;
+    
+    private final String[] _capaciteNom;
+    private final TypePokemon[] _capaciteType;
+    private final double[][] _capaciteStat;
     
     private Pokedex(){
-        _noms = new String[151];
-        _baseStats = new int[151][6];
-        _types = new TypePokemon[151][2];
+        _pkmnNom = new String[NB_POKEMON];
+        _pkmnBaseStat = new int[NB_POKEMON][6];
+        _pkmnType = new TypePokemon[NB_POKEMON][2];
+        _capaciteNom = new String[NB_CAPACITE];
+        _capaciteType = new TypePokemon[NB_CAPACITE];
+        _capaciteStat = new double[NB_CAPACITE][4];
+        
         String line = "";
         int i = 0;
         TypePokemon types[] = TypePokemon.values();
@@ -41,15 +51,15 @@ public class Pokedex {
             Scanner scan = new Scanner(getClass().getResourceAsStream("pokemon_base_stats.csv"));
             while (scan.hasNextLine()) {
                 String[] pkmn = scan.nextLine().split(";");
-                _noms[i] = pkmn[1];
-                _baseStats[i][0] = Integer.parseInt(pkmn[2]);
-                _baseStats[i][1] = Integer.parseInt(pkmn[3]);
-                _baseStats[i][2] = Integer.parseInt(pkmn[4]);
-                _baseStats[i][3] = Integer.parseInt(pkmn[5]);
-                _baseStats[i][4] = Integer.parseInt(pkmn[6]);
-                _baseStats[i][5] = Integer.parseInt(pkmn[7]);
-                _types[i][0] = types[Integer.parseInt(pkmn[8])];
-                _types[i][1] = (Integer.parseInt(pkmn[9]) != -1 ? types[Integer.parseInt(pkmn[9])] : null);
+                _pkmnNom[i] = pkmn[1];
+                _pkmnBaseStat[i][0] = Integer.parseInt(pkmn[2]);
+                _pkmnBaseStat[i][1] = Integer.parseInt(pkmn[3]);
+                _pkmnBaseStat[i][2] = Integer.parseInt(pkmn[4]);
+                _pkmnBaseStat[i][3] = Integer.parseInt(pkmn[5]);
+                _pkmnBaseStat[i][4] = Integer.parseInt(pkmn[6]);
+                _pkmnBaseStat[i][5] = Integer.parseInt(pkmn[7]);
+                _pkmnType[i][0] = types[Integer.parseInt(pkmn[8])];
+                _pkmnType[i][1] = (Integer.parseInt(pkmn[9]) != -1 ? types[Integer.parseInt(pkmn[9])] : null);
                 i++;
             }
 
@@ -63,15 +73,27 @@ public class Pokedex {
         return _instance;
     }
     
-    public String getNom(int id){
-        return _noms[id - 1];
+    public String getNomPkmn(int id){
+        return _pkmnNom[id - 1];
     }
     
-    public int[] getBaseStats(int id){
-        return _baseStats[id - 1];
+    public int[] getBaseStatsPkmn(int id){
+        return _pkmnBaseStat[id - 1];
     }
     
-    public TypePokemon[] getTypes(int id){
-        return _types[id - 1];
+    public TypePokemon[] getTypesPkmn(int id){
+        return _pkmnType[id - 1];
+    }
+    
+    public String getNomCapacite(int id){
+        return _capaciteNom[id];
+    }
+    
+    public double[] getStatsCapacite(int id){
+        return _capaciteStat[id];
+    }
+    
+    public TypePokemon getTypeCapacite(int id){
+        return _capaciteType[id];
     }
 }
