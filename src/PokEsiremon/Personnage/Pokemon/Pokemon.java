@@ -210,7 +210,7 @@ public class Pokemon extends Personnage{
     }
     
     private int statFormula(int statBase, int statIV){
-        return (int)(((2. * statBase + statIV)* _niveau) / 100 + 5);
+        return (int)(((2. * statBase + statIV) * _niveau) / 100 + 5);
     }
     
     private int[] generateIV(){
@@ -226,7 +226,7 @@ public class Pokemon extends Personnage{
        this._vieMax = hpFormula();
        this._atqMax = statFormula(_atqBase, _atqIV);
        this._defMax = statFormula(_defBase, _defIV);
-       this._atqSpeMax = statFormula(-_atqSpeBase, _atqSpeIV);
+       this._atqSpeMax = statFormula(_atqSpeBase, _atqSpeIV);
        this._defSpeMax = statFormula(_defSpeBase, _defSpeIV);
        this._vitMax = statFormula(_vitBase, _vitIV);
        resetCurrentStats();

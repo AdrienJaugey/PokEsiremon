@@ -18,9 +18,7 @@
  */
 package PokEsiremon.Personnage.Pokemon;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.Scanner;
 
 /**
  *
@@ -38,10 +36,11 @@ public class Pokedex {
         _types = new TypePokemon[151][2];
         String line = "";
         int i = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader("pokemon_base_stats.csv"))) {
-
-            while ((line = br.readLine()) != null) {
-                String[] pkmn = line.split(";");
+        TypePokemon types[] = TypePokemon.values();
+        try {
+            Scanner scan = new Scanner(getClass().getResourceAsStream("pokemon_base_stats.csv"));
+            while (scan.hasNextLine()) {
+                String[] pkmn = scan.nextLine().split(";");
                 _noms[i] = pkmn[1];
                 _baseStats[i][0] = Integer.parseInt(pkmn[2]);
                 _baseStats[i][1] = Integer.parseInt(pkmn[3]);
@@ -49,11 +48,12 @@ public class Pokedex {
                 _baseStats[i][3] = Integer.parseInt(pkmn[5]);
                 _baseStats[i][4] = Integer.parseInt(pkmn[6]);
                 _baseStats[i][5] = Integer.parseInt(pkmn[7]);
-
+                _types[i][0] = types[Integer.parseInt(pkmn[8])];
+                _types[i][1] = (Integer.parseInt(pkmn[9]) != -1 ? types[Integer.parseInt(pkmn[9])] : null);
                 i++;
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println(e.getLocalizedMessage());
         }
     }
