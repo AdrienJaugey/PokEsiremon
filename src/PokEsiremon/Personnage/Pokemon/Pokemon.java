@@ -25,160 +25,170 @@ import PokEsiremon.Personnage.Personnage;
  * @author AdrienJaugey
  */
 public class Pokemon extends Personnage{
-    private TypePokemon type;
-    private String nom;
-    private String surnom;
-    private Attaque attaques[];
+    private TypePokemon _type1;
+    private TypePokemon _type2;
+    private String _nom;
+    private String _surnom;
+    private Attaque[] _attaques;
     
     //Valeur des stats de base
-    private int vieBase;
-    private int atqBase;
-    private int defBase;
-    private int atqSpeBase;
-    private int defSpeBase;
-    private int vitBase;
+    private int _vieBase;
+    private int _atqBase;
+    private int _defBase;
+    private int _atqSpeBase;
+    private int _defSpeBase;
+    private int _vitBase;
+    
+    //IVs
+    private final int _vieIV;
+    private final int _atqIV;
+    private final int _defIV;
+    private final int _atqSpeIV;
+    private final int _defSpeIV;
+    private final int _vitIV;
     
     //Valeur des stats actuelles
-    private int vie;
-    private int atq;
-    private int def;
-    private int atqSpe;
-    private int defSpe;
-    private int vit;
-    private int exp;
-    private int niveau;
+    private int _vie;
+    private int _atq;
+    private int _def;
+    private int _atqSpe;
+    private int _defSpe;
+    private int _vit;
+    private int _exp;
+    private int _niveau;
     
     //Valeur des stats Maximale
-    private int vieMax;
-    private int atqMax;
-    private int defMax;
-    private int atqSpeMax;
-    private int defSpeMax;
-    private int vitMax;
+    private int _vieMax;
+    private int _atqMax;
+    private int _defMax;
+    private int _atqSpeMax;
+    private int _defSpeMax;
+    private int _vitMax;
     
-    public Pokemon(TypePokemon type, String nom){
-        this(type, nom, 2);
+    public Pokemon(int id){
+        this(id, 2);
     }
     
-    public Pokemon(TypePokemon type, String nom, int niveau){
-        this.type = type;
-        this.nom = nom;
-        generateBaseStats();
-        this.niveau = niveau;
-        updateMaxStats();
+    public Pokemon(int id, int niveau){
+        Pokedex pkdx = Pokedex.get();
+        _nom = pkdx.getNom(id);
+        int baseStats[] = pkdx.getBaseStats(id);
+        _vieBase = baseStats[0];
+        _atqBase = baseStats[1];
+        _defBase = baseStats[2];
+        _atqSpeBase = baseStats[3];
+        _defSpeBase = baseStats[4];
+        _vitBase = baseStats[5];
+        _niveau = niveau;
+        _surnom = null;
+        _attaques = new Attaque[4];
+        TypePokemon t[] = pkdx.getTypes(id);
+        _type1 = t[0];
+        _type2 = t[1];
+        int IV[] = generateIV();
+        _vieIV = IV[0];
+        _atqIV = IV[1];
+        _defIV = IV[2];
+        _atqSpeIV = IV[3];
+        _defSpeIV = IV[4];
+        _vitIV = IV[5];
+        this.updateMaxStats();
     }
 
     @Override
     public String toString() {
-        String res = nom + " (" + type + ") Niv. " + niveau;
-        res += "\nVie : " + vie + "/" + vieMax;
-        res += "\n\tAtq : " + atqMax;
-        res += "\n\tDef : " + defMax;
-        res += "\n\tVit : " + vitMax;
-        res += "\n\tAtqSpe : " + atqSpeMax;
-        res += "\n\tDefSpe : " + defSpeMax;
-        res += "\nProchain niveau dans " + (this.getExpNextLvl() - exp) + " exp.";
+        String res = _nom + " (" + _type1 + (_type2 != null ? "/" + _type2 : "" ) + ") Niv. " + _niveau;
+        res += "\n\tVie :\t " + _vie + "/" + _vieMax + "\t(" + _vieIV + ")";
+        res += "\n\tAtq :\t " + _atqMax + "\t(" + _atqIV + ")";
+        res += "\n\tDef :\t " + _defMax + "\t(" + _defIV + ")";
+        res += "\n\tAtqSpe : " + _atqSpeMax + "\t(" + _atqSpeIV + ")";
+        res += "\n\tDefSpe : " + _defSpeMax + "\t(" + _defSpeIV + ")";
+        res += "\n\tVit :\t " + _vitMax + "\t(" + _vitIV + ")";
+        res += "\nProchain niveau dans " + (this.getExpNextLvl() - _exp) + " exp.";
         return res;
     }
     
     
 
     public TypePokemon getType() {
-        return type;
+        return _type1;
     }
 
     public String getNom() {
-        return nom;
+        return _nom;
     }
 
     public String getSurnom() {
-        return surnom;
+        return _surnom;
     }
 
     public Attaque[] getAttaques() {
-        return attaques;
+        return _attaques;
     }
 
     public int getVie() {
-        return vie;
+        return _vie;
     }
 
     public int getAtq() {
-        return atq;
+        return _atq;
     }
 
     public int getDef() {
-        return def;
+        return _def;
     }
 
     public int getAtqSpe() {
-        return atqSpe;
+        return _atqSpe;
     }
 
     public int getDefSpe() {
-        return defSpe;
+        return _defSpe;
     }
 
     public int getVitesse() {
-        return vit;
+        return _vit;
     }
     
     public int getExp(){
-        return exp;
+        return _exp;
     }
     
     public int getNiveau(){
-        return niveau;
+        return _niveau;
     }
 
     public int getVieMax() {
-        return vieMax;
+        return _vieMax;
     }
 
     public int getAtqMax() {
-        return atqMax;
+        return _atqMax;
     }
 
     public int getDefMax() {
-        return defMax;
+        return _defMax;
     }
 
     public int getAtqSpeMax() {
-        return atqSpeMax;
+        return _atqSpeMax;
     }
 
     public int getDefSpeMax() {
-        return defSpeMax;
+        return _defSpeMax;
     }
 
     public int getVitesseMax() {
-        return vitMax;
-    }
-    
-    private int generateBaseStat(){
-        return 30 + (int)(Math.random()*20);
-    }
-    
-    private int generateBaseHP(){
-        return 10 + (int)(Math.random()*20);
-    }
-    
-    private void generateBaseStats(){
-        this.vieBase = this.generateBaseHP();
-        this.atqBase = this.generateBaseStat();
-        this.defBase = this.generateBaseStat();
-        this.atqSpeBase = this.generateBaseStat();
-        this.defSpeBase = this.generateBaseStat();
-        this.vitBase = this.generateBaseStat();
+        return _vitMax;
     }
     
     public int ajouterExp(int exp){
         int lvlup = 0;
-        if(exp > 0 && niveau < 100){
-            this.exp += exp;
-            while(this.exp >= getExpNextLvl() && niveau < 100){
+        if(exp > 0 && _niveau < 100){
+            this._exp += exp;
+            while(this._exp >= getExpNextLvl() && _niveau < 100){
                 lvlup++;
-                niveau++;
+                _niveau++;
             }
         }
         if(lvlup > 0) updateMaxStats();
@@ -186,40 +196,49 @@ public class Pokemon extends Personnage{
     }
     
     /**
-     * Permet d'obtenir la quantité d'experience nécessaire pour passer un niveau
+     * Permet d'obtenir la quantité d'experience nécessaire pour passer un _niveau
      * @return le nombre de niveaux passés
      */
     public int getExpNextLvl(){
         //Courbe rapide d'expérience 
         //https://www.pokepedia.fr/Courbe_d%27exp%C3%A9rience#La_courbe_.22rapide.22
-        return (int)(0.8 * Math.pow(niveau + 1, 3));
+        return (int)(0.8 * Math.pow(_niveau + 1, 3));
     }
     
     private int hpFormula(){
-        return (int)((2. * vieBase * niveau) / 100 + niveau + 10);
+        return (int)(((2. * _vieBase + _vieIV) * _niveau) / 100 + _niveau + 10);
     }
     
-    private int statFormula(int stat){
-        return (int)((2. * stat * niveau) / 100 + 5);
+    private int statFormula(int statBase, int statIV){
+        return (int)(((2. * statBase + statIV)* _niveau) / 100 + 5);
+    }
+    
+    private int[] generateIV(){
+        int IV[] = new int[6];
+        for(int i = 0; i < 31; i++){
+            int index = (int)(Math.random() * 6);
+            IV[index]++;
+        }
+        return IV;
     }
     
     private void updateMaxStats(){
-       this.vieMax = hpFormula();
-       this.atqMax = statFormula(atqBase);
-       this.defMax = statFormula(defBase);
-       this.atqSpeMax = statFormula(atqSpeBase);
-       this.defSpeMax = statFormula(defSpeBase);
-       this.vitMax = statFormula(vitBase);
+       this._vieMax = hpFormula();
+       this._atqMax = statFormula(_atqBase, _atqIV);
+       this._defMax = statFormula(_defBase, _defIV);
+       this._atqSpeMax = statFormula(-_atqSpeBase, _atqSpeIV);
+       this._defSpeMax = statFormula(_defSpeBase, _defSpeIV);
+       this._vitMax = statFormula(_vitBase, _vitIV);
        resetCurrentStats();
     }
 
     private void resetCurrentStats() {
-        this.vie = this.vieMax;
-        this.atq = this.atqMax;
-        this.def = this.defMax;
-        this.atqSpe = this.atqSpeMax;
-        this.defSpe = this.defSpeMax;
-        this.vit = this.vitMax;
+        this._vie = this._vieMax;
+        this._atq = this._atqMax;
+        this._def = this._defMax;
+        this._atqSpe = this._atqSpeMax;
+        this._defSpe = this._defSpeMax;
+        this._vit = this._vitMax;
     }
     
 }

@@ -19,7 +19,6 @@
 package Main;
 
 import PokEsiremon.Personnage.Pokemon.Pokemon;
-import static PokEsiremon.Personnage.Pokemon.TypePokemon.*;
 
 /**
  *
@@ -27,7 +26,8 @@ import static PokEsiremon.Personnage.Pokemon.TypePokemon.*;
  */
 public class Main {
     public static void main(String[] args) {
-        Pokemon pikachu = new Pokemon(ELECTRIK, "Pikachu");
+        Pokemon pikachu = new Pokemon(25);
         System.out.println(pikachu);
+    
     }
 }
