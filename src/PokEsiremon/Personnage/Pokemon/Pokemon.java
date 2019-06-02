@@ -19,17 +19,20 @@
 package PokEsiremon.Personnage.Pokemon;
 
 import PokEsiremon.Personnage.Personnage;
+import PokEsiremon.Personnage.Pokemon.Capacite.Attaque;
+import static PokEsiremon.Personnage.Pokemon.Enum_Statut.*;
 
 /**
  *
  * @author AdrienJaugey
  */
 public class Pokemon extends Personnage{
-    private TypePokemon _type1;
-    private TypePokemon _type2;
+    private TypePokemon _type[];
     private String _nom;
     private String _surnom;
     private Attaque[] _attaques;
+    private Enum_Statut _statut;
+    private int _tourStatut;
     
     //Valeur des stats de base
     private int _vieBase;
@@ -72,6 +75,8 @@ public class Pokemon extends Personnage{
     public Pokemon(int id, int niveau){
         Pokedex pkdx = Pokedex.get();
         _nom = pkdx.getNomPkmn(id);
+        _statut = NEUTRE;
+        _tourStatut = 0;
         int baseStats[] = pkdx.getBaseStatsPkmn(id);
         _vieBase = baseStats[0];
         _atqBase = baseStats[1];
@@ -82,9 +87,7 @@ public class Pokemon extends Personnage{
         _niveau = niveau;
         _surnom = null;
         _attaques = new Attaque[4];
-        TypePokemon t[] = pkdx.getTypesPkmn(id);
-        _type1 = t[0];
-        _type2 = t[1];
+        _type = pkdx.getTypesPkmn(id);
         int IV[] = generateIV();
         _vieIV = IV[0];
         _atqIV = IV[1];
@@ -97,7 +100,7 @@ public class Pokemon extends Personnage{
 
     @Override
     public String toString() {
-        String res = _nom + " (" + _type1 + (_type2 != null ? "/" + _type2 : "" ) + ") Niv. " + _niveau;
+        String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") Niv. " + _niveau;
         res += "\n\tVie :\t " + _vie + "/" + _vieMax + "\t(" + _vieIV + ")";
         res += "\n\tAtq :\t " + _atqMax + "\t(" + _atqIV + ")";
         res += "\n\tDef :\t " + _defMax + "\t(" + _defIV + ")";
@@ -108,10 +111,8 @@ public class Pokemon extends Personnage{
         return res;
     }
     
-    
-
-    public TypePokemon getType() {
-        return _type1;
+    public TypePokemon[] getType() {
+        return _type;
     }
 
     public String getNom() {
@@ -156,6 +157,34 @@ public class Pokemon extends Personnage{
     
     public int getNiveau(){
         return _niveau;
+    }
+
+    public Enum_Statut getStatut() {
+        return _statut;
+    }
+
+    public int getVieIV() {
+        return _vieIV;
+    }
+
+    public int getAtqIV() {
+        return _atqIV;
+    }
+
+    public int getDefIV() {
+        return _defIV;
+    }
+
+    public int getAtqSpeIV() {
+        return _atqSpeIV;
+    }
+
+    public int getDefSpeIV() {
+        return _defSpeIV;
+    }
+
+    public int getVitIV() {
+        return _vitIV;
     }
 
     public int getVieMax() {
@@ -239,6 +268,8 @@ public class Pokemon extends Personnage{
         this._atqSpe = this._atqSpeMax;
         this._defSpe = this._defSpeMax;
         this._vit = this._vitMax;
+        this._statut = NEUTRE;
+        this._tourStatut = 0;
     }
     
 }

@@ -16,7 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package PokEsiremon.Personnage.Pokemon;
+package PokEsiremon.Personnage.Pokemon.Capacite;
+
+import PokEsiremon.Personnage.Pokemon.Pokedex;
+import PokEsiremon.Personnage.Pokemon.Pokemon;
+import PokEsiremon.Personnage.Pokemon.TypePokemon;
 
 /**
  *
@@ -52,7 +56,7 @@ public class Attaque {
         return _typeAtq;
     }
     
-    public void attaquer(Pokemon pkmn){
+    public void attaquer(Pokemon sender, Pokemon receiver){
         
     }
 }

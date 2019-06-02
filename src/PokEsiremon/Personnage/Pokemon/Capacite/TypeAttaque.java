@@ -16,8 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package PokEsiremon.Personnage.Pokemon;
+package PokEsiremon.Personnage.Pokemon.Capacite;
 
+import PokEsiremon.Personnage.Pokemon.TypePokemon;
 import static PokEsiremon.Personnage.Pokemon.TypePokemon.*;
 
 /**
