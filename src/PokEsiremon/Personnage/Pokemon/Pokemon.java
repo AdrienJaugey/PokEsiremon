@@ -19,7 +19,7 @@
 package PokEsiremon.Personnage.Pokemon;
 
 import PokEsiremon.Personnage.Personnage;
-import PokEsiremon.Personnage.Pokemon.Capacite.Attaque;
+import PokEsiremon.Personnage.Pokemon.Capacite.Capacite;
 import static PokEsiremon.Personnage.Pokemon.Enum_Statut.*;
 
 /**
@@ -29,26 +29,9 @@ import static PokEsiremon.Personnage.Pokemon.Enum_Statut.*;
 public class Pokemon extends Personnage{
     private TypePokemon _type[];
     private String _nom;
-    private String _surnom;
-    private Attaque[] _attaques;
+    private Capacite[] _attaques;
     private Enum_Statut _statut;
     private int _tourStatut;
-    
-    //Valeur des stats de base
-    private int _vieBase;
-    private int _atqBase;
-    private int _defBase;
-    private int _atqSpeBase;
-    private int _defSpeBase;
-    private int _vitBase;
-    
-    //IVs
-    private final int _vieIV;
-    private final int _atqIV;
-    private final int _defIV;
-    private final int _atqSpeIV;
-    private final int _defSpeIV;
-    private final int _vitIV;
     
     //Valeur des stats actuelles
     private int _vie;
@@ -61,53 +44,40 @@ public class Pokemon extends Personnage{
     private int _niveau;
     
     //Valeur des stats Maximale
-    private int _vieMax;
-    private int _atqMax;
-    private int _defMax;
-    private int _atqSpeMax;
-    private int _defSpeMax;
-    private int _vitMax;
+    private final int _vieMax;
+    private final int _atqMax;
+    private final int _defMax;
+    private final int _atqSpeMax;
+    private final int _defSpeMax;
+    private final int _vitMax;
     
     public Pokemon(int id){
-        this(id, 2);
-    }
-    
-    public Pokemon(int id, int niveau){
         Pokedex pkdx = Pokedex.get();
         _nom = pkdx.getNomPkmn(id);
         _statut = NEUTRE;
         _tourStatut = 0;
         int baseStats[] = pkdx.getBaseStatsPkmn(id);
-        _vieBase = baseStats[0];
-        _atqBase = baseStats[1];
-        _defBase = baseStats[2];
-        _atqSpeBase = baseStats[3];
-        _defSpeBase = baseStats[4];
-        _vitBase = baseStats[5];
-        _niveau = niveau;
-        _surnom = null;
-        _attaques = new Attaque[4];
+        int dv[] = generateDV();
+        _vieMax = hpFormula(baseStats[0], dv[0]);
+        _atqMax = statFormula(baseStats[1], dv[1]);
+        _defMax = statFormula(baseStats[2], dv[2]);
+        _atqSpeMax = statFormula(baseStats[3], dv[3]);
+        _defSpeMax = statFormula(baseStats[4], dv[4]);
+        _vitMax = statFormula(baseStats[5], dv[5]);
+        _attaques = new Capacite[4];
         _type = pkdx.getTypesPkmn(id);
-        int IV[] = generateIV();
-        _vieIV = IV[0];
-        _atqIV = IV[1];
-        _defIV = IV[2];
-        _atqSpeIV = IV[3];
-        _defSpeIV = IV[4];
-        _vitIV = IV[5];
-        this.updateMaxStats();
+        this.resetStats();
     }
 
     @Override
     public String toString() {
         String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") Niv. " + _niveau;
-        res += "\n\tVie :\t " + _vie + "/" + _vieMax + "\t(" + _vieIV + ")";
-        res += "\n\tAtq :\t " + _atqMax + "\t(" + _atqIV + ")";
-        res += "\n\tDef :\t " + _defMax + "\t(" + _defIV + ")";
-        res += "\n\tAtqSpe : " + _atqSpeMax + "\t(" + _atqSpeIV + ")";
-        res += "\n\tDefSpe : " + _defSpeMax + "\t(" + _defSpeIV + ")";
-        res += "\n\tVit :\t " + _vitMax + "\t(" + _vitIV + ")";
-        res += "\nProchain niveau dans " + (this.getExpNextLvl() - _exp) + " exp.";
+        res += "\n\tVie :\t " + _vie + "/" + _vieMax;
+        res += "\n\tAtq :\t " + _atqMax + "/" + _atqMax;
+        res += "\n\tDef :\t " + _defMax + "/" + _defMax;
+        res += "\n\tAtqSpe : " + _atqSpeMax + "/" + _atqSpeMax;
+        res += "\n\tDefSpe : " + _defSpeMax + "/" + _defSpeMax;
+        res += "\n\tVit :\t " + _vitMax + "/" + _vitMax;
         return res;
     }
     
@@ -119,12 +89,12 @@ public class Pokemon extends Personnage{
         return _nom;
     }
 
-    public String getSurnom() {
-        return _surnom;
-    }
-
-    public Attaque[] getAttaques() {
+    public Capacite[] getAttaques() {
         return _attaques;
+    }
+    
+    public void setAttaque(int id, int emplacement){
+        this._attaques[emplacement] = Pokedex.get().getCapacite(id);
     }
 
     public int getVie() {
@@ -163,30 +133,6 @@ public class Pokemon extends Personnage{
         return _statut;
     }
 
-    public int getVieIV() {
-        return _vieIV;
-    }
-
-    public int getAtqIV() {
-        return _atqIV;
-    }
-
-    public int getDefIV() {
-        return _defIV;
-    }
-
-    public int getAtqSpeIV() {
-        return _atqSpeIV;
-    }
-
-    public int getDefSpeIV() {
-        return _defSpeIV;
-    }
-
-    public int getVitIV() {
-        return _vitIV;
-    }
-
     public int getVieMax() {
         return _vieMax;
     }
@@ -211,57 +157,23 @@ public class Pokemon extends Personnage{
         return _vitMax;
     }
     
-    public int ajouterExp(int exp){
-        int lvlup = 0;
-        if(exp > 0 && _niveau < 100){
-            this._exp += exp;
-            while(this._exp >= getExpNextLvl() && _niveau < 100){
-                lvlup++;
-                _niveau++;
-            }
+    private int hpFormula(int vieBase, int dv){
+        return (int)((vieBase + dv + 82)*2 + 10);
+    }
+    
+    private int statFormula(int statBase, int dv){
+        return (int)((statBase + dv + 32)*2 + 5);
+    }
+    
+    private int[] generateDV(){
+        int DV[] = new int[6];
+        for(int i = 0; i < 6; i++){
+            DV[i] = (int)(Math.random() * 15);
         }
-        if(lvlup > 0) updateMaxStats();
-        return lvlup;
-    }
-    
-    /**
-     * Permet d'obtenir la quantité d'experience nécessaire pour passer un _niveau
-     * @return le nombre de niveaux passés
-     */
-    public int getExpNextLvl(){
-        //Courbe rapide d'expérience 
-        //https://www.pokepedia.fr/Courbe_d%27exp%C3%A9rience#La_courbe_.22rapide.22
-        return (int)(0.8 * Math.pow(_niveau + 1, 3));
-    }
-    
-    private int hpFormula(){
-        return (int)(((2. * _vieBase + _vieIV) * _niveau) / 100 + _niveau + 10);
-    }
-    
-    private int statFormula(int statBase, int statIV){
-        return (int)(((2. * statBase + statIV) * _niveau) / 100 + 5);
-    }
-    
-    private int[] generateIV(){
-        int IV[] = new int[6];
-        for(int i = 0; i < 31; i++){
-            int index = (int)(Math.random() * 6);
-            IV[index]++;
-        }
-        return IV;
-    }
-    
-    private void updateMaxStats(){
-       this._vieMax = hpFormula();
-       this._atqMax = statFormula(_atqBase, _atqIV);
-       this._defMax = statFormula(_defBase, _defIV);
-       this._atqSpeMax = statFormula(_atqSpeBase, _atqSpeIV);
-       this._defSpeMax = statFormula(_defSpeBase, _defSpeIV);
-       this._vitMax = statFormula(_vitBase, _vitIV);
-       resetCurrentStats();
+        return DV;
     }
 
-    private void resetCurrentStats() {
+    private void resetStats() {
         this._vie = this._vieMax;
         this._atq = this._atqMax;
         this._def = this._defMax;

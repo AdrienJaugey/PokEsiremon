@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey.
+ * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,18 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Main;
-
-import PokEsiremon.Personnage.Pokemon.Pokemon;
+package PokEsiremon.Personnage.Pokemon.Capacite;
 
 /**
  *
- * @author AdrienJaugey
+ * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public class Main {
-    public static void main(String[] args) {
-        Pokemon pikachu = new Pokemon(1);
-        System.out.println(pikachu);
-    
-    }
+public enum Enum_Cible {
+    UTILISATEUR,
+    ADVERSAIRE;
 }

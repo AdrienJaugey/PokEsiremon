@@ -18,6 +18,8 @@
  */
 package PokEsiremon.Personnage.Pokemon;
 
+import PokEsiremon.Personnage.Pokemon.Capacite.Capacite;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -31,18 +33,16 @@ public class Pokedex {
     private final String[] _pkmnNom;
     private final TypePokemon[][] _pkmnType;
     private final int[][] _pkmnBaseStat;
-    
-    private final String[] _capaciteNom;
-    private final TypePokemon[] _capaciteType;
-    private final double[][] _capaciteStat;
+    private final ArrayList<Integer>[] _pkmnCapacite;
+    private final Capacite[] _capacite;
     
     private Pokedex(){
         _pkmnNom = new String[NB_POKEMON];
         _pkmnBaseStat = new int[NB_POKEMON][6];
         _pkmnType = new TypePokemon[NB_POKEMON][2];
-        _capaciteNom = new String[NB_CAPACITE];
-        _capaciteType = new TypePokemon[NB_CAPACITE];
-        _capaciteStat = new double[NB_CAPACITE][4];
+        _pkmnCapacite = new ArrayList[NB_POKEMON];
+        
+        _capacite = new Capacite[NB_CAPACITE];
         
         String line = "";
         int i = 0;
@@ -85,15 +85,11 @@ public class Pokedex {
         return _pkmnType[id - 1];
     }
     
-    public String getNomCapacite(int id){
-        return _capaciteNom[id];
+    public ArrayList<Integer> getCapacitePokemon(int id){
+        return _pkmnCapacite[id];
     }
     
-    public double[] getStatsCapacite(int id){
-        return _capaciteStat[id];
-    }
-    
-    public TypePokemon getTypeCapacite(int id){
-        return _capaciteType[id];
+    public Capacite getCapacite(int id){
+        return _capacite[id];
     }
 }

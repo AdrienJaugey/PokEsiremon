@@ -18,7 +18,6 @@
  */
 package PokEsiremon.Personnage.Pokemon.Capacite;
 
-import PokEsiremon.Personnage.Pokemon.Pokedex;
 import PokEsiremon.Personnage.Pokemon.Pokemon;
 import PokEsiremon.Personnage.Pokemon.TypePokemon;
 
@@ -26,26 +25,20 @@ import PokEsiremon.Personnage.Pokemon.TypePokemon;
  *
  * @author AdrienJaugey
  */
-public class Attaque {
+public class Capacite {
     private final String _nom;
     private final TypePokemon _typePkmn;
     private final TypeAttaque _typeAtq;
     private final int _puissance;
     private final int _precision;
-    private final double _critModifier;
-    private final double _vitModifier;
-    
 
-    public Attaque(int id) {
-        Pokedex pkdx = Pokedex.get();
-        this._nom = pkdx.getNomCapacite(id);
-        this._typePkmn = pkdx.getTypeCapacite(id);
-        this._typeAtq = TypeAttaque.get(_typePkmn);
-        double stats[] = pkdx.getStatsCapacite(id);
-        _puissance = (int) stats[0];
-        _precision = (int) stats[1];
-        _critModifier = stats[2];
-        _vitModifier = stats[3];
+    public Capacite(String nom, TypePokemon typePkmn, int puissance, int precision) {
+        _nom = nom;
+        _typePkmn = typePkmn;
+        _typeAtq = TypeAttaque.get(typePkmn);
+        _puissance = puissance;
+        _precision = precision;
+        
     }
 
     public TypePokemon getTypePkmn() {
@@ -56,7 +49,7 @@ public class Attaque {
         return _typeAtq;
     }
     
-    public void attaquer(Pokemon sender, Pokemon receiver){
+    public void utiliser(Pokemon sender, Pokemon receiver){
         
     }
 }
