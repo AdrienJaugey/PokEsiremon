@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey.
+ * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,12 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package PokEsiremon.Personnage;
+package Pokemon;
 
 /**
  *
- * @author AdrienJaugey
+ * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public class Personnage {
-    
+public enum Enum_Statut {
+    NEUTRE,
+    BRULURE,
+    GEL,
+    PARALYSIE,
+    POISON,
+    SOMMEIL,
+    CONFUSION,
+    VAMPIGRAINE;
 }

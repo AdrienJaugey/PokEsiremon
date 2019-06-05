@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
+ * Copyright (C) 2019 AdrienJaugey.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,13 +16,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package PokEsiremon.Personnage.Pokemon.Capacite;
+package Pokemon.Capacite;
+
+import Pokemon.TypePokemon;
+import static Pokemon.TypePokemon.*;
 
 /**
  *
- * @author AdrienJaugey <a.jaugey@gmail.com>
+ * @author AdrienJaugey
  */
-public enum Enum_Cible {
-    UTILISATEUR,
-    ADVERSAIRE;
+public enum TypeAttaque {
+    PHYSIQUE,
+    SPECIALE;
+    
+    public static TypeAttaque get(TypePokemon type){
+        if(type == PLANTE 
+        || type == EAU 
+        || type == FEU 
+        || type == ELECTRIK 
+        || type == PSY 
+        || type == GLACE 
+        || type == DRAGON){
+            return SPECIALE;
+        } else {
+            return PHYSIQUE;
+        }
+    }
 }

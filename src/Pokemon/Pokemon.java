@@ -16,17 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package PokEsiremon.Personnage.Pokemon;
+package Pokemon;
 
-import PokEsiremon.Personnage.Personnage;
-import PokEsiremon.Personnage.Pokemon.Capacite.Capacite;
-import static PokEsiremon.Personnage.Pokemon.Enum_Statut.*;
+import Pokemon.Capacite.Capacite;
+import static Pokemon.Enum_Statut.*;
 
 /**
  *
  * @author AdrienJaugey
  */
-public class Pokemon extends Personnage{
+public class Pokemon{
     private TypePokemon _type[];
     private String _nom;
     private Capacite[] _attaques;
@@ -71,7 +70,7 @@ public class Pokemon extends Personnage{
 
     @Override
     public String toString() {
-        String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") Niv. " + _niveau;
+        String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") Niv. 100";
         res += "\n\tVie :\t " + _vie + "/" + _vieMax;
         res += "\n\tAtq :\t " + _atqMax + "/" + _atqMax;
         res += "\n\tDef :\t " + _defMax + "/" + _defMax;

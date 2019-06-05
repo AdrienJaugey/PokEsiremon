@@ -16,14 +16,40 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package PokEsiremon.Personnage.Humain;
+package Pokemon.Capacite;
 
-import PokEsiremon.Personnage.Personnage;
+import Pokemon.Pokemon;
+import Pokemon.TypePokemon;
 
 /**
  *
  * @author AdrienJaugey
  */
-public class Humain extends Personnage{
+public class Capacite {
+    private final String _nom;
+    private final TypePokemon _typePkmn;
+    private final TypeAttaque _typeAtq;
+    private final int _puissance;
+    private final int _precision;
+
+    public Capacite(String nom, TypePokemon typePkmn, int puissance, int precision) {
+        _nom = nom;
+        _typePkmn = typePkmn;
+        _typeAtq = TypeAttaque.get(typePkmn);
+        _puissance = puissance;
+        _precision = precision;
+        
+    }
+
+    public TypePokemon getTypePkmn() {
+        return _typePkmn;
+    }
+
+    public TypeAttaque getTypeAtq() {
+        return _typeAtq;
+    }
     
+    public void utiliser(Pokemon sender, Pokemon receiver){
+        
+    }
 }

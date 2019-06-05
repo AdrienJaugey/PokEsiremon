@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey.
+ * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,14 +16,20 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package PokEsiremon.Personnage.Humain.Joueur;
-
-import PokEsiremon.Personnage.Humain.Dresseur;
+package Pokemon.Capacite;
 
 /**
  *
- * @author AdrienJaugey
+ * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public class Joueur extends Dresseur{
+public class EffetCapacite {
+    /*private Enum_Cible _cible;
     
+    public EffetCapacite(Enum_Cible _cible) {
+        this._cible = _cible;
+    }
+    
+    public void utiliser(Pokemon sender, Pokemon target){
+       
+    }*/
 }
