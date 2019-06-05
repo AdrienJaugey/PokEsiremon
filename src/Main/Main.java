@@ -18,6 +18,12 @@
  */
 package Main;
 
+import Pokemon.Capacite.Capacite;
+import Pokemon.Capacite.EffetCapacite.Effet;
+import Pokemon.Capacite.EffetCapacite.EffetStatut;
+import static Pokemon.Capacite.Enum_Cible.*;
+import static Pokemon.Enum_Statut.*;
+import static Pokemon.Enum_TypePokemon.*;
 import Pokemon.Pokemon;
 
 /**
@@ -26,8 +32,25 @@ import Pokemon.Pokemon;
  */
 public class Main {
     public static void main(String[] args) {
-        Pokemon pkmn = new Pokemon(25);
-        System.out.println(pkmn);
+        clear();
+        Pokemon pika = new Pokemon(25);
+        System.out.println(pika);
+        Capacite eclair = new Capacite("Eclair", ELECTRIK, 50, 100);
+        Effet e = new EffetStatut(ADVERSAIRE, PARALYSIE);
+        eclair.addEffet(e);
+        pika.setCapacite(eclair, 0);
+        Pokemon carapuce = new Pokemon(7);
+        System.out.println(carapuce);
+        System.out.println(pika.utiliserCapacite(0, carapuce));
+        System.out.println(carapuce);
+    }
     
+    public static void clear(){
+        try{
+            System.out.println("Clear");
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch(Exception error){
+            System.err.println(error.getLocalizedMessage());
+        }
     }
 }

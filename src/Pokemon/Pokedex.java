@@ -31,7 +31,7 @@ public class Pokedex {
     public static final int NB_CAPACITE = 1;
     private static Pokedex _instance;
     private final String[] _pkmnNom;
-    private final TypePokemon[][] _pkmnType;
+    private final Enum_TypePokemon[][] _pkmnType;
     private final int[][] _pkmnBaseStat;
     private final ArrayList<Integer>[] _pkmnCapacite;
     private final Capacite[] _capacite;
@@ -39,14 +39,14 @@ public class Pokedex {
     private Pokedex(){
         _pkmnNom = new String[NB_POKEMON];
         _pkmnBaseStat = new int[NB_POKEMON][6];
-        _pkmnType = new TypePokemon[NB_POKEMON][2];
+        _pkmnType = new Enum_TypePokemon[NB_POKEMON][2];
         _pkmnCapacite = new ArrayList[NB_POKEMON];
         
         _capacite = new Capacite[NB_CAPACITE];
         
         String line = "";
         int i = 0;
-        TypePokemon types[] = TypePokemon.values();
+        Enum_TypePokemon types[] = Enum_TypePokemon.values();
         try {
             Scanner scan = new Scanner(getClass().getResourceAsStream("pokemon_base_stats.csv"));
             while (scan.hasNextLine()) {
@@ -81,7 +81,7 @@ public class Pokedex {
         return _pkmnBaseStat[id - 1];
     }
     
-    public TypePokemon[] getTypesPkmn(int id){
+    public Enum_TypePokemon[] getTypesPkmn(int id){
         return _pkmnType[id - 1];
     }
     

@@ -22,7 +22,7 @@ package Pokemon;
  *
  * @author AdrienJaugey
  */
-public enum TypePokemon {
+public enum Enum_TypePokemon {
     NORMAL,
     FEU,
     EAU,
@@ -57,7 +57,7 @@ public enum TypePokemon {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2}                           //Dragon
     };
     
-    public double dmgModifier(TypePokemon attackType){
+    public double dmgModifier(Enum_TypePokemon attackType){
         return modifier[attackType.ordinal()][this.ordinal()];
     }
     
@@ -71,7 +71,7 @@ public enum TypePokemon {
         String inefficace = "";
         String peuEfficace = "";
         String tresEfficace = "";
-        for(TypePokemon t : TypePokemon.values()){
+        for(Enum_TypePokemon t : Enum_TypePokemon.values()){
             double value = t.dmgModifier(this);
             if(value == 0) {
                 if(!inefficace.equals("")) inefficace += ", ";

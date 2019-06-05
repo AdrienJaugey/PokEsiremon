@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey.
+ * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,30 +16,32 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite;
+package Pokemon.Capacite.EffetCapacite;
 
-import Pokemon.TypePokemon;
-import static Pokemon.TypePokemon.*;
+import Pokemon.Capacite.Enum_Cible;
+import Pokemon.Enum_Statut;
+import Pokemon.Pokemon;
 
 /**
  *
- * @author AdrienJaugey
+ * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public enum TypeAttaque {
-    PHYSIQUE,
-    SPECIALE;
+public class EffetStatut extends Effet {
+    private final Enum_Statut _statut;
     
-    public static TypeAttaque get(TypePokemon type){
-        if(type == PLANTE 
-        || type == EAU 
-        || type == FEU 
-        || type == ELECTRIK 
-        || type == PSY 
-        || type == GLACE 
-        || type == DRAGON){
-            return SPECIALE;
-        } else {
-            return PHYSIQUE;
-        }
+    public EffetStatut(Enum_Cible cible, Enum_Statut statut) {
+        super(cible);
+        _statut = statut;
     }
+
+    @Override
+    public String effet(Pokemon cible, Pokemon autre) {
+        return cible.setStatut(_statut, autre);
+    }
+
+    @Override
+    public String toString() {
+        return "Inflige le statut " + _statut.toString() + " au Pokémon " + super._cible + " .";
+    }
+    
 }

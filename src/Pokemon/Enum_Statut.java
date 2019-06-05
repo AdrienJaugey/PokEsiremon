@@ -27,7 +27,7 @@ public enum Enum_Statut {
     BRULURE,
     GEL,
     PARALYSIE,
-    POISON,
+    EMPOISONNEMENT,
     SOMMEIL,
     CONFUSION,
     VAMPIGRAINE;

@@ -16,13 +16,32 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite;
+package Pokemon.Capacite.EffetCapacite;
+
+import Pokemon.Capacite.Enum_Cible;
+import static Pokemon.Capacite.Enum_Cible.LANCEUR;
+import Pokemon.Pokemon;
 
 /**
  *
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public enum Enum_Cible {
-    LANCEUR,
-    ADVERSAIRE;
+public abstract class Effet {
+    protected final Enum_Cible _cible;  
+
+    public Effet(Enum_Cible cible) {
+        this._cible = cible;
+    }
+            
+    public String agir(Pokemon lanceur, Pokemon adversaire){
+        String res;
+        if(_cible == LANCEUR) res = effet(lanceur, adversaire);
+        else res = effet(adversaire, lanceur);
+        return res;
+    }
+    
+    public abstract String effet(Pokemon cible, Pokemon autre);
+    
+    @Override
+    public abstract String toString();
 }

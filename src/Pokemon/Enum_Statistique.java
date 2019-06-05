@@ -16,13 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite;
+package Pokemon;
 
 /**
  *
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public enum Enum_Cible {
-    LANCEUR,
-    ADVERSAIRE;
+public enum Enum_Statistique {
+    VIE,
+    ATQ,
+    DEF,
+    ATQSPE,
+    DEFSPE,
+    VITESSE,
+    PRECISION,
+    ESQUIVE;
 }

@@ -18,8 +18,10 @@
  */
 package Pokemon.Capacite;
 
+import Pokemon.Capacite.EffetCapacite.Effet;
+import Pokemon.Enum_TypePokemon;
 import Pokemon.Pokemon;
-import Pokemon.TypePokemon;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,29 +29,51 @@ import Pokemon.TypePokemon;
  */
 public class Capacite {
     private final String _nom;
-    private final TypePokemon _typePkmn;
-    private final TypeAttaque _typeAtq;
+    private final Enum_TypePokemon _typePkmn;
+    private final Enum_TypeAttaque _typeAtq;
     private final int _puissance;
     private final int _precision;
+    private final ArrayList<Effet> _effetCapacite;
 
-    public Capacite(String nom, TypePokemon typePkmn, int puissance, int precision) {
+    public Capacite(String nom, Enum_TypePokemon typePkmn, int puissance, int precision) {
         _nom = nom;
         _typePkmn = typePkmn;
-        _typeAtq = TypeAttaque.get(typePkmn);
+        _typeAtq = Enum_TypeAttaque.get(typePkmn);
         _puissance = puissance;
         _precision = precision;
-        
+        _effetCapacite = new ArrayList<>();
     }
 
-    public TypePokemon getTypePkmn() {
+    public Enum_TypePokemon getTypePkmn() {
         return _typePkmn;
     }
 
-    public TypeAttaque getTypeAtq() {
+    public Enum_TypeAttaque getTypeAtq() {
         return _typeAtq;
     }
     
-    public void utiliser(Pokemon sender, Pokemon receiver){
-        
+    public String getNom(){
+        return _nom;
+    }
+
+    public int getPuissance() {
+        return _puissance;
+    }
+
+    public int getPrecision() {
+        return _precision;
+    }
+    
+    public void addEffet(Effet e){
+        _effetCapacite.add(e);
+    }
+    
+    public String utiliser(Pokemon lanceur, Pokemon cible){
+        String res = "";
+        cible.subir(_typeAtq, _typePkmn, (int) (lanceur.getAtq() + _puissance * 1.5));
+        for(Effet e : _effetCapacite){
+            res += e.agir(lanceur, cible) + "\n";
+        }
+        return res;
     }
 }

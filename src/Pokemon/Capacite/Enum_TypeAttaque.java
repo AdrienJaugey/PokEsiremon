@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
+ * Copyright (C) 2019 AdrienJaugey.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,18 +18,28 @@
  */
 package Pokemon.Capacite;
 
+import Pokemon.Enum_TypePokemon;
+import static Pokemon.Enum_TypePokemon.*;
+
 /**
  *
- * @author AdrienJaugey <a.jaugey@gmail.com>
+ * @author AdrienJaugey
  */
-public class EffetCapacite {
-    /*private Enum_Cible _cible;
+public enum Enum_TypeAttaque {
+    PHYSIQUE,
+    SPECIALE;
     
-    public EffetCapacite(Enum_Cible _cible) {
-        this._cible = _cible;
+    public static Enum_TypeAttaque get(Enum_TypePokemon type){
+        if(type == PLANTE 
+        || type == EAU 
+        || type == FEU 
+        || type == ELECTRIK 
+        || type == PSY 
+        || type == GLACE 
+        || type == DRAGON){
+            return SPECIALE;
+        } else {
+            return PHYSIQUE;
+        }
     }
-    
-    public void utiliser(Pokemon sender, Pokemon target){
-       
-    }*/
 }
