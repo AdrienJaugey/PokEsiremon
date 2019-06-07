@@ -19,7 +19,6 @@
 package Pokemon;
 
 import Pokemon.Capacite.Capacite;
-import Pokemon.Capacite.Enum_TypeAttaque;
 import static Pokemon.Capacite.Enum_TypeAttaque.*;
 import static Pokemon.Enum_Statistique.VIE;
 import static Pokemon.Enum_Statut.*;
@@ -175,7 +174,7 @@ public class Pokemon{
         }
         switch(stat){
             case VIE : {
-                _vie = borne(0, _vie + delta, _vieMax);
+                _vie = Utils.borne(0, _vie + delta, _vieMax);
                 if(_vie == 0) {
                     gererKO();
                     res = this._nom + " est K.O.";
@@ -186,25 +185,25 @@ public class Pokemon{
                 }
             } break;
             case ATQ : {
-                _atq = borne(0, _atq + delta, _atqMax);
+                _atq = Utils.borne(0, _atq + delta, _atqMax);
             } break;
             case DEF : {
-                _def = borne(0, _def + delta, _defMax);
+                _def = Utils.borne(0, _def + delta, _defMax);
             } break;
             case ATQSPE : {
-                _atqSpe = borne(0, _atqSpe + delta, _atqSpeMax);
+                _atqSpe = Utils.borne(0, _atqSpe + delta, _atqSpeMax);
             } break;
             case DEFSPE : {
-                _defSpe = borne(0, _defSpe + delta, _defSpeMax);
+                _defSpe = Utils.borne(0, _defSpe + delta, _defSpeMax);
             } break;
             case VITESSE : {
-                _vit = borne(0, _vit + delta, _vit);
+                _vit = Utils.borne(0, _vit + delta, _vit);
             } break;
             case PRECISION : {
-                _precision = borne(0, _precision + delta, _precision);
+                _precision = Utils.borne(0, _precision + delta, _precision);
             } break;
             case ESQUIVE : {
-                _esquive = borne(0, _esquive + delta, _esquive);
+                _esquive = Utils.borne(0, _esquive + delta, _esquive);
             } break;
         }
         return res;
@@ -219,7 +218,7 @@ public class Pokemon{
         }
         switch(stat){
             case VIE : {
-                _vie = borne(0, (int)  Math.round(_vie * (1 + modifier)), _vieMax);
+                _vie = Utils.borne(0, (int)  Math.round(_vie * (1 + modifier)), _vieMax);
                 if(_vie == 0) {
                     gererKO();
                     res = this._nom + " est K.O.";
@@ -230,25 +229,25 @@ public class Pokemon{
                 }
             } break;
             case ATQ : {
-                _atq = borne(0, (int)  Math.round(_atq  * (1 + modifier)), _atqMax);
+                _atq = Utils.borne(0, (int)  Math.round(_atq  * (1 + modifier)), _atqMax);
             } break;
             case DEF : {
-                _def = borne(0, (int)  Math.round(_def  * (1 + modifier)), _defMax);
+                _def = Utils.borne(0, (int)  Math.round(_def  * (1 + modifier)), _defMax);
             } break;
             case ATQSPE : {
-                _atqSpe = borne(0, (int)  Math.round(_atqSpe  * (1 + modifier)), _atqSpeMax);
+                _atqSpe = Utils.borne(0, (int)  Math.round(_atqSpe  * (1 + modifier)), _atqSpeMax);
             } break;
             case DEFSPE : {
-                _defSpe = borne(0, (int)  Math.round(_defSpe  * (1 + modifier)), _defSpeMax);
+                _defSpe = Utils.borne(0, (int)  Math.round(_defSpe  * (1 + modifier)), _defSpeMax);
             } break;
             case VITESSE : {
-                _vit = borne(0, (int)  Math.round(_vit  * (1 + modifier)), _vit);
+                _vit = Utils.borne(0, (int)  Math.round(_vit  * (1 + modifier)), _vit);
             } break;
             case PRECISION : {
-                _precision = borne(0, (int)  Math.round(_precision  * (1 + modifier)), _precision);
+                _precision = Utils.borne(0, (int)  Math.round(_precision  * (1 + modifier)), _precision);
             } break;
             case ESQUIVE : {
-                _esquive = borne(0, (int) Math.round(_esquive  * (1 + modifier)), _esquive);
+                _esquive = Utils.borne(0, (int) Math.round(_esquive  * (1 + modifier)), _esquive);
             } break;
         }
         return res;
@@ -367,7 +366,7 @@ public class Pokemon{
             _tourStatut--;
             if(_tourStatut == 0) _statut = NEUTRE;
         } else if(_statut == GEL){
-            if(chance(20)) _statut = NEUTRE;
+            if(Utils.chance(20)) _statut = NEUTRE;
         }
     }
     
@@ -386,15 +385,16 @@ public class Pokemon{
                 }
             } break;
             case PARALYSIE:{
-                if(chance(75)){
+                if(Utils.chance(75)){
                     res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
                 } else {
                     res = this._nom + " n'a pas pu attaquer.";
                 }
             } break;
             case CONFUSION:{
-                if(chance(33)){
-                    this.subir(PHYSIQUE, null, 40);
+                if(Utils.chance(33)){
+                    int pvPerdus = (int) Math.round((((42. * this.getAtq() * 40) / (this.getDef() * 50.)) + 2) * (0.85 + Math.random() * 0.15)); 
+                    this.modifierStatistique(VIE, -pvPerdus);
                     res = this._nom + " s'est blessé dans sa confusion.";
                 }
                 else res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
@@ -406,11 +406,27 @@ public class Pokemon{
         return res;
     }
     
-    public void subir(Enum_TypeAttaque typeAtq, Enum_TypePokemon typePkmn, int puissance){
-        int defense = (typeAtq == PHYSIQUE ? getDef() : getDefSpe());
-        double modifier = (typePkmn != null ? this.getModifier(typePkmn) : 1);
-        int pv = (int) Math.round(puissance * modifier - defense);
-        this.modifierStatistique(VIE, -pv);
+    public void subir(Capacite capa, Pokemon lanceur){
+        /*
+                        ( 42 * AtqLanceur * PuiCapacité    )
+            PVPerdus = (  ----------------------------- + 2 ) * STAB ? * Efficacité type * Crit(1.5) ? * Alea(0.85 - 1)
+                        (       DefCible * 50              )
+        */
+        
+        int attaque, defense, puissance = capa.getPuissance();
+        if(capa.getTypeAtq() == PHYSIQUE){
+            attaque = lanceur.getAtq();
+            defense = this.getDef();
+        } else {
+            attaque = lanceur.getAtqSpe();
+            defense = this.getDefSpe();
+        }
+        double modifierSTAB = (lanceur.isType(capa.getTypePkmn()) ? 1.5 : 1);
+        double modifierType = (capa.getTypePkmn() != null ? this.getModifier(capa.getTypePkmn()) : 1);
+        double modifierCrit = 1; //A IMPLEMENTER !!!!!!!!!!!!!!!!!!!!
+        double modifierAlea = 0.85 + Math.random() * 0.15;
+        int pvPerdus = (int) Math.round((((42. * attaque * puissance) / (defense * 50.)) + 2) * modifierSTAB * modifierType * modifierCrit * modifierAlea); 
+        this.modifierStatistique(VIE, -pvPerdus);
     }
     
     private double getModifier(Enum_TypePokemon type){
@@ -434,17 +450,9 @@ public class Pokemon{
         this.resetStats();
         this._vie = 0;
     }
-    
-    /********************************
-    *   Méthodes basiques/utiles    *
-    ********************************/
-    
-    private boolean chance(int chance){
-        return (Math.random() * 100) <= chance;
-    }
-    
-    private int borne(int min, int value, int max){
-        return Math.max(min, Math.min(value, max));
+
+    public boolean isKO() {
+        return this.getVie() <= 0;
     }
     
 }

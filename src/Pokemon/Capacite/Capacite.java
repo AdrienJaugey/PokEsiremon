@@ -21,6 +21,7 @@ package Pokemon.Capacite;
 import Pokemon.Capacite.EffetCapacite.Effet;
 import Pokemon.Enum_TypePokemon;
 import Pokemon.Pokemon;
+import Pokemon.Utils;
 import java.util.ArrayList;
 
 /**
@@ -70,10 +71,18 @@ public class Capacite {
     
     public String utiliser(Pokemon lanceur, Pokemon cible){
         String res = "";
-        cible.subir(_typeAtq, _typePkmn, (int) (lanceur.getAtq() + _puissance * 1.5));
-        for(Effet e : _effetCapacite){
-            res += e.agir(lanceur, cible) + "\n";
+        int pReussite = (int) Math.round((lanceur.getPrecision() * (double) this.getPrecision()) / cible.getEsquive());
+        if(Utils.chance(pReussite)){
+            cible.subir(this, lanceur);
+            if(!cible.isKO()){
+                for(Effet e : _effetCapacite){
+                    res += e.agir(lanceur, cible) + "\n";
+                }
+            }
+        } else {
+            res = lanceur.getNom() + " n'a pas pu attaquer.";
         }
+        
         return res;
     }
 }

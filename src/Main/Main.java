@@ -43,6 +43,8 @@ public class Main {
         System.out.println(carapuce);
         System.out.println(pika.utiliserCapacite(0, carapuce));
         System.out.println(carapuce);
+        System.out.println(pika.utiliserCapacite(0, carapuce));
+        System.out.println(carapuce);
     }
     
     public static void clear(){
