@@ -31,7 +31,7 @@ public class EffetStatistique extends Effet {
     private final double _modifier;
     private final int _delta;
     
-    public EffetStatistique(Enum_Cible cible, Enum_Statistique stat, int delta,  double modifier) {
+    public EffetStatistique(Enum_Cible cible, Enum_Statistique stat, int delta, double modifier) {
         super(cible);
         _stat = stat;
         _delta = delta;

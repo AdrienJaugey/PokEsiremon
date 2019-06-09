@@ -34,14 +34,18 @@ public class Capacite {
     private final Enum_TypeAttaque _typeAtq;
     private final int _puissance;
     private final int _precision;
+    private final int _critModifier;
+    private final int _ppMax;
     private final ArrayList<Effet> _effetCapacite;
 
-    public Capacite(String nom, Enum_TypePokemon typePkmn, int puissance, int precision) {
+    public Capacite(String nom, Enum_TypePokemon typePkmn, int puissance, int precision, int ppMax, boolean boostCrit) {
         _nom = nom;
         _typePkmn = typePkmn;
         _typeAtq = Enum_TypeAttaque.get(typePkmn);
         _puissance = puissance;
         _precision = precision;
+        _ppMax = ppMax;
+        _critModifier = (boostCrit ? 8 : 1);
         _effetCapacite = new ArrayList<>();
     }
 
@@ -65,6 +69,10 @@ public class Capacite {
         return _precision;
     }
     
+    public int getPPMax(){
+        return _ppMax;
+    }
+    
     public void addEffet(Effet e){
         _effetCapacite.add(e);
     }
@@ -73,7 +81,7 @@ public class Capacite {
         String res = "";
         int pReussite = (int) Math.round((lanceur.getPrecision() * (double) this.getPrecision()) / cible.getEsquive());
         if(Utils.chance(pReussite)){
-            cible.subir(this, lanceur);
+            res += cible.subir(this, lanceur);
             if(!cible.isKO()){
                 for(Effet e : _effetCapacite){
                     res += e.agir(lanceur, cible) + "\n";
@@ -88,14 +96,18 @@ public class Capacite {
 
     @Override
     public String toString() {
-        String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ")"
+        String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ") " + _ppMax + " PP"
                    + "\nPuissance : " + _puissance
                    + "\nPrecision : " + _precision;
         for(Effet e : _effetCapacite){
             res += "\n\t- " + e.toString();
         }
+        if(_critModifier == 8) res += "\nForte chance de coups critiques";
         return res;
     }
-    
+
+    public double getModifierCrit() {
+        return _critModifier;
+    }
     
 }

@@ -36,13 +36,22 @@ public class Main {
         clear();
         Pokemon pika = new Pokemon(25);
         System.out.println(pika);
-        Capacite eclair = new Capacite("Eclair", ELECTRIK, 50, 100);
+        Capacite eclair = new Capacite("Eclair", ELECTRIK, 50, 100, 1, true);
         Effet e = new EffetStatut(ADVERSAIRE, PARALYSIE);
         eclair.addEffet(e);
-        pika.setCapacite(eclair, 0);
+        try {
+            pika.setCapacite(eclair, 0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
         Pokemon carapuce = new Pokemon(7);
         System.out.println(carapuce);
-        System.out.println(pika.utiliserCapacite(0, carapuce));
+        try {
+            System.out.println(pika.utiliserCapacite(0, carapuce));
+            System.out.println(pika.utiliserCapacite(0, carapuce));
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
         System.out.println(carapuce);
         
         System.out.println("");

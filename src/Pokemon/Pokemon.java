@@ -23,6 +23,7 @@ import static Pokemon.Capacite.Enum_TypeAttaque.*;
 import static Pokemon.Enum_Statistique.VIE;
 import static Pokemon.Enum_Statut.*;
 import static Pokemon.Enum_TypePokemon.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Pokemon{
     private final String _nom;
     private final int _id;
     private final Capacite[] _capacites;
+    private final int[] _pp;
     private Enum_Statut _statut;
     Pokemon _cibleVampigraine; 
     private int _tourStatut;
@@ -55,6 +57,10 @@ public class Pokemon{
     private final int _defSpeMax;
     private final int _vitMax;
     
+    /**
+     * Constructeur de Pokemon
+     * @param id l'id du pokémon à instancier
+     */
     public Pokemon(int id){
         Pokedex pkdx = Pokedex.get();
         _nom = pkdx.getNomPkmn(id);
@@ -70,13 +76,14 @@ public class Pokemon{
         _defSpeMax = statFormula(baseStats[4], dv[4]);
         _vitMax = statFormula(baseStats[5], dv[5]);
         _capacites = new Capacite[4];
+        _pp = new int[4];
         _type = pkdx.getTypesPkmn(id);
         this._precision = 100;
         this._esquive = 100;
         this._cibleVampigraine = null;
         this.resetStats();
     }
-
+    
     @Override
     public String toString() {
         String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") Niv. 100";
@@ -89,84 +96,192 @@ public class Pokemon{
         return res;
     }
     
+    /**
+     * Permet d'obtenir la liste des capacités que peut apprendre ce pokémon
+     * @return la liste des id des capacités
+     */
+    public ArrayList<Integer> getCapaciteUtilisable(){
+        return Pokedex.get().getCapacitePokemon(_id);
+    }
+    
+    /**
+     * Permet de récupérer le(s) type(s) du pokémon
+     * @return un tableau contenant le(s) type(s) (le deuxième peut être à null)
+     */
     public Enum_TypePokemon[] getType() {
         return _type;
     }
-
+    
+    /**
+     * Permet de récupérer le nom du pokémon
+     * @return le nom du pokémon
+     */
     public String getNom() {
         return _nom;
     }
-
-    public Capacite[] getAttaques() {
+    
+    /**
+     * Permet de récupérer un tableau contenant les capacités du pokémon
+     * @return un tableau de capacités
+     */
+    public Capacite[] getCapacites() {
         return _capacites;
     }
     
-    public void setCapacite(Capacite atq, int emplacement){
-        this._capacites[emplacement] = atq;//Pokedex.get().getCapacite(id);
+    /**
+     * Permet d'ajouter une capacité au pokémon à un emplacement choisi
+     * @param capacite la capacité à ajouter
+     * @param emplacement  l'emplacement où définir la capacité (entre 0 et 3)
+     * @throws java.lang.Exception
+     */
+    public void setCapacite(Capacite capacite, int emplacement) throws Exception{
+        if(emplacement < 0 || emplacement > 3) throw new Exception("Un pokémon n'a que 4 emplacements de capacité (entre 0 et 3)");
+        this._capacites[emplacement] = capacite;
+        this._pp[emplacement] = capacite.getPPMax();
     }
-
+    
+    /**
+     * Permet d'ajouter une capacité à un pokémon à un emplacement donné
+     * @param id l'id de la capacité à ajouter
+     * @param emplacement l'emplacement où définir la capacité (entre 0 et 3)
+     * @throws Exception 
+     */
+    public void setCapacite(int id, int emplacement) throws Exception{
+        this.setCapacite(Pokedex.get().getCapacite(id), emplacement);
+    }
+    
+    /**
+     * Permet de récupérer la vie actuelle du pokémon
+     * @return la vie actuelle du pokémon
+     */
     public int getVie() {
         return _vie;
     }
-
+    
+    /**
+     * Permet de récupérer la statistique d'attaque du pokémon
+     * @return la valeur de la statistique
+     */
     public int getAtq() {
         if(_statut == BRULURE) return _atq/2; 
         return _atq;
     }
 
+    /**
+     * Permet de récupérer la statistique de défense du pokémon
+     * @return la valeur de la statistique
+     */
     public int getDef() {
         return _def;
     }
 
+    /**
+     * Permet de récupérer la statistique d'attaque spéciale du pokémon
+     * @return la valeur de la statistique
+     */
     public int getAtqSpe() {
         return _atqSpe;
     }
 
+    /**
+     * Permet de récupérer la statistique de défense spéciale du pokémon
+     * @return la valeur de la statistique
+     */
     public int getDefSpe() {
         return _defSpe;
     }
 
+    /**
+     * Permet de récupérer la statistique de vitesse du pokémon
+     * @return la valeur de la statistique
+     */
     public int getVitesse() {
         if(_statut == PARALYSIE) return _vit/2;
         return _vit;
     }
     
+    /**
+     * Permet de récupérer le statut du pokémon
+     * @return le statut du pokémon
+     */
     public Enum_Statut getStatut() {
         return _statut;
     }
 
+    /**
+     * Permet de récupérer la précision du pokémon
+     * @return la précision
+     */
     public int getPrecision() {
         return _precision;
     }
 
+    /**
+     * Permet de récupérer l'esquive du pokémon
+     * @return l'esquive du pokémon
+     */
     public int getEsquive() {
         return _esquive;
     }
-
+    
+    /**
+     * Permet d'obtenir le nombre de PP restant(s) pour une capacité
+     * @param emplacement l'emplacement de la capacité dont on veut les PP
+     * @return le nombre de PP restant(s)
+     * @throws Exception 
+     */
+    public int getPPCapacite(int emplacement) throws Exception{
+        if(_capacites[emplacement] == null) throw new Exception("Il n'y a pas de capacité ici");
+        return _pp[emplacement];
+    }
+    
+    /**
+     * Permet de récupérer la valeur maximale de la vie du pokémon
+     * @return la valeur maximale de la vie
+     */
     public int getVieMax() {
         return _vieMax;
     }
 
+    /**
+     * Permet de récupérer la valeur maximale de la statistique d'attaque du pokémon
+     * @return la valeur maximale de la statistique
+     */
     public int getAtqMax() {
         return _atqMax;
     }
 
+    /**
+     * Permet de récupérer la valeur maximale de la statistique de défense du pokémon
+     * @return la valeur maximale de la statistique
+     */
     public int getDefMax() {
         return _defMax;
     }
 
+    /**
+     * Permet de récupérer la valeur maximale de la statistique d'attaque spéciale du pokémon
+     * @return la valeur maximale de la statistique
+     */
     public int getAtqSpeMax() {
         return _atqSpeMax;
     }
 
+    /**
+     * Permet de récupérer la valeur maximale de la statistique de défense spéciale du pokémon
+     * @return la valeur maximale de la statistique
+     */
     public int getDefSpeMax() {
         return _defSpeMax;
     }
 
+    /**
+     * Permet de récupérer la valeur maximale de la vitesse du pokémon
+     * @return la valeur maximale de la statistique
+     */
     public int getVitesseMax() {
         return _vitMax;
     }
-    
     
     /**
      * Permet de retirer ou ajouter une quantité donnée à une statistique du pokémon
@@ -194,25 +309,25 @@ public class Pokemon{
                 }
             } break;
             case ATQ : {
-                _atq = Utils.borne(0, _atq + delta, _atqMax);
+                _atq = Utils.borne((int)(0.25*_atqMax), _atq + delta, 4 * _atqMax);
             } break;
             case DEF : {
-                _def = Utils.borne(0, _def + delta, _defMax);
+                _def = Utils.borne((int)(0.25*_defMax), _def + delta, 4 * _defMax);
             } break;
             case ATQSPE : {
-                _atqSpe = Utils.borne(0, _atqSpe + delta, _atqSpeMax);
+                _atqSpe = Utils.borne((int)(0.25 * _atqSpeMax), _atqSpe + delta, 4 * _atqSpeMax);
             } break;
             case DEFSPE : {
-                _defSpe = Utils.borne(0, _defSpe + delta, _defSpeMax);
+                _defSpe = Utils.borne((int)(0.25 * _defSpeMax), _defSpe + delta, 4 * _defSpeMax);
             } break;
             case VITESSE : {
-                _vit = Utils.borne(0, _vit + delta, _vit);
+                _vit = Utils.borne((int)(0.25 * _vitMax), _vit + delta, 4 * _vitMax);
             } break;
             case PRECISION : {
-                _precision = Utils.borne(0, _precision + delta, _precision);
+                _precision = Utils.borne(33, _precision + delta, 300);
             } break;
             case ESQUIVE : {
-                _esquive = Utils.borne(0, _esquive + delta, _esquive);
+                _esquive = Utils.borne(33, _esquive + delta, 300);
             } break;
         }
         return res;
@@ -244,25 +359,25 @@ public class Pokemon{
                 }
             } break;
             case ATQ : {
-                _atq = Utils.borne(0, (int)  Math.round(_atq  * (1 + modifier)), _atqMax);
+                _atq = Utils.borne((int)(0.25*_atqMax), (int)  Math.round(_atq  * (1 + modifier)), 4 * _atqMax);
             } break;
             case DEF : {
-                _def = Utils.borne(0, (int)  Math.round(_def  * (1 + modifier)), _defMax);
+                _def = Utils.borne((int)(0.25*_defMax), (int)  Math.round(_def  * (1 + modifier)), 4 * _defMax);
             } break;
             case ATQSPE : {
-                _atqSpe = Utils.borne(0, (int)  Math.round(_atqSpe  * (1 + modifier)), _atqSpeMax);
+                _atqSpe = Utils.borne((int)(0.25 * _atqSpeMax), (int)  Math.round(_atqSpe  * (1 + modifier)), 4 * _atqSpeMax);
             } break;
             case DEFSPE : {
-                _defSpe = Utils.borne(0, (int)  Math.round(_defSpe  * (1 + modifier)), _defSpeMax);
+                _defSpe = Utils.borne((int)(0.25 * _defSpeMax), (int)  Math.round(_defSpe  * (1 + modifier)), 4 * _defSpeMax);
             } break;
             case VITESSE : {
-                _vit = Utils.borne(0, (int)  Math.round(_vit  * (1 + modifier)), _vit);
+                _vit = Utils.borne((int)(0.25 * _vitMax), (int)  Math.round(_vit * (1 + modifier)), 4 * _vitMax);
             } break;
             case PRECISION : {
-                _precision = Utils.borne(0, (int)  Math.round(_precision  * (1 + modifier)), _precision);
+                _precision = Utils.borne(33, (int)  Math.round(_precision  * (1 + modifier)), 300);
             } break;
             case ESQUIVE : {
-                _esquive = Utils.borne(0, (int) Math.round(_esquive  * (1 + modifier)), _esquive);
+                _esquive = Utils.borne(33, (int)  Math.round(_esquive  * (1 + modifier)), 300);
             } break;
         }
         return res;
@@ -319,6 +434,10 @@ public class Pokemon{
         this._statut = NEUTRE;
         this._tourStatut = 0;
         this.resetCibleVampigraine();
+        for(int i = 0; i < 4; i++){
+            if(_capacites[i] == null) continue;
+            _pp[i] = _capacites[i].getPPMax();
+        }
     }
     
     /**
@@ -330,10 +449,21 @@ public class Pokemon{
         return (_type[0] == type || _type[1] == type);
     }
     
-    public void setStatut(Enum_Statut statut){
-        this.setStatut(statut, null);
+    /***
+     * Permet de donner un statut à un pokémon
+     * @param statut le statut à donner
+     * @return Une phrase descriptive
+     */
+    public String setStatut(Enum_Statut statut){
+        return this.setStatut(statut, null);
     }
     
+    /**
+     * Permet de donner un statut à un pokémon
+     * @param statut le statut à donner
+     * @param cibleVampigraine le pokémon lanceur (utilisé pour Vampigraine)
+     * @return Une phrase descriptive
+     */
     public String setStatut(Enum_Statut statut, Pokemon cibleVampigraine){
         String res = "";
         if(this._statut != statut && this._statut == NEUTRE){
@@ -385,6 +515,10 @@ public class Pokemon{
         return res;
     }
     
+    /**
+     * Permet de retirer le statut d'un pokémon
+     * @return Une phrase descriptive
+     */
     public String resetStatut(){
         String res = _nom + " n'est plus ";
         switch(_statut){
@@ -402,10 +536,17 @@ public class Pokemon{
         return res;
     }
     
+    /**
+     * Permet de réinitialiser le pokémon qui a lancé Vampigraine.
+     * Typiquement, lorce que celui-ci est retiré du combat ou est K.O.
+     */
     public void resetCibleVampigraine(){
         _cibleVampigraine = null;
     }
     
+    /**
+     * Permet de gérer les actions de début de tour
+     */
     public void debutTour(){
         if(_statut == SOMMEIL || _statut == CONFUSION){
             _tourStatut--;
@@ -415,49 +556,79 @@ public class Pokemon{
         }
     }
     
-    public String utiliserCapacite(int choixCapacite, Pokemon cible){
+    /**
+     * Le pokémon tente d'utiliser la capacité se trouvant en position 
+     * choixCapacite sur le pokémon cible
+     * @param choixCapacite la capacité à utiliser
+     * @param cible le pokémon adversaire même si cela n'agit pas sur lui
+     * @return Une phrase descriptive
+     * @throws java.lang.Exception
+     */
+    public String utiliserCapacite(int choixCapacite, Pokemon cible) throws Exception{
+        if(_capacites[choixCapacite] == null) throw new Exception("Il n'y a pas de capacité ici");
         String res = this._nom + " lance " + _capacites[choixCapacite].getNom() + ".";
-        switch(_statut){
-            case SOMMEIL:{
-                res = this._nom + " n'a pas pu attaquer.";
-            } break;
-            case GEL:{
-                if(_capacites[choixCapacite].getTypePkmn() == FEU){
-                    this.resetStatut();
-                    res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
-                } else {
-                    res = this._nom + " n'a pas pu attaquer";
-                }
-            } break;
-            case PARALYSIE:{
-                if(Utils.chance(75)){
-                    res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
-                } else {
+        if (_pp[choixCapacite] > 0) {
+            switch (_statut) {
+                case SOMMEIL: {
                     res = this._nom + " n'a pas pu attaquer.";
                 }
-            } break;
-            case CONFUSION:{
-                if(Utils.chance(33)){
-                    int pvPerdus = (int) Math.round((((42. * this.getAtq() * 40) / (this.getDef() * 50.)) + 2) * (0.85 + Math.random() * 0.15)); 
-                    this.modifierStatistique(VIE, -pvPerdus);
-                    res = this._nom + " s'est blessé dans sa confusion.";
+                break;
+                case GEL: {
+                    if (_capacites[choixCapacite].getTypePkmn() == FEU) {
+                        this.resetStatut();
+                        res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
+                        _pp[choixCapacite]--;
+                    } else {
+                        res = this._nom + " n'a pas pu attaquer";
+                    }
                 }
-                else res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
-            } break;
-            default :{
-                res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
-            } break;
+                break;
+                case PARALYSIE: {
+                    if (Utils.chance(75)) {
+                        res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
+                        _pp[choixCapacite]--;
+                    } else {
+                        res = this._nom + " n'a pas pu attaquer.";
+                    }
+                }
+                break;
+                case CONFUSION: {
+                    if (Utils.chance(33)) {
+                        int pvPerdus = (int) Math.round((((42. * this.getAtq() * 40) / (this.getDef() * 50.)) + 2) * (0.85 + Math.random() * 0.15));                        
+                        this.modifierStatistique(VIE, -pvPerdus);
+                        res = this._nom + " s'est blessé dans sa confusion.";
+                    } else {
+                        res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
+                        
+                    }
+                    _pp[choixCapacite]--;
+                }
+                break;
+                default: {
+                    res += "\n" + _capacites[choixCapacite].utiliser(this, cible);
+                    _pp[choixCapacite]--;
+                }
+                break;
+            }
+        } else {
+            res = _nom + " n'a pas pu attaquer";
         }
         return res;
     }
     
-    public void subir(Capacite capa, Pokemon lanceur){
+    /**
+     * Permet de calculer et retirer la vie qu'un pokémon perd face à une capacité
+     * @param capa la capacité que subit le pokémon
+     * @param lanceur le pokémon lanceur de la capacité
+     * @return Une phrase descriptive
+     */
+    public String subir(Capacite capa, Pokemon lanceur){
         /*
                         ( 42 * AtqLanceur * PuiCapacité    )
             PVPerdus = (  ----------------------------- + 2 ) * STAB ? * Efficacité type * Crit(1.5) ? * Alea(0.85 - 1)
                         (       DefCible * 50              )
         */
-        
+        String res = "";
         int attaque, defense, puissance = capa.getPuissance();
         if(capa.getTypeAtq() == PHYSIQUE){
             attaque = lanceur.getAtq();
@@ -468,12 +639,27 @@ public class Pokemon{
         }
         double modifierSTAB = (lanceur.isType(capa.getTypePkmn()) ? 1.5 : 1);
         double modifierType = (capa.getTypePkmn() != null ? this.getModifier(capa.getTypePkmn()) : 1);
-        double modifierCrit = 1; //A IMPLEMENTER !!!!!!!!!!!!!!!!!!!!
+        if(modifierType <= 0.5) res+= "Ce n'est pas très efficace\n";
+        else if(modifierType >= 2.) res += "C'est très efficace !\n";
+        double chanceCrit = Pokedex.get().getBaseStatsPkmn(_id)[5];
+        chanceCrit = (chanceCrit%2 == 0 ? chanceCrit : chanceCrit + 1) / 2;
+        chanceCrit *= capa.getModifierCrit();
+        chanceCrit = (chanceCrit / 255.) * 100;
+        double modifierCrit = (Utils.chance((int)chanceCrit) ? 1.5 : 1);
+        if(modifierCrit == 1.5) res += "Coup critique !\n"; 
         double modifierAlea = 0.85 + Math.random() * 0.15;
         int pvPerdus = (int) Math.round((((42. * attaque * puissance) / (defense * 50.)) + 2) * modifierSTAB * modifierType * modifierCrit * modifierAlea); 
         this.modifierStatistique(VIE, -pvPerdus);
+        return res;
     }
     
+    /**
+     * Permet de calculer et retourner le coefficient de dégat d'une capacité
+     * selon l'efficacité du type de celle-ci face aux types du pokémon qui la
+     * reçoit
+     * @param type le type de la capacité
+     * @return le coefficient de modification de dégats
+     */
     private double getModifier(Enum_TypePokemon type){
         double modifier = 1;
         modifier *= _type[0].dmgModifier(type);
@@ -481,6 +667,10 @@ public class Pokemon{
         return modifier;
     }
     
+    /**
+     * Permet de gérer les actions de fin de tour (par ex. la perte de vie à 
+     * cause d'un statut...)
+     */
     public void finTour(){
         if(_statut == EMPOISONNEMENT || _statut == BRULURE || _statut == VAMPIGRAINE){
             int pv = Math.min(_vie, (int) (_vieMax / 16.));
@@ -491,11 +681,18 @@ public class Pokemon{
         }
     }
     
+    /**
+     * Gère les actions lors d'un KO
+     */
     public void gererKO(){
         this.resetStats();
         this._vie = 0;
     }
-
+    
+    /**
+     * Permet de savoir si un pokémon est KO ou non
+     * @return true si le pokémon est KO, false sinon
+     */
     public boolean isKO() {
         return this.getVie() <= 0;
     }

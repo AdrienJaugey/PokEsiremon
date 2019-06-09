@@ -45,6 +45,9 @@ public class Pokedex {
     private final ArrayList<Integer>[] _pkmnCapacite;
     private final Capacite[] _capacite;
     
+    /**
+     * Permet d'instancier et remplir le Pokédex
+     */
     private Pokedex(){
         _pkmnNom = new String[NB_POKEMON];
         _pkmnBaseStat = new int[NB_POKEMON][6];
@@ -59,7 +62,7 @@ public class Pokedex {
         int i = 0;
         Enum_TypePokemon types[] = Enum_TypePokemon.values();
         try {
-            Scanner scan = new Scanner(getClass().getResourceAsStream("pokemon_base_stats.csv"));
+            Scanner scan = new Scanner(getClass().getResourceAsStream("../Ressources/Donnees/pokemon_base_stats.csv"));
             while (scan.hasNextLine()) {
                 String[] pkmn = scan.nextLine().split(";");
                 _pkmnNom[i] = pkmn[1];
@@ -81,7 +84,7 @@ public class Pokedex {
             ********************************/
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document xml = builder.parse(getClass().getResourceAsStream("Capacite/pokemon_moves.xml"));
+            Document xml = builder.parse(getClass().getResourceAsStream("../Ressources/Donnees/pokemon_moves.xml"));
             NodeList capacites = xml.getDocumentElement().getChildNodes();
             Node capacite;
             for(i = 0; i < capacites.getLength() - 1; i++){
@@ -90,7 +93,8 @@ public class Pokedex {
                     int id = Integer.parseInt(capacite.getAttributes().item(0).getNodeValue());
                     String nomCapa = "";
                     Enum_TypePokemon type = null;
-                    int puissance = 0, precision = 0;
+                    int puissance = 0, precision = 0, pp = 0;
+                    boolean boostCrit = false;
                     ArrayList<Effet> effetsCapa = new ArrayList<>();
                     NodeList infos = capacite.getChildNodes();
                     for (int j = 1; j < infos.getLength(); j++) {
@@ -101,6 +105,8 @@ public class Pokedex {
                             case "type": type = Enum_TypePokemon.get(n.getTextContent()); break;
                             case "puissance": puissance = Integer.parseInt(n.getTextContent()); break;
                             case "precision": precision = Integer.parseInt(n.getTextContent()); break;
+                            case "pp": pp = Integer.parseInt(n.getTextContent()); break;
+                            case "boostCrit": boostCrit = true; break;
                             case "pokemons":
                                 String content = n.getTextContent();
                                 if (content.contains(",")) {
@@ -136,7 +142,7 @@ public class Pokedex {
                             default: break;
                         }                        
                     }
-                    _capacite[id] = new Capacite(nomCapa, type, puissance, precision);
+                    _capacite[id] = new Capacite(nomCapa, type, puissance, precision, pp, boostCrit);
                     for(Effet effet : effetsCapa)
                         _capacite[id].addEffet(effet);
                 }
@@ -148,27 +154,58 @@ public class Pokedex {
         }
     }
     
+    /**
+     * Permet de récupérer l'instance du Pokedex
+     * @return l'instance
+     */
     public static Pokedex get(){
         if(_instance == null) _instance = new Pokedex();
         return _instance;
     }
     
+    /**
+     * Permet de récupérer le nom du pokémon suivant son id
+     * @param id l'id du pokémon en question
+     * @return le nom du pokémon
+     */
     public String getNomPkmn(int id){
         return _pkmnNom[id - 1];
     }
     
+    /**
+     * Permet de récupérer toutes les statistiques de base d'un pokémon selon 
+     * son id
+     * @param id l'id du pokémon en question
+     * @return un tableau contenant les statistiques (Vie, Atq, Def, Atq Spe, DefSpe et Vit)
+     */
     public int[] getBaseStatsPkmn(int id){
         return _pkmnBaseStat[id - 1];
     }
     
+    /**
+     * Permet de récupérer le(s) type(s) d'un pokémon grâce à son id
+     * @param id l'id du pokémon en question
+     * @return un tableau contenant le(s) type(s) du pokémon (le deuxième peut être null)
+     */
     public Enum_TypePokemon[] getTypesPkmn(int id){
         return _pkmnType[id - 1];
     }
     
+    /**
+     * Permet de récupérer la liste des capacités que peut utiliser un pokémon
+     * grâce à son id
+     * @param id l'id du pokémon en question
+     * @return une ArrayList contenant les id des capacités
+     */
     public ArrayList<Integer> getCapacitePokemon(int id){
         return _pkmnCapacite[id];
     }
     
+    /**
+     * permet de récupérer la capacité grâce à son id
+     * @param id l'id de la capacité à récupérer
+     * @return la capacité
+     */
     public Capacite getCapacite(int id){
         return _capacite[id];
     }

@@ -1,0 +1,4 @@
+Implémentation des "niveaux" de statistiques de -6 à +6
+Ajout de la chance de statut
+Ajout de lutte quand 0 pp
+Implémentation de l'entrave de capacités
