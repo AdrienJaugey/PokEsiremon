@@ -31,6 +31,7 @@ import static Pokemon.Enum_TypePokemon.*;
 public class Pokemon{
     private final Enum_TypePokemon _type[];
     private final String _nom;
+    private final int _id;
     private final Capacite[] _capacites;
     private Enum_Statut _statut;
     Pokemon _cibleVampigraine; 
@@ -57,6 +58,7 @@ public class Pokemon{
     public Pokemon(int id){
         Pokedex pkdx = Pokedex.get();
         _nom = pkdx.getNomPkmn(id);
+        _id = id;
         _statut = NEUTRE;
         _tourStatut = 0;
         int baseStats[] = pkdx.getBaseStatsPkmn(id);
@@ -165,6 +167,13 @@ public class Pokemon{
         return _vitMax;
     }
     
+    
+    /**
+     * Permet de retirer ou ajouter une quantité donnée à une statistique du pokémon
+     * @param stat la statistique à modifier
+     * @param delta la quantité à ajouter ou retirer
+     * @return une description de la modification apportée
+     */
     public String modifierStatistique(Enum_Statistique stat, int delta){
         String res = "";
         if(delta > 0) {
@@ -209,6 +218,12 @@ public class Pokemon{
         return res;
     }
     
+    /**
+     * Permet de retirer ou ajouter un pourcentage à une statistique d'un pokémon
+     * @param stat la statistique à modifier
+     * @param modifier le pourcentage à ajouter ou retirer
+     * @return une description de la modification apportée
+     */
     public String modifierStatistique(Enum_Statistique stat, double modifier){
         String res = "";
         if(modifier > 0) {
@@ -253,14 +268,35 @@ public class Pokemon{
         return res;
     }
         
+    /**
+     * Permet de calculer la vie d'un pokémon au niveau 100 suivant sa vie de
+     * base et un nombre aléatoire qui lui est attribué
+     * @param vieBase La valeur de la statistique de vie de base
+     * @param dv La valeur générée aléatoirement
+     * @return la quantité de vie du pokémon au niveau 100
+     */
     private int hpFormula(int vieBase, int dv){
         return (int)((vieBase + dv + 82)*2 + 10);
     }
     
+    /**
+     * Permet de connaître la quantité maximale d'une statitstique d'un pokémon
+     * au niveau 100 à partir de la valeur de base de cette statistique ainsi
+     * que d'une valeur générée aléatoirement.
+     * @param statBase La valeur de base de la statistique
+     * @param dv La valeur générée aléatoirement
+     * @return La quantité de la statistique du pokémon au niveau 100
+     */
     private int statFormula(int statBase, int dv){
         return (int)((statBase + dv + 32)*2 + 5);
     }
     
+    /**
+     * Permet de générer les Determinant Value (DV) qui servent à différencier
+     * deux même pokémons à un niveau similaire en agissant plus ou moins sur 
+     * l'évolution de leurs statistiques.
+     * @return un tableau contenant les 6 DV du pokémon
+     */
     private int[] generateDV(){
         int DV[] = new int[6];
         for(int i = 0; i < 6; i++){
@@ -269,6 +305,10 @@ public class Pokemon{
         return DV;
     }
 
+    /**
+     * Permet de réinitialiser les statistiques actuelles d'un pokémon ainsi que
+     * sont statut
+     */
     private void resetStats() {
         this._vie = this._vieMax;
         this._atq = this._atqMax;
@@ -281,6 +321,11 @@ public class Pokemon{
         this.resetCibleVampigraine();
     }
     
+    /**
+     * Permet de savoir si un pokémon est d'un type ou non
+     * @param type le type à savoir
+     * @return true s'il est de ce type, false sinon
+     */
     private boolean isType(Enum_TypePokemon type){
         return (_type[0] == type || _type[1] == type);
     }

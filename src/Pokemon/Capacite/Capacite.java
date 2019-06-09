@@ -85,4 +85,17 @@ public class Capacite {
         
         return res;
     }
+
+    @Override
+    public String toString() {
+        String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ")"
+                   + "\nPuissance : " + _puissance
+                   + "\nPrecision : " + _precision;
+        for(Effet e : _effetCapacite){
+            res += "\n\t- " + e.toString();
+        }
+        return res;
+    }
+    
+    
 }

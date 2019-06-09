@@ -31,4 +31,8 @@ public enum Enum_Statistique {
     VITESSE,
     PRECISION,
     ESQUIVE;
+    
+    public static Enum_Statistique get(String stat){
+        return Enum_Statistique.valueOf(stat.toUpperCase());
+    }
 }

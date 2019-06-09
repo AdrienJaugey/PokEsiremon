@@ -24,6 +24,7 @@ import Pokemon.Capacite.EffetCapacite.EffetStatut;
 import static Pokemon.Capacite.Enum_Cible.*;
 import static Pokemon.Enum_Statut.*;
 import static Pokemon.Enum_TypePokemon.*;
+import Pokemon.Pokedex;
 import Pokemon.Pokemon;
 
 /**
@@ -43,8 +44,11 @@ public class Main {
         System.out.println(carapuce);
         System.out.println(pika.utiliserCapacite(0, carapuce));
         System.out.println(carapuce);
-        System.out.println(pika.utiliserCapacite(0, carapuce));
-        System.out.println(carapuce);
+        
+        System.out.println("");
+        System.out.println(Pokedex.get().getCapacite(0));
+        System.out.println(Pokedex.get().getCapacite(1));
+        for(Integer i : Pokedex.get().getCapacitePokemon(4)) System.out.println(i);
     }
     
     public static void clear(){

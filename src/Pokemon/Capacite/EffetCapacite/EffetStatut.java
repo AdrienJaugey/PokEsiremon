@@ -41,7 +41,7 @@ public class EffetStatut extends Effet {
 
     @Override
     public String toString() {
-        return "Inflige le statut " + _statut.toString() + " au Pokémon " + super._cible + " .";
+        return "Inflige le statut " + _statut.toString() + " au pokémon " + super._cible + " .";
     }
     
 }

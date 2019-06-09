@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE capacites [
+    <!ELEMENT capacites (capacite+)>
+    <!ELEMENT capacite (nom, type, puissance?, precision?, pokemons, effets?)>
+    <!ATTLIST capacite id CDATA #REQUIRED> 
+    <!ELEMENT nom (#PCDATA)>
+    <!ELEMENT type (#PCDATA)>
+    <!ELEMENT puissance (#PCDATA)>
+    <!ELEMENT precision (#PCDATA)>
+    <!ELEMENT pokemons (#PCDATA)>
+    <!ELEMENT effets (effet+)>
+    <!ELEMENT effet (cible, (statut | statistique))>
+    <!ELEMENT cible (#PCDATA)>
+    <!ELEMENT statut (#PCDATA)>
+    <!ELEMENT statistique (stat, (modifierD | modifierI)+)>
+    <!ELEMENT stat (#PCDATA)>
+    <!ELEMENT modifierD (#PCDATA)>
+    <!ELEMENT modifierI (#PCDATA)>
+]>
+
+<capacites>
+    <capacite id="0">
+        <nom>Lance-Flamme</nom>
+        <type>Feu</type>
+        <puissance>90</puissance>
+        <precision>100</precision>
+        <pokemons>4,5,6</pokemons>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Brulure</statut>
+            </effet>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique>
+                    <stat>Atq</stat>
+                    <modifierD>-0.20</modifierD>
+                </statistique>
+            </effet>
+        </effets>
+    </capacite>
+    <capacite id="1">
+        <nom>Deflagration</nom>
+        <type>Feu</type>
+        <puissance>120</puissance>
+        <precision>80</precision>
+        <pokemons>4,5,6</pokemons>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Brulure</statut>
+            </effet>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique>
+                    <stat>Atq</stat>
+                    <modifierD>-0.20</modifierD>
+                </statistique>
+            </effet>
+        </effets>
+    </capacite>
+</capacites>

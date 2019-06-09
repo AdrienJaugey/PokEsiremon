@@ -39,6 +39,10 @@ public enum Enum_TypePokemon {
     SPECTRE,
     DRAGON;
     
+    public static Enum_TypePokemon get(String type){
+        return Enum_TypePokemon.valueOf(type.toUpperCase());
+    }
+    
     private final double modifier[][] = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 1},                        //Normal
         {1, 0.5, 0.5, 2, 1, 2, 1, 1, 1, 1, 1, 2, 0.5, 1, 0.5},                  //Feu

@@ -25,4 +25,8 @@ package Pokemon.Capacite;
 public enum Enum_Cible {
     LANCEUR,
     ADVERSAIRE;
+    
+    public static Enum_Cible get(String cible){
+        return Enum_Cible.valueOf(cible.toUpperCase());
+    }
 }

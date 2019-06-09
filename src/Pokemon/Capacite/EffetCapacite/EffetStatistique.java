@@ -47,11 +47,11 @@ public class EffetStatistique extends Effet {
     @Override
     public String toString() {
         String res = "";
-        if(_delta > 0){
+        if(_modifier > 0){
             res = "Ajoute " + (int)(_modifier * 100) + "%";
-        } else if(_delta < 0){
+        } else if(_modifier < 0){
             res = "Retire " + (int)(_modifier * 100) + "%";
-        } else if(_modifier > 0){
+        } else if(_delta > 0){
             res = "Ajoute " + _delta + " points";
         } else {
             res = "Retire " + _delta + " points";

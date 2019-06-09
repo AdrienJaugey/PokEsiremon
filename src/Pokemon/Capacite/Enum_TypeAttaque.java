@@ -42,4 +42,8 @@ public enum Enum_TypeAttaque {
             return PHYSIQUE;
         }
     }
+    
+    public static Enum_TypeAttaque get(String type){
+        return Enum_TypeAttaque.valueOf(type.toUpperCase());
+    }
 }

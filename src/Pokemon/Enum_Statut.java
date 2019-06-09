@@ -31,4 +31,8 @@ public enum Enum_Statut {
     SOMMEIL,
     CONFUSION,
     VAMPIGRAINE;
+    
+    public static Enum_Statut get(String statut){
+        return Enum_Statut.valueOf(statut.toUpperCase());
+    }
 }
