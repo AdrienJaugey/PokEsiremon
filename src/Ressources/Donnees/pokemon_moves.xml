@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE capacites [
     <!ELEMENT capacites (capacite+)>
-    <!ELEMENT capacite (nom, type, puissance?, precision?, pp, boostCrit?, pokemons, effets?)>
+    <!ELEMENT capacite (nom, type?, puissance?, precision?, pp, boostCrit?, nbFrappe?, tourAvant?, tourApres?, pokemons, effets?)>
     <!ATTLIST capacite id CDATA #REQUIRED> 
     <!ELEMENT nom (#PCDATA)>
     <!ELEMENT type (#PCDATA)>
@@ -9,59 +9,425 @@
     <!ELEMENT precision (#PCDATA)>
     <!ELEMENT pp (#PCDATA)>
     <!ELEMENT boostCrit EMPTY>
+    <!ELEMENT nbFrappe EMPTY>
+    <!ATTLIST nbFrappe min CDATA #REQUIRED>
+    <!ATTLIST nbFrappe max CDATA #REQUIRED>
+    <!ELEMENT tourAvant EMPTY>
+    <!ELEMENT tourApres EMPTY>
     <!ELEMENT pokemons (#PCDATA)>
     <!ELEMENT effets (effet+)>
-    <!ELEMENT effet (cible, (statut | statistique))>
+    <!ELEMENT effet (cible, (statut | statistique | special))>
+    <!ATTLIST effet chance CDATA #IMPLIED>
     <!ELEMENT cible (#PCDATA)>
     <!ELEMENT statut (#PCDATA)>
-    <!ELEMENT statistique (stat, (modifierD | modifierI)+)>
-    <!ELEMENT stat (#PCDATA)>
-    <!ELEMENT modifierD (#PCDATA)>
-    <!ELEMENT modifierI (#PCDATA)>
+    <!ELEMENT statistique (#PCDATA)>
+    <!ATTLIST statistique modifier CDATA #REQUIRED>
+    <!ELEMENT special (#PCDATA)>
 ]>
 
 <capacites>
+    <!-- Liste des attaques obtenues à partir de https://www.pokemon-france.com/jeux/gen1/bleu_rouge/attaques ]-->
     <capacite id="0">
-        <nom>Lance-Flamme</nom>
-        <type>Feu</type>
-        <pp>10</pp>
-        <puissance>90</puissance>
+        <nom>Lutte</nom>
+        <pp>2147483647</pp>
+        <puissance>50</puissance>
         <precision>100</precision>
-        <boostCrit/>
-        <pokemons>4,5,6</pokemons>
         <effets>
             <effet>
-                <cible>Adversaire</cible>
-                <statut>Brulure</statut>
-            </effet>
-            <effet>
-                <cible>Adversaire</cible>
-                <statistique>
-                    <stat>Atq</stat>
-                    <modifierD>-0.20</modifierD>
-                </statistique>
+                <cible>Lanceur</cible>
+                <statistique modifier="-0.25">Vie</statistique>
             </effet>
         </effets>
     </capacite>
+    
     <capacite id="1">
-        <nom>Deflagration</nom>
-        <type>Feu</type>
-        <pp>10</pp>
-        <puissance>120</puissance>
-        <precision>80</precision>
-        <pokemons>4,5,6</pokemons>
+        <nom>Abîme</nom>
+        <type>Sol</type>
+        <pp>5</pp>
+        <precision>30</precision>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
-                <statut>Brulure</statut>
-            </effet>
-            <effet>
-                <cible>Adversaire</cible>
-                <statistique>
-                    <stat>Atq</stat>
-                    <modifierD>-0.20</modifierD>
-                </statistique>
+                <statistique modifier="-1.">Vie</statistique>
             </effet>
         </effets>
     </capacite>
+    
+    <capacite id="2">
+        <nom>Acidarmure</nom>
+        <type>Poison</type>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="3">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="3">
+        <nom>Acide</nom>
+        <type>Poison</type>
+        <puissance>40</puissance>
+        <pp>30</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="4">
+        <nom>Adaptation</nom>
+        <type>Normal</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special>CopieType</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="5">
+        <nom>Affûtage</nom>
+        <type>Normal</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="1">Atq</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="6">
+        <nom>Amnésie</nom>
+        <type>Psy</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="2">DefSpe</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="7">
+        <nom>Armure</nom>
+        <type>Normal</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="1">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="8">
+        <nom>Balayage</nom>
+        <type>Combat</type>
+        <puissance>50</puissance>
+        <precision>90</precision>
+        <pp>20</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="9">
+        <nom>Bec Vrille</nom>
+        <type>Vol</type>
+        <puissance>80</puissance>
+        <pp>20</pp>
+    </capacite>
+    
+    <capacite id="10">
+        <nom>Bélier</nom>
+        <type>Normal</type>
+        <puissance>90</puissance>
+        <precision>85</precision>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special modifier="0.25">Part de Dégats Infligés</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="11">
+        <nom>Berceuse</nom>
+        <type>Normal</type>
+        <precision>55</precision>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Sommeil</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="12">
+        <nom>Blizzard</nom>
+        <type>Glace</type>
+        <puissance>120</puissance>
+        <precision>90</precision>
+        <pp>5</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Gel</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="13">
+        <nom>Bomb'oeuf</nom>
+        <type>Normal</type>
+        <puissance>100</puissance>
+        <precision>75</precision>
+        <pp>10</pp>
+    </capacite>
+    
+    <capacite id="14">
+        <nom>Bouclier</nom>
+        <type>Psy</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="2">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="15">
+        <nom>Boul'armure</nom>
+        <type>Normal</type>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="1">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="16">
+        <nom>Brouillard</nom>
+        <type>Normal</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Precision</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="17">
+        <nom>Brume</nom>
+        <type>Glace</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special>Empecher modifications statistiques</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="18">
+        <nom>Buée Noire</nom>
+        <type>Glace</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statut>Neutre</statut>
+            </effet>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Neutre</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="19">
+        <nom>Bulles D'O</nom>
+        <type>Eau</type>
+        <puissance>65</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Vitesse</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="20">
+        <nom>Cage-Eclair</nom>
+        <type>Electrik</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="21">
+        <nom>Cascade</nom>
+        <type>Eau</type>
+        <puissance>80</puissance>
+        <pp>15</pp>
+    </capacite>
+    
+    <capacite id="22">
+        <nom>Charge</nom>
+        <type>Normal</type>
+        <puissance>35</puissance>
+        <precision>95</precision>
+        <pp>35</pp>
+    </capacite>
+    
+    <capacite id="23">
+        <nom>Choc Mental</nom>
+        <type>Psy</type>
+        <puissance>50</puissance>
+        <pp>25</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Confusion</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="24">
+        <nom>Claquoir</nom>
+        <type>Eau</type>
+        <puissance>35</puissance>
+        <precision>75</precision>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <special>Claquoir</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="25">
+        <nom>Clonage</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="-0.25">Vie</statistique>
+            </effet>
+            <effet>
+                <cible>lanceur</cible>
+                <special>Clonage</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="26">
+        <nom>Combo-griffe</nom>
+        <type>Normal</type>
+        <puissance>18</puissance>
+        <precision>80</precision>
+        <pp>15</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="27">
+        <nom>Constriction</nom>
+        <type>Normal</type>
+        <puissance>10</puissance>
+        <pp>35</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Vitesse</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="28">
+        <nom>Copie</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special>Copie Attaque</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="29">
+        <nom>Coud'boule</nom>
+        <type>Normal</type>
+        <puissance>70</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="30">
+        <nom>Coud'krâne</nom>
+        <type>Normal</type>
+        <puissance>100</puissance>
+        <pp>15</pp>
+        <tourAvant/>
+    </capacite>
+    
+    <capacite id="31">
+        <nom>Coupe</nom>
+        <type>Normal</type>
+        <puissance>50</puissance>
+        <precision>95</precision>
+        <pp>30</pp>
+    </capacite>
+    
+    <capacite id="32">
+        <nom>Coupe-vent</nom>
+        <type>Vol</type>
+        <puissance>80</puissance>
+        <precision>75</precision>
+        <pp>30</pp>
+        <tourAvant/>
+    </capacite>
+    
+    <capacite id="33">
+        <nom>Croc de Mort</nom>
+        <type>Normal</type>
+        <puissance>80</puissance>
+        <precision>70</precision>
+        <pp>15</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    
 </capacites>

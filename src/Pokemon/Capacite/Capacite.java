@@ -35,10 +35,12 @@ public class Capacite {
     private final int _puissance;
     private final int _precision;
     private final int _critModifier;
+    private final int _nbFrappeMin;
+    private final int _nbFrappeMax;
     private final int _ppMax;
     private final ArrayList<Effet> _effetCapacite;
 
-    public Capacite(String nom, Enum_TypePokemon typePkmn, int puissance, int precision, int ppMax, boolean boostCrit) {
+    public Capacite(String nom, Enum_TypePokemon typePkmn, int puissance, int precision, int ppMax, boolean boostCrit, int nbFrappeMin, int nbFrappeMax) {
         _nom = nom;
         _typePkmn = typePkmn;
         _typeAtq = Enum_TypeAttaque.get(typePkmn);
@@ -46,6 +48,8 @@ public class Capacite {
         _precision = precision;
         _ppMax = ppMax;
         _critModifier = (boostCrit ? 8 : 1);
+        _nbFrappeMin = nbFrappeMin;
+        _nbFrappeMax = nbFrappeMax;
         _effetCapacite = new ArrayList<>();
     }
 
@@ -81,7 +85,13 @@ public class Capacite {
         String res = "";
         int pReussite = (int) Math.round((lanceur.getPrecision() * (double) this.getPrecision()) / cible.getEsquive());
         if(Utils.chance(pReussite)){
-            res += cible.subir(this, lanceur);
+            if(_puissance > 0){
+                if(_nbFrappeMin == _nbFrappeMax && _nbFrappeMin == 1) res += cible.subir(this, lanceur);
+                else {
+                    for(int i = 0; i < _nbFrappeMin + (int)(Math.random()*_nbFrappeMax-_nbFrappeMin); i++)
+                        res += cible.subir(this, lanceur);
+                }
+            }
             if(!cible.isKO()){
                 for(Effet e : _effetCapacite){
                     res += e.agir(lanceur, cible) + "\n";
@@ -98,11 +108,13 @@ public class Capacite {
     public String toString() {
         String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ") " + _ppMax + " PP"
                    + "\nPuissance : " + _puissance
-                   + "\nPrecision : " + _precision;
+                   + "\nPrecision : " + _precision + "%";
+        if(!_effetCapacite.isEmpty()) res += "\nEffets :";
         for(Effet e : _effetCapacite){
             res += "\n\t- " + e.toString();
         }
         if(_critModifier == 8) res += "\nForte chance de coups critiques";
+        if(_nbFrappeMin > 1) res += "\nFrappe entre " + _nbFrappeMin + " et " + _nbFrappeMax + " fois l'adversaire";
         return res;
     }
 

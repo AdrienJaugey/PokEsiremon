@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
  */
 public class Pokedex {
     public static final int NB_POKEMON = 151;
-    public static final int NB_CAPACITE = 2;
+    public static final int NB_CAPACITE = 100;
     private static Pokedex _instance;
     private final String[] _pkmnNom;
     private final Enum_TypePokemon[][] _pkmnType;
@@ -90,50 +90,77 @@ public class Pokedex {
             for(i = 0; i < capacites.getLength() - 1; i++){
                 capacite = capacites.item(i);
                 if (capacite.getNodeName().equals("capacite")) {
+                    
                     int id = Integer.parseInt(capacite.getAttributes().item(0).getNodeValue());
                     String nomCapa = "";
                     Enum_TypePokemon type = null;
-                    int puissance = 0, precision = 0, pp = 0;
+                    int puissance = 0, 
+                        precision = 100, 
+                        pp = 0,
+                        nbFrappeMin = 1,
+                        nbFrappeMax = 1;
                     boolean boostCrit = false;
                     ArrayList<Effet> effetsCapa = new ArrayList<>();
+                    
                     NodeList infos = capacite.getChildNodes();
                     for (int j = 1; j < infos.getLength(); j++) {
                         Node n = infos.item(j);
                         String nom = n.getNodeName();
-                        switch (nom) {
+                        switch (nom) {//On parcours les noeuds enfants, suivant leur nom, on met à jour la donnée correspondante
                             case "nom": nomCapa = n.getTextContent(); break;
                             case "type": type = Enum_TypePokemon.get(n.getTextContent()); break;
                             case "puissance": puissance = Integer.parseInt(n.getTextContent()); break;
                             case "precision": precision = Integer.parseInt(n.getTextContent()); break;
                             case "pp": pp = Integer.parseInt(n.getTextContent()); break;
                             case "boostCrit": boostCrit = true; break;
-                            case "pokemons":
+                            case "nbFrappe": 
+                                nbFrappeMin = Integer.parseInt(n.getAttributes().item(0).getNodeValue()); 
+                                nbFrappeMax = Integer.parseInt(n.getAttributes().item(1).getNodeValue());
+                                break;
+                            case "pokemons": //Dans ce cas, on récupère les id des pokémons pouvant utiliser la capacité
                                 String content = n.getTextContent();
+                                //Si on trouve une virgule, il y a plusieurs pokémons donc on split la chaîne, sinon on lit directement l'id
                                 if (content.contains(",")) {
                                     String[] pkmns = content.split(",");
                                     for (String s : pkmns) { this._pkmnCapacite[Integer.parseInt(s)].add(id); }
                                 } else _pkmnCapacite[Integer.parseInt(content)].add(id);
                                 break;
-                            case "effets":
+                            case "effets": //Dans ce cas, on va ajouter des effets à la capacité
                                 NodeList effets = n.getChildNodes();
                                 for(int e = 0; e < effets.getLength(); e++){
                                     Node effet = effets.item(e);
+                                    //On parcours les neuds "effet"
                                     if(effet.getNodeName().equals("effet")){
-                                        NodeList effetInfos = effet.getChildNodes();
                                         Enum_Cible cible = null;
+                                        int chance = 100;
+                                        //Si on trouve un attribut, c'est la chance de réussite
+                                        if(effet.getAttributes().item(0) != null) chance = Integer.parseInt(effet.getAttributes().item(0).getNodeValue());  
+                                        
+                                        //On parcours les noeuds enfants qui contiennent la cible et le statut OU la statistique à modifier
+                                        NodeList effetInfos = effet.getChildNodes();
                                         for(int ei = 0; ei < effetInfos.getLength(); ei++){
                                             Node info = effetInfos.item(ei);
+                                            //Si c'est le noeud "cible" on enregistre la cible (ce noeud apparaît forcément en premier)
                                             if(info.getNodeName().equals("cible")) cible = Enum_Cible.get(info.getTextContent());
-                                            else if (info.getNodeName().equals("statut")) effetsCapa.add(new EffetStatut(cible, Enum_Statut.get(info.getTextContent())));
+                                            else if (info.getNodeName().equals("statut")){
+                                                //Si on trouve le noeud "statut", on récupère le statut à affecter
+                                                //On crée l'effet et on l'ajoute à la capacité
+                                                Enum_Statut statut = Enum_Statut.get(info.getTextContent());
+                                                effetsCapa.add(new EffetStatut(cible, chance, statut));
+                                            }
                                             else if (info.getNodeName().equals("statistique")){
-                                                Enum_Statistique stat = Enum_Statistique.get(info.getChildNodes().item(1).getTextContent());
-                                                String modifierString = info.getChildNodes().item(3).getTextContent();
+                                                //Sinon, si on tombe sur le noeud "statistique", on récupère la stat à modifier et de combien
+                                                //On crée également l'effet et on l'ajoute à la capacité
+                                                Enum_Statistique stat = Enum_Statistique.get(info.getTextContent());
+                                                String modifierString = info.getAttributes().item(0).getTextContent();
                                                 int delta = 0;
                                                 double modifier = 0;
                                                 if(modifierString.contains(".")) modifier = Double.parseDouble(modifierString);
                                                 else delta = Integer.parseInt(modifierString);
-                                                EffetStatistique effetStat = new EffetStatistique(cible, stat, delta, modifier);
+                                                EffetStatistique effetStat = new EffetStatistique(cible, chance, stat, delta, modifier);
                                                 effetsCapa.add(effetStat);
+                                            } else if(info.getNodeName().equals("special")){
+                                                System.out.println("A implémenter : " + info.getTextContent());
                                             }
                                         }
                                     }
@@ -142,7 +169,7 @@ public class Pokedex {
                             default: break;
                         }                        
                     }
-                    _capacite[id] = new Capacite(nomCapa, type, puissance, precision, pp, boostCrit);
+                    _capacite[id] = new Capacite(nomCapa, type, puissance, precision, pp, boostCrit, nbFrappeMin, nbFrappeMax);
                     for(Effet effet : effetsCapa)
                         _capacite[id].addEffet(effet);
                 }

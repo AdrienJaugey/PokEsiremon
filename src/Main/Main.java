@@ -19,13 +19,7 @@
 package Main;
 
 import Pokemon.Capacite.Capacite;
-import Pokemon.Capacite.EffetCapacite.Effet;
-import Pokemon.Capacite.EffetCapacite.EffetStatut;
-import static Pokemon.Capacite.Enum_Cible.*;
-import static Pokemon.Enum_Statut.*;
-import static Pokemon.Enum_TypePokemon.*;
 import Pokemon.Pokedex;
-import Pokemon.Pokemon;
 
 /**
  *
@@ -34,30 +28,12 @@ import Pokemon.Pokemon;
 public class Main {
     public static void main(String[] args) {
         clear();
-        Pokemon pika = new Pokemon(25);
-        System.out.println(pika);
-        Capacite eclair = new Capacite("Eclair", ELECTRIK, 50, 100, 1, true);
-        Effet e = new EffetStatut(ADVERSAIRE, PARALYSIE);
-        eclair.addEffet(e);
-        try {
-            pika.setCapacite(eclair, 0);
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
+        Capacite c = null;
+        for(int i = 0; i < Pokedex.NB_CAPACITE; i++){
+            if(Pokedex.get().getCapacite(i) == null) break;
+            else c = Pokedex.get().getCapacite(i);
         }
-        Pokemon carapuce = new Pokemon(7);
-        System.out.println(carapuce);
-        try {
-            System.out.println(pika.utiliserCapacite(0, carapuce));
-            System.out.println(pika.utiliserCapacite(0, carapuce));
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-        }
-        System.out.println(carapuce);
-        
-        System.out.println("");
-        System.out.println(Pokedex.get().getCapacite(0));
-        System.out.println(Pokedex.get().getCapacite(1));
-        for(Integer i : Pokedex.get().getCapacitePokemon(4)) System.out.println(i);
+        System.out.println(c);
     }
     
     public static void clear(){

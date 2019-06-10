@@ -1,4 +1,3 @@
-Implémentation des "niveaux" de statistiques de -6 à +6
-Ajout de la chance de statut
 Ajout de lutte quand 0 pp
-Implémentation de l'entrave de capacités
+Implémentation des effets spéciaux de capacités
+Implémentation du nombre de tour avant/après une capacité

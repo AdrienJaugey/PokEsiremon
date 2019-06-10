@@ -20,6 +20,7 @@ package Pokemon.Capacite.EffetCapacite;
 
 import Pokemon.Capacite.Enum_Cible;
 import Pokemon.Enum_Statistique;
+import static Pokemon.Enum_Statistique.VIE;
 import Pokemon.Pokemon;
 
 /**
@@ -31,8 +32,8 @@ public class EffetStatistique extends Effet {
     private final double _modifier;
     private final int _delta;
     
-    public EffetStatistique(Enum_Cible cible, Enum_Statistique stat, int delta, double modifier) {
-        super(cible);
+    public EffetStatistique(Enum_Cible cible, int chance, Enum_Statistique stat, int delta, double modifier) {
+        super(cible, chance);
         _stat = stat;
         _delta = delta;
         _modifier = modifier;
@@ -40,23 +41,40 @@ public class EffetStatistique extends Effet {
 
     @Override
     public String effet(Pokemon cible, Pokemon autre) {
-        if(_delta == 0) return cible.modifierStatistique(_stat, _modifier);
-        else return cible.modifierStatistique(_stat, _delta);
+        String res = "";
+        if(_delta == 0) try {
+            res = cible.modifierStatistique(_stat, _modifier);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+        else res = cible.modifierStatistique(_stat, _delta);
+        return res;
     }
 
     @Override
-    public String toString() {
+    public String description() {
         String res = "";
         if(_modifier > 0){
-            res = "Ajoute " + (int)(_modifier * 100) + "%";
+            res = "Ajoute " + (int)(_modifier * 100) + "% de " + _stat.toString();
         } else if(_modifier < 0){
-            res = "Retire " + (int)(_modifier * 100) + "%";
-        } else if(_delta > 0){
-            res = "Ajoute " + _delta + " points";
-        } else {
-            res = "Retire " + _delta + " points";
+            res = "Retire " + (int)(-_modifier * 100) + "% de "  + _stat.toString();
+        } else{
+            if(_stat == VIE){
+                if(_delta > 0){
+                    res = "Ajoute " + _delta + " points de vie";
+                } else {
+                    res = "Retire " + (-_delta) + " points de vie";
+                }
+            } else {
+                if(_delta > 0){
+                    res = "Ajoute " + _delta + " niveau" + (_delta > 1 ? "x" : "") + " de " + _stat.toString();
+                } else {
+                    res = "Retire " + (-_delta) + " niveau" + (_delta < -1 ? "x" : "") + " de " + _stat.toString();
+                }
+            }
+            
         }
-        return res + " de " + _stat.toString() + " du pokémon " + super._cible.toString();
+        return res;
     }
     
 }

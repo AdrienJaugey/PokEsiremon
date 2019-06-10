@@ -20,6 +20,7 @@ package Pokemon.Capacite.EffetCapacite;
 
 import Pokemon.Capacite.Enum_Cible;
 import Pokemon.Enum_Statut;
+import static Pokemon.Enum_Statut.NEUTRE;
 import Pokemon.Pokemon;
 
 /**
@@ -29,8 +30,8 @@ import Pokemon.Pokemon;
 public class EffetStatut extends Effet {
     private final Enum_Statut _statut;
     
-    public EffetStatut(Enum_Cible cible, Enum_Statut statut) {
-        super(cible);
+    public EffetStatut(Enum_Cible cible, int chance, Enum_Statut statut) {
+        super(cible, chance);
         _statut = statut;
     }
 
@@ -40,8 +41,12 @@ public class EffetStatut extends Effet {
     }
 
     @Override
-    public String toString() {
-        return "Inflige le statut " + _statut.toString() + " au pokémon " + super._cible + " .";
+    public String description() {
+        if(_statut == NEUTRE){
+            return "Annule le changement de statut infligé";
+        } else {
+            return "Inflige le statut " + _statut.toString();
+        }
     }
     
 }
