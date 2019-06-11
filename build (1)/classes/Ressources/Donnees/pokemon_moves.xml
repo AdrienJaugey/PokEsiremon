@@ -85,7 +85,7 @@
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <special>Copie_Type</special>
+                <special>CopieType</special>
             </effet>
         </effets>
     </capacite>
@@ -156,7 +156,7 @@
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <special modifier="0.25">RETOUR_DEGATS</special>
+                <special modifier="0.25">Part de Dégats Infligés</special>
             </effet>
         </effets>
     </capacite>
@@ -239,7 +239,7 @@
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <special>NO_STATUS_CHANGE</special>
+                <special>Empecher modifications statistiques</special>
             </effet>
         </effets>
     </capacite>
@@ -313,7 +313,7 @@
         </effets>
     </capacite>
     
-    <!--<capacite id="24">
+    <capacite id="24">
         <nom>Claquoir</nom>
         <type>Eau</type>
         <puissance>35</puissance>
@@ -325,7 +325,7 @@
                 <special>Claquoir</special>
             </effet>
         </effets>
-    </capacite> -->
+    </capacite>
     
     <capacite id="25">
         <nom>Clonage</nom>
@@ -372,7 +372,7 @@
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <special>COPIE_CAPACITE</special>
+                <special>Copie Attaque</special>
             </effet>
         </effets>
     </capacite>

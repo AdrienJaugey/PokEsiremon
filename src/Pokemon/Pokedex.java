@@ -20,8 +20,10 @@ package Pokemon;
 
 import Pokemon.Capacite.Capacite;
 import Pokemon.Capacite.EffetCapacite.Effet;
+import Pokemon.Capacite.EffetCapacite.EffetSpecial;
 import Pokemon.Capacite.EffetCapacite.EffetStatistique;
 import Pokemon.Capacite.EffetCapacite.EffetStatut;
+import static Pokemon.Capacite.EffetCapacite.Enum_EffetSpeciaux.*;
 import Pokemon.Capacite.Enum_Cible;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -160,7 +162,15 @@ public class Pokedex {
                                                 EffetStatistique effetStat = new EffetStatistique(cible, chance, stat, delta, modifier);
                                                 effetsCapa.add(effetStat);
                                             } else if(info.getNodeName().equals("special")){
-                                                System.out.println("A implémenter : " + info.getTextContent());
+                                                switch (info.getTextContent().toLowerCase()) {
+                                                    case "peur": effetsCapa.add(new EffetSpecial(cible, chance, PEUR, 0)); break;
+                                                    case "clonage": effetsCapa.add(new EffetSpecial(cible, chance, CLONAGE, 0)); break;
+                                                    case "no_status_change": effetsCapa.add(new EffetSpecial(cible, chance, NO_STATUS_CHANGE, 0)); break;
+                                                    case "copie_type": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_TYPE, 0)); break;
+                                                    case "copie_capacite": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_CAPACITE, 0)); break;
+                                                    case "retour_degats": effetsCapa.add(new EffetSpecial(cible, chance, RETOUR_DEGATS, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
+                                                    default: System.out.println("[" + id + "] A implémenter : " + info.getTextContent());
+                                                }
                                             }
                                         }
                                     }

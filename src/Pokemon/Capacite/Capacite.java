@@ -85,6 +85,7 @@ public class Capacite {
         String res = "";
         int pReussite = (int) Math.round((lanceur.getPrecision() * (double) this.getPrecision()) / cible.getEsquive());
         if(Utils.chance(pReussite)){
+            lanceur.setDerniereCapacite(this);
             if(_puissance > 0){
                 if(_nbFrappeMin == _nbFrappeMax && _nbFrappeMin == 1) res += cible.subir(this, lanceur);
                 else {
