@@ -156,7 +156,7 @@
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <special modifier="0.25">RETOUR_DEGATS</special>
+                <special modifier="0.25">CONTRECOUP</special>
             </effet>
         </effets>
     </capacite>
@@ -333,10 +333,6 @@
         <pp>10</pp>
         <effets>
             <effet>
-                <cible>Lanceur</cible>
-                <statistique modifier="-0.25">Vie</statistique>
-            </effet>
-            <effet>
                 <cible>lanceur</cible>
                 <special>Clonage</special>
             </effet>
@@ -428,6 +424,7 @@
             </effet>
         </effets>
     </capacite>
+    
     
     
 </capacites>

@@ -28,5 +28,5 @@ public enum Enum_EffetSpeciaux {
     COPIE_TYPE,
     COPIE_CAPACITE,
     NO_STATUS_CHANGE,
-    RETOUR_DEGATS;
+    CONTRECOUP;
 }

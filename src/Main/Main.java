@@ -34,6 +34,7 @@ public class Main {
             else c = Pokedex.get().getCapacite(i);
         }
         System.out.println(c);
+       
     }
     
     public static void clear(){

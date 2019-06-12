@@ -39,8 +39,16 @@ public abstract class Effet {
             
     public String agir(Pokemon lanceur, Pokemon adversaire){
         String res = "";
-        if(_cible == LANCEUR) if(Utils.chance(_chance))res = effet(lanceur, adversaire);
-        else if(chance(_chance))res = effet(adversaire, lanceur);
+        if(_cible == LANCEUR){
+            if(Utils.chance(_chance)){
+                res = effet(lanceur, adversaire);
+            }
+        }
+        else {
+            if(chance(_chance)){
+                res = effet(adversaire, lanceur);
+            }
+        }
         return res;
     }
     

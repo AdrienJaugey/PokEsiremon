@@ -57,7 +57,7 @@ public class EffetSpecial extends Effet{
             case NO_STATUS_CHANGE: {
                 res = cible.activerBrume();
             } break;
-            case RETOUR_DEGATS: {
+            case CONTRECOUP: {
                 cible.perdreVie((int) Math.round(autre.getDernierDegats() * _modifier));
                 res = cible.getNom() + " a subi un contre-coup";
             } break;
@@ -73,8 +73,8 @@ public class EffetSpecial extends Effet{
             case PEUR: res = "Apeure le pokémon " + super._cible.toString().toLowerCase(); break;
             case CLONAGE: res = "Crée un clone qui prend les dégats à la place du pokémon. Retire 25% du maximum de PV qui deviennent la vie du clone."; break;
             case COPIE_TYPE: res = "Le pokémon prend le type du pokémon adverse."; break;
-            case NO_STATUS_CHANGE: res = "Une brume se lève et empêche les changements de statuts du pokémon lanceur."; break;
-            case RETOUR_DEGATS: res = "Le lanceur se blesse a hauteur de " + (int)(_modifier*100) + "% des dégats"; break;
+            case NO_STATUS_CHANGE: res = "Une brume se lève et empêche les changements de statistiques du pokémon lanceur."; break;
+            case CONTRECOUP: res = "Le lanceur se blesse a hauteur de " + (int)(_modifier*100) + "% des dégats"; break;
         }
         return res;
     }

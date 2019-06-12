@@ -95,7 +95,7 @@ public class Capacite {
             }
             if(!cible.isKO()){
                 for(Effet e : _effetCapacite){
-                    res += e.agir(lanceur, cible) + "\n";
+                    res += "\n" + e.agir(lanceur, cible);
                 }
             }
         } else {

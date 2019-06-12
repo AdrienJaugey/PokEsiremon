@@ -168,7 +168,7 @@ public class Pokedex {
                                                     case "no_status_change": effetsCapa.add(new EffetSpecial(cible, chance, NO_STATUS_CHANGE, 0)); break;
                                                     case "copie_type": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_TYPE, 0)); break;
                                                     case "copie_capacite": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_CAPACITE, 0)); break;
-                                                    case "retour_degats": effetsCapa.add(new EffetSpecial(cible, chance, RETOUR_DEGATS, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
+                                                    case "contrecoup": effetsCapa.add(new EffetSpecial(cible, chance, CONTRECOUP, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
                                                     default: System.out.println("[" + id + "] A implémenter : " + info.getTextContent());
                                                 }
                                             }

@@ -373,7 +373,7 @@ public class Pokemon{
     @Override
     public String toString() {
         String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") Niv. 100";
-        res += "\n\tVie :\t " + _vie + "/" + _vieMax;
+        res += "\n\tVie :\t " + getVie() + "/" + _vieMax;
         res += "\n\tAtq :\t " + getAtq() + "/" + _atqMax;
         res += "\n\tDef :\t " + getDef() + "/" + _defMax;
         res += "\n\tAtqSpe : " + getAtqSpe() + "/" + _atqSpeMax;
@@ -430,7 +430,16 @@ public class Pokemon{
                     _vie = Math.min(_vieMax, _vie + delta);
                 }
             } break;
-            default: _niveauStat[stat.ordinal() - 1] = Utils.borne(-6, _niveauStat[stat.ordinal() - 1] + delta, 6);
+            default: 
+                if(!isThereClone() && !_brume){
+                    _niveauStat[stat.ordinal() - 1] = Utils.borne(-6, _niveauStat[stat.ordinal() - 1] + delta, 6);
+                } else {
+                    if(_brume){
+                        res = "Aucun changement de statistiques ne peut affecter " + _nom + ".";
+                    } else if(isThereClone()){
+                        res = "Cela affecte le clone.";
+                    }
+                }
         }
         return res;
     }
@@ -466,7 +475,9 @@ public class Pokemon{
      */
     public String setStatut(Enum_Statut statut, Pokemon cibleVampigraine){
         String res = "";
-        if(this._statut != statut && this._statut == NEUTRE && (!_brume || statut == CONFUSION || statut == VAMPIGRAINE)){
+        //la confusion et vampigraine sont censés être des statuts secondaires 
+        //(i.e. ils peuvent subvenir en même temps qu'un statut principal (gel...)
+        if(this._statut != statut && this._statut == NEUTRE){
             switch(statut){
                 case BRULURE: {
                     if(!isType(FEU)){
@@ -526,6 +537,7 @@ public class Pokemon{
             _vieClone -= degats;
             _dernierDegats = degats;
             if(_vieClone < 0){
+                this.resetStatut();
                 _vieClone = 0;
                 _dernierDegats = 0;
                 res += "Le clone a disparu";
@@ -666,16 +678,16 @@ public class Pokemon{
         double modifierSTAB = (lanceur.isType(capa.getTypePkmn()) ? 1.5 : 1);
         
         double modifierType = (capa.getTypePkmn() != null ? this.getModifier(capa.getTypePkmn()) : 1);
-        if(modifierType <= 0.5) res+= "Ce n'est pas très efficace\n";
-        else if(modifierType >= 2.) res += "C'est très efficace !\n";
+        if(modifierType <= 0.5) res+= "Ce n'est pas très efficace";
+        else if(modifierType >= 2.) res += "C'est très efficace !";
         
         double modifierCrit = (Utils.chance(getChanceCrit(capa)) ? 1.5 : 1);
-        if(modifierCrit == 1.5) res += "Coup critique !\n"; 
+        if(modifierCrit == 1.5) res += "Coup critique !"; 
         
         double modifierAlea = 0.85 + Math.random() * 0.15;
         
         int pvPerdus = (int) Math.round((((42. * attaque * puissance) / (defense * 50.)) + 2) * modifierSTAB * modifierType * modifierCrit * modifierAlea); 
-        this.modifierStatistique(VIE, -pvPerdus);
+        res += "\n" + this.modifierStatistique(VIE, -pvPerdus);
         return res;
     }
     
@@ -756,7 +768,7 @@ public class Pokemon{
      */
     public String activerBrume(){
         _brume = true;
-        return "Une brume se lève, aucun changement de statut ne peut affecter " + _nom;
+        return "Une brume se lève, aucun changement de statistiques ne peut affecter " + _nom;
     }
     
     /**
