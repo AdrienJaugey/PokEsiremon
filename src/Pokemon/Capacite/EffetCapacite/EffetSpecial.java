@@ -62,7 +62,11 @@ public class EffetSpecial extends Effet{
                 res = cible.getNom() + " se blesse en attaquant";
             } break;
             case COPIE_CAPACITE: res = cible.copierCapacite(autre); break;
-            case ENTRAVE: res = cible.bloquerCapacite(2, 8);
+            case ENTRAVE: res = cible.bloquerCapacite(2, 8); break;
+            case DEGATS2VIE: {
+                int restaure = (int)Math.round(autre.getDernierDegats() * _modifier);
+                res = cible.modifierStatistique(VIE, restaure);
+            } break;
         }
         return res;
     }
@@ -77,6 +81,8 @@ public class EffetSpecial extends Effet{
             case NO_STATUS_CHANGE: res = "Une brume se lève et empêche les changements de statistiques du pokémon lanceur"; break;
             case CONTRECOUP: res = "Le lanceur se blesse a hauteur de " + (int)(_modifier*100) + "% des dégats"; break;
             case ENTRAVE: res = "La dernière attaque du pokémon " + _cible.toString() + " est entravée.\n\t  S'il n'y en a pas, la capacité échoue"; break;
+            case COPIE_CAPACITE : res = "Copie la dernière capacité utilisée par le pokémon adverse.\n\t  Echoue s'il n'y en a pas."; break;
+            case DEGATS2VIE : res = "Restaure " + (int)(_modifier * 100) + "% des dégats réalisés en tant que vie"; break;
         }
         if(super._chance != 100) res += ", " + _chance + "% de chance de réussite.";
         else res += ".";

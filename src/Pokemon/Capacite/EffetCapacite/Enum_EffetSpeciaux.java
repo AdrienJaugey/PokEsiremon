@@ -29,5 +29,6 @@ public enum Enum_EffetSpeciaux {
     COPIE_CAPACITE,
     NO_STATUS_CHANGE,
     CONTRECOUP,
-    ENTRAVE;
+    ENTRAVE,
+    DEGATS2VIE;
 }

@@ -585,7 +585,7 @@ public class Pokemon{
                                 res += "\n" + capa.utiliser(this, cible);
                                 baisserPPCapacite(choixCapacite);
                             } else {
-                                res = this._nom + " n'a pas pu attaquer";
+                                res = this._nom + " n'a pas pu attaquer.";
                             }
                         }
                         break;
@@ -621,15 +621,15 @@ public class Pokemon{
                         res = _nom + " lance Lutte.";
                         res += "\n" + Pokedex.get().getCapacite(0).utiliser(this, cible);
                     } else {
-                        res = _nom + " n'a pas pu attaquer";
+                        res = _nom + " n'a pas pu attaquer.";
                     }
                 }
                 
             } else {
-                res = _nom + " n'a pas pu attaquer, la capacité est bloquée";
+                res = _nom + " n'a pas pu attaquer, la capacité est bloquée.";
             }
         } else {
-            res = _nom + " n'a pas pu attaquer à cause de la peur";
+            res = _nom + " n'a pas pu attaquer à cause de la peur.";
         }
         return res;
     }
@@ -778,7 +778,7 @@ public class Pokemon{
      */
     public String activerBrume(){
         _brume = true;
-        return "Une brume se lève, aucun changement de statistiques ne peut affecter " + _nom;
+        return "Une brume se lève, aucun changement de statistiques ne peut affecter " + _nom + ".";
     }
     
     /**
@@ -807,9 +807,9 @@ public class Pokemon{
         if(aCopier._derniereCapaUtilisee != null){
             _copie = aCopier._derniereCapaUtilisee;
             _ppCopie = 10;
-            return _nom + " apprend " + _copie.getNom();
+            return _nom + " apprend " + _copie.getNom() + ".";
         } else {
-            return "Copie a échoué";
+            return "Copie a échoué.";
         }
     }
     
@@ -819,14 +819,16 @@ public class Pokemon{
             res = _derniereCapaUtilisee.getNom();
             try {
                 int aBloquer = -1;
-                for(int i = 0; i < 4; i++){
-                    if(getCapacite(i).getNom().equals(res)) aBloquer = i;
+                int i = 0;
+                while(i < 4 && aBloquer == -1){
+                    if(_capacites[i] != null && getCapacite(i).getNom().equals(res)) aBloquer = i;
+                    i++;
                 }
-                if(aBloquer != -1){
+                if(aBloquer != -1 && _capaciteBloquee[aBloquer] == 0){
                     _capaciteBloquee[aBloquer] = minTour + (int)(Math.random() * (maxTour - minTour));
                     res += " est entravé(e)."; 
                 }
-                else res = "L'entrave a échoué";
+                else res = "L'entrave a échouée.";
             } catch (Exception ex) { 
                 res = "L'entrave a échoué.";
             }
@@ -859,13 +861,13 @@ public class Pokemon{
     public String resetStatut(){
         String res = _nom + " n'est plus ";
         switch(_statut){
-            case BRULURE: { res += "brûlé"; } break;
-            case GEL: { res += "gelé"; } break;
-            case PARALYSIE: { res += "paralysé"; } break;
-            case EMPOISONNEMENT: { res += "empoisonné"; } break;
-            case SOMMEIL: { res = _nom + " se réveille"; } break;
-            case CONFUSION: { res += "confus"; } break;
-            case VAMPIGRAINE: { res += "infecté"; } break;
+            case BRULURE: { res += "brûlé."; } break;
+            case GEL: { res += "gelé."; } break;
+            case PARALYSIE: { res += "paralysé."; } break;
+            case EMPOISONNEMENT: { res += "empoisonné."; } break;
+            case SOMMEIL: { res = _nom + " se réveille."; } break;
+            case CONFUSION: { res += "confus."; } break;
+            case VAMPIGRAINE: { res += "infecté."; } break;
         }
         _statut = NEUTRE;
         _tourStatut = 0;

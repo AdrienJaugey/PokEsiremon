@@ -170,6 +170,7 @@ public class Pokedex {
                                                     case "copie_capacite": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_CAPACITE, 0)); break;
                                                     case "contrecoup": effetsCapa.add(new EffetSpecial(cible, chance, CONTRECOUP, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
                                                     case "entrave": effetsCapa.add(new EffetSpecial(cible, chance, ENTRAVE, 0)); break;
+                                                    case "degats2vie": effetsCapa.add(new EffetSpecial(cible, chance, DEGATS2VIE, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
                                                     default: System.out.println("[" + id + "] A implémenter : " + info.getTextContent());
                                                 }
                                             }

@@ -738,4 +738,400 @@
         </effets>
     </capacite>
     
+    <capacite id="58">
+        <nom>Etreinte</nom>
+        <type>Normal</type>
+        <puissance>15</puissance>
+        <precision>75</precision>
+        <pp>20</pp>
+        <nbFrappe min="2" max="5"/>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="59">
+        <nom>Explosion</nom>
+        <type>Normal</type>
+        <puissance>340</puissance>
+        <pp>5</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="-1.0">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="60">
+        <nom>Fatal-Foudre</nom>
+        <type>Electrik</type>
+        <puissance>120</puissance>
+        <precision>70</precision>
+        <pp>10</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="61">
+        <nom>Flammeche</nom>
+        <type>Feu</type>
+        <puissance>40</puissance>
+        <pp>25</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Brulure</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="62">
+        <nom>Flash</nom>
+        <type>Normal</type>
+        <precision>70</precision>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Precision</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="63">
+        <nom>Force</nom>
+        <type>Normal</type>
+        <puissance>80</puissance>
+        <pp>15</pp>
+    </capacite>
+    
+    <capacite id="64">
+        <nom>Force Poigne</nom>
+        <type>Normal</type>
+        <puissance>55</puissance>
+        <pp>30</pp>
+    </capacite>
+    
+    <capacite id="65">
+        <nom>Fouet Lianes</nom>
+        <type>Plante</type>
+        <puissance>35</puissance>
+        <pp>10</pp>
+    </capacite>
+    
+    <capacite id="66">
+        <nom>Frappe-Atlas</nom>
+        <type>Combat</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-100">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="67">
+        <nom>Frénésie</nom>
+        <type>Combat</type>
+        <puissance>20</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet chance="50">
+                <cible>Lanceur</cible>
+                <statistique modifier="1">Atq</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="68">
+        <nom>Furie</nom>
+        <type>Normal</type>
+        <puissance>15</puissance>
+        <precision>85</precision>
+        <pp>20</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="69">
+        <nom>Gaz Toxik</nom>
+        <type>Poison</type>
+        <precision>55</precision>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Empoisonnement</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="70">
+        <nom>Griffe</nom>
+        <type>Normal</type>
+        <puissance>40</puissance>
+        <pp>35</pp>
+    </capacite>
+    
+    <capacite id="71">
+        <nom>Grincement</nom>
+        <type>Normal</type>
+        <precision>85</precision>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-2">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="72">
+        <nom>Grobisou</nom>
+        <type>Normal</type>
+        <precision>75</precision>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Sommeil</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="73">
+        <nom>Groz'Yeux</nom>
+        <type>Normal</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="74">
+        <nom>Guillotine</nom>
+        <type>Normal</type>
+        <precision>30</precision>
+        <pp>5</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1.0">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="75">
+        <nom>Hate</nom>
+        <type>Psy</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="2">Vitesse</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="76">
+        <nom>Hydrocanon</nom>
+        <type>Eau</type>
+        <puissance>120</puissance>
+        <precision>80</precision>
+        <pp>5</pp>
+    </capacite>
+    
+    <capacite id="77">
+        <nom>Hypnose</nom>
+        <type>Psy</type>
+        <precision>60</precision>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Sommeil</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="78">
+        <nom>Intimidation</nom>
+        <type>Normal</type>
+        <precision>75</precision>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="79">
+        <nom>Jackpot</nom>
+        <type>Normal</type>
+        <puissance>40</puissance>
+        <pp>20</pp>
+    </capacite>
+    
+    <capacite id="80">
+        <nom>Jet de sable</nom>
+        <type>Normal</type>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Precision</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="81">
+        <nom>Jet pierre</nom>
+        <type>Roche</type>
+        <puissance>50</puissance>
+        <precision>75</precision>
+        <pp>15</pp>
+    </capacite>
+    
+    <capacite id="82">
+        <nom>Koud'Korne</nom>
+        <type>Normal</type>
+        <puissance>65</puissance>
+        <pp>25</pp>
+    </capacite>
+    
+    <capacite id="83">
+        <nom>Lance-Flamme</nom>
+        <type>Feu</type>
+        <puissance>95</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Brulure</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="84">
+        <nom>Lance-Soleil</nom>
+        <type>Plante</type>
+        <puissance>120</puissance>
+        <pp>10</pp>
+        <tourAvant/>
+    </capacite>
+    
+    <capacite id="85">
+        <nom>Laser-Glace</nom>
+        <type>Glace</type>
+        <puissance>95</puissance>
+        <pp>10</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Gel</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="86">
+        <nom>Lêchouille</nom>
+        <type>Spectre</type>
+        <puissance>20</puissance>
+        <pp>30</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="87">
+        <nom>Ligotage</nom>
+        <type>Normal</type>
+        <puissance>15</puissance>
+        <precision>85</precision>
+        <pp>20</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="88">
+        <nom>Liliput</nom>
+        <type>Normal</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="2">Esquive</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="89">
+        <nom>Mania</nom>
+        <type>Normal</type>
+        <puissance>90</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Lanceur</cible>
+                <statut>Confusion</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="90">
+        <nom>Massd'Os</nom>
+        <type>Sol</type>
+        <puissance>65</puissance>
+        <precision>85</precision>
+        <pp>20</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="91">
+        <nom>Mawashi Geri</nom>
+        <type>Combat</type>
+        <puissance>60</puissance>
+        <precision>80</precision>
+        <pp>15</pp>
+        <effets>
+            <effet chance="26">
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="92">
+        <nom>Mega-sangsue</nom>
+        <type>Plante</type>
+        <puissance>40</puissance>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <special modifier="0.5">Degats2Vie</special>
+            </effet>
+        </effets>
+    </capacite>
+    
 </capacites>
