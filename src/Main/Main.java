@@ -30,11 +30,29 @@ public class Main {
         clear();
         Capacite c = null;
         for(int i = 0; i < Pokedex.NB_CAPACITE; i++){
+            if(i == 24 || i == 46) continue;
             if(Pokedex.get().getCapacite(i) == null) break;
             else c = Pokedex.get().getCapacite(i);
         }
         System.out.println(c);
        
+        /*Pokemon pika = new Pokemon(25);
+        Pokemon carapuce = new Pokemon(7);
+        Capacite eclair = new Capacite("Eclair", ELECTRIK, 40, 100, 1, false, 1, 1);
+        try {
+            pika.setCapacite(eclair, 0);
+            System.out.println(pika.utiliserCapacite(0, carapuce));
+            System.out.println(pika);
+            System.out.println(carapuce);
+            System.out.println("\n");
+            System.out.println(pika.utiliserCapacite(0, carapuce));
+            System.out.println(pika);
+            System.out.println(carapuce);
+            System.out.println("\n");
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
     }
     
     public static void clear(){

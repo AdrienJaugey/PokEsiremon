@@ -59,9 +59,10 @@ public class EffetSpecial extends Effet{
             } break;
             case CONTRECOUP: {
                 cible.perdreVie((int) Math.round(autre.getDernierDegats() * _modifier));
-                res = cible.getNom() + " a subi un contre-coup";
+                res = cible.getNom() + " se blesse en attaquant";
             } break;
             case COPIE_CAPACITE: res = cible.copierCapacite(autre); break;
+            case ENTRAVE: res = cible.bloquerCapacite(2, 8);
         }
         return res;
     }
@@ -71,11 +72,14 @@ public class EffetSpecial extends Effet{
         String res = "";
         switch (_type) {
             case PEUR: res = "Apeure le pokémon " + super._cible.toString().toLowerCase(); break;
-            case CLONAGE: res = "Crée un clone qui prend les dégats à la place du pokémon. Retire 25% du maximum de PV qui deviennent la vie du clone."; break;
-            case COPIE_TYPE: res = "Le pokémon prend le type du pokémon adverse."; break;
-            case NO_STATUS_CHANGE: res = "Une brume se lève et empêche les changements de statistiques du pokémon lanceur."; break;
+            case CLONAGE: res = "Crée un clone qui prend les dégats à la place du pokémon.\n\t  Retire 25% du maximum de PV qui deviennent la vie du clone"; break;
+            case COPIE_TYPE: res = "Le pokémon prend le type du pokémon adverse"; break;
+            case NO_STATUS_CHANGE: res = "Une brume se lève et empêche les changements de statistiques du pokémon lanceur"; break;
             case CONTRECOUP: res = "Le lanceur se blesse a hauteur de " + (int)(_modifier*100) + "% des dégats"; break;
+            case ENTRAVE: res = "La dernière attaque du pokémon " + _cible.toString() + " est entravée.\n\t  S'il n'y en a pas, la capacité échoue"; break;
         }
+        if(super._chance != 100) res += ", " + _chance + "% de chance de réussite.";
+        else res += ".";
         return res;
     }
     

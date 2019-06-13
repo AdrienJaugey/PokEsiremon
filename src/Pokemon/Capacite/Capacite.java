@@ -115,7 +115,13 @@ public class Capacite {
             res += "\n\t- " + e.toString();
         }
         if(_critModifier == 8) res += "\nForte chance de coups critiques";
-        if(_nbFrappeMin > 1) res += "\nFrappe entre " + _nbFrappeMin + " et " + _nbFrappeMax + " fois l'adversaire";
+        if(_nbFrappeMin > 1){
+            if(_nbFrappeMin != _nbFrappeMax){
+                res += "\nFrappe entre " + _nbFrappeMin + " et " + _nbFrappeMax + " fois l'adversaire";
+            } else {
+                res += "\nFrappe " + _nbFrappeMin + " fois l'adversaire";
+            }
+        }
         return res;
     }
 

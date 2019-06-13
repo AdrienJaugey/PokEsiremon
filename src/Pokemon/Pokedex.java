@@ -116,8 +116,8 @@ public class Pokedex {
                             case "pp": pp = Integer.parseInt(n.getTextContent()); break;
                             case "boostCrit": boostCrit = true; break;
                             case "nbFrappe": 
-                                nbFrappeMin = Integer.parseInt(n.getAttributes().item(0).getNodeValue()); 
-                                nbFrappeMax = Integer.parseInt(n.getAttributes().item(1).getNodeValue());
+                                nbFrappeMin = Integer.parseInt(n.getAttributes().item(1).getNodeValue()); 
+                                nbFrappeMax = Integer.parseInt(n.getAttributes().item(0).getNodeValue());
                                 break;
                             case "pokemons": //Dans ce cas, on récupère les id des pokémons pouvant utiliser la capacité
                                 String content = n.getTextContent();
@@ -169,6 +169,7 @@ public class Pokedex {
                                                     case "copie_type": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_TYPE, 0)); break;
                                                     case "copie_capacite": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_CAPACITE, 0)); break;
                                                     case "contrecoup": effetsCapa.add(new EffetSpecial(cible, chance, CONTRECOUP, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
+                                                    case "entrave": effetsCapa.add(new EffetSpecial(cible, chance, ENTRAVE, 0)); break;
                                                     default: System.out.println("[" + id + "] A implémenter : " + info.getTextContent());
                                                 }
                                             }

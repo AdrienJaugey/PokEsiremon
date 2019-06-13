@@ -35,7 +35,7 @@ public class Pokemon{
     private final int _id;
     private final Capacite[] _capacites;
     private final int[] _pp;
-    private boolean _capaciteBloquee[];
+    private int _capaciteBloquee[];
     private boolean _peur;
     private boolean _brume;
     private int _vieClone;
@@ -90,7 +90,8 @@ public class Pokemon{
         _niveauStat = new int[7];
         for(int i = 0; i < 7; i++) _niveauStat[i] = 0;
         _capacites = new Capacite[4];
-        _capaciteBloquee = new boolean[4];
+        _capaciteBloquee = new int[4];
+        for(int i = 0; i < 4; i++) _capaciteBloquee[i] = 0;
         _pp = new int[4];
         _type = pkdx.getTypesPkmn(id);
         this._cibleVampigraine = null;
@@ -392,7 +393,7 @@ public class Pokemon{
         if(emplacement < 0 || emplacement > 3) throw new Exception("Un pokémon n'a que 4 emplacements de capacité (entre 0 et 3)");
         this._capacites[emplacement] = capacite;
         this._pp[emplacement] = capacite.getPPMax();
-        this._capaciteBloquee[emplacement] = false;
+        this._capaciteBloquee[emplacement] = 0;
         if(capacite.getNom().equals("Copie")) _emplacementCopie = emplacement;
     }
     
@@ -572,7 +573,7 @@ public class Pokemon{
     public String utiliserCapacite(int choixCapacite, Pokemon cible) throws Exception{
         String res;
         if (!_peur) {
-            if (!_capaciteBloquee[choixCapacite]) {
+            if (_capaciteBloquee[choixCapacite] == 0) {
                 if (getPPCapacite(choixCapacite) > 0) {
                     Capacite capa = getCapacite(choixCapacite);
                     res = this._nom + " lance " + capa.getNom() + ".";
@@ -616,8 +617,14 @@ public class Pokemon{
                         break;
                     }
                 } else {
-                    res = _nom + " n'a pas pu attaquer";
+                    if(!hasStillPP()){
+                        res = _nom + " lance Lutte.";
+                        res += "\n" + Pokedex.get().getCapacite(0).utiliser(this, cible);
+                    } else {
+                        res = _nom + " n'a pas pu attaquer";
+                    }
                 }
+                
             } else {
                 res = _nom + " n'a pas pu attaquer, la capacité est bloquée";
             }
@@ -712,6 +719,9 @@ public class Pokemon{
      * cause d'un statut...)
      */
     public void finTour(){
+        for(int i = 0; i < 4; i++){
+            if(_capaciteBloquee[i] > 0) _capaciteBloquee[i]--;
+        }
         _peur = false;
         if(_statut == EMPOISONNEMENT || _statut == BRULURE || _statut == VAMPIGRAINE){
             int pv = Math.min(_vie, (int) (_vieMax / 16.));
@@ -803,6 +813,26 @@ public class Pokemon{
         }
     }
     
+    public String bloquerCapacite(int minTour, int maxTour){
+        String res = "";
+        if(_derniereCapaUtilisee != null){
+            res = _derniereCapaUtilisee.getNom();
+            try {
+                int aBloquer = -1;
+                for(int i = 0; i < 4; i++){
+                    if(getCapacite(i).getNom().equals(res)) aBloquer = i;
+                }
+                if(aBloquer != -1){
+                    _capaciteBloquee[aBloquer] = minTour + (int)(Math.random() * (maxTour - minTour));
+                    res += " est entravé(e)."; 
+                }
+                else res = "L'entrave a échoué";
+            } catch (Exception ex) { 
+                res = "L'entrave a échoué.";
+            }
+        }
+        return res;
+    }
     /*************
     *   Resets   *
     *************/
@@ -904,7 +934,18 @@ public class Pokemon{
         return this.getVie() <= 0;
     }
     
+    /**
+     * Permet de savoir s'il y a un clone d'actif
+     * @return true si oui, false sinon
+     */
     public boolean isThereClone(){
         return _vieClone > 0;
+    }
+    
+    public boolean hasStillPP(){
+        for(int emplacement = 0; emplacement < 4; emplacement++){
+            try { if(getPPCapacite(emplacement) > 0) return true; } catch (Exception ex) { }
+        }
+        return false;
     }
 }

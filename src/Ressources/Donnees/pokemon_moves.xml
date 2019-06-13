@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE capacites [
     <!ELEMENT capacites (capacite+)>
-    <!ELEMENT capacite (nom, type?, puissance?, precision?, pp, boostCrit?, nbFrappe?, tourAvant?, tourApres?, pokemons, effets?)>
+    <!ELEMENT capacite (nom, type?, puissance?, precision?, pp, boostCrit?, nbFrappe?, tourAvant?, tourApres?, pokemons?, effets?)>
     <!ATTLIST capacite id CDATA #REQUIRED> 
     <!ELEMENT nom (#PCDATA)>
     <!ELEMENT type (#PCDATA)>
@@ -23,19 +23,49 @@
     <!ELEMENT statistique (#PCDATA)>
     <!ATTLIST statistique modifier CDATA #REQUIRED>
     <!ELEMENT special (#PCDATA)>
+    <!ATTLIST special modifier CDATA #IMPLIED>
 ]>
 
 <capacites>
     <!-- Liste des attaques obtenues à partir de https://www.pokemon-france.com/jeux/gen1/bleu_rouge/attaques ]-->
+    
+    <!--
+        <capacite id="">
+            <nom></nom>
+            <type></type>
+            <puissance></puissance>
+            <precision></precision>
+            <pp></pp>
+            <nbFrappe min="" max=""/>
+            <tourAvant/>
+            <tourApres/>
+            <pokemons></pokemons>
+            <effets>
+                <effet chance="">
+                    <cible></cible>
+                    <statut></statut>
+                </effet>
+                <effet chance="">
+                    <cible></cible>
+                    <statistique modifier=""></statistique>
+                </effet>
+                <effet chance="">
+                    <cible></cible>
+                    <special modifier=""></special>
+                </effet>
+            </effets>
+        </capacite>
+    -->
+    
     <capacite id="0">
         <nom>Lutte</nom>
-        <pp>2147483647</pp>
         <puissance>50</puissance>
         <precision>100</precision>
+        <pp>1</pp>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <statistique modifier="-0.25">Vie</statistique>
+                <special modifier="0.5">CONTRECOUP</special>
             </effet>
         </effets>
     </capacite>
@@ -43,8 +73,8 @@
     <capacite id="1">
         <nom>Abîme</nom>
         <type>Sol</type>
-        <pp>5</pp>
         <precision>30</precision>
+        <pp>5</pp>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -313,19 +343,21 @@
         </effets>
     </capacite>
     
-    <!--<capacite id="24">
-        <nom>Claquoir</nom>
-        <type>Eau</type>
-        <puissance>35</puissance>
-        <precision>75</precision>
-        <pp>10</pp>
-        <effets>
-            <effet>
-                <cible>Adversaire</cible>
-                <special>Claquoir</special>
-            </effet>
-        </effets>
-    </capacite> -->
+    <!--
+        <capacite id="24">
+            <nom>Claquoir</nom>
+            <type>Eau</type>
+            <puissance>35</puissance>
+            <precision>75</precision>
+            <pp>10</pp>
+            <effets>
+                <effet>
+                    <cible>Adversaire</cible>
+                    <special>Claquoir</special>
+                </effet>
+            </effets>
+        </capacite> 
+    -->
     
     <capacite id="25">
         <nom>Clonage</nom>
@@ -425,6 +457,285 @@
         </effets>
     </capacite>
     
+    <capacite id="34">
+        <nom>Croc Fatal</nom>
+        <type>Normal</type>
+        <precision>90</precision>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="-0.5">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
     
+    <capacite id="35">
+        <nom>Croissance</nom>
+        <type>Normal</type>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="1">Atq</statistique>
+            </effet>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="1">AtqSpe</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="36">
+        <nom>Cru-aile</nom>
+        <type>Vol</type>
+        <puissance>35</puissance>
+        <pp>35</pp>
+    </capacite>
+    
+    <capacite id="37">
+        <nom>Damoclès</nom>
+        <type>Normal</type>
+        <puissance>100</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special modifier="0.25">CONTRECOUP</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="38">
+        <nom>Danseflamme</nom>
+        <type>Feu</type>
+        <puissance>15</puissance>
+        <precision>70</precision>
+        <pp>15</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="39">
+        <nom>Danse-Fleur</nom>
+        <type>Plante</type>
+        <puissance>120</puissance>
+        <precision>75</precision>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statut>CONFUSION</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="40">
+        <nom>Danse-Lames</nom>
+        <type>Normal</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="2">Atq</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="41">
+        <nom>Dard-Nuée</nom>
+        <type>Insecte</type>
+        <puissance>14</puissance>
+        <precision>85</precision>
+        <pp>20</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="42">
+        <nom>Dard-Venin</nom>
+        <type>Poison</type>
+        <puissance>15</puissance>
+        <precision>100</precision>
+        <pp>35</pp>
+        <effets>
+            <effet chance="20">
+                <cible>Adversaire</cible>
+                <statut>Empoisonnement</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="43">
+        <nom>Déflagration</nom>
+        <type>Feu</type>
+        <puissance>120</puissance>
+        <precision>85</precision>
+        <pp>5</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statut>Brulure</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="44">
+        <nom>Destruction</nom>
+        <type>Normal</type>
+        <puissance>260</puissance>
+        <pp>5</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="-1.0">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="45">
+        <nom>Détritus</nom>
+        <type>Poison</type>
+        <puissance>65</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet chance="50">
+                <cible>Adversaire</cible>
+                <statut>Empoisonnement</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <!--<capacite id="46">
+        <nom>Dévorêve</nom>
+        <type>Psy</type>
+        <puissance>100</puissance>
+        <pp>15</pp>
+    </capacite>-->
+    
+    <capacite id="47">
+        <nom>Double-Dard</nom>
+        <type>Insecte</type>
+        <puissance>25</puissance>
+        <pp>20</pp>
+        <nbFrappe min="2" max="2"/>
+        <effets>
+            <effet chance="36">
+                <cible>Adversaire</cible>
+                <statut>Empoisonnement</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="48">
+        <nom>Double-pied</nom>
+        <type>Combat</type>
+        <puissance>30</puissance>
+        <pp>30</pp>
+        <nbFrappe min="2" max="2"/>
+    </capacite>
+    
+    <capacite id="49">
+        <nom>Draco-rage</nom>
+        <type>Dragon</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-40">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="50">
+        <nom>Eboulement</nom>
+        <type>Roche</type>
+        <puissance>80</puissance>
+        <precision>90</precision>
+        <pp>10</pp>
+    </capacite>
+    
+    <capacite id="51">
+        <nom>Eclair</nom>
+        <type>Electrik</type>
+        <puissance>40</puissance>
+        <pp>30</pp>
+        <pokemons>25</pokemons>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="52">
+        <nom>E-coque</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="0.5">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="53">
+        <nom>Ecrasement</nom>
+        <type>Normal</type>
+        <puissance>65</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="54">
+        <nom>Ecras'face</nom>
+        <type>Normal</type>
+        <puissance>40</puissance>
+        <pp>35</pp>
+    </capacite>
+    
+    <capacite id="55">
+        <nom>Ecume</nom>
+        <type>Eau</type>
+        <puissance>20</puissance>
+        <pp>30</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Vitesse</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="56">
+        <nom>Empal'korne</nom>
+        <type>Normal</type>
+        <precision>30</precision>
+        <pp>5</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1.0">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="57">
+        <nom>Entrave</nom>
+        <type>Normal</type>
+        <precision>55</precision>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <special>Entrave</special>
+            </effet>
+        </effets>
+    </capacite>
     
 </capacites>
