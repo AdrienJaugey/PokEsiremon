@@ -108,7 +108,7 @@ public class Capacite {
     @Override
     public String toString() {
         String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ") " + _ppMax + " PP"
-                   + "\nPuissance : " + _puissance
+                   + "\nPuissance : " + (_puissance == 0 ? " -" : _puissance)
                    + "\nPrecision : " + _precision + "%";
         if(!_effetCapacite.isEmpty()) res += "\nEffets :";
         for(Effet e : _effetCapacite){

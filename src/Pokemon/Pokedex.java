@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
  */
 public class Pokedex {
     public static final int NB_POKEMON = 151;
-    public static final int NB_CAPACITE = 150;
+    public static final int NB_CAPACITE = 160;
     private static Pokedex _instance;
     private final String[] _pkmnNom;
     private final Enum_TypePokemon[][] _pkmnType;

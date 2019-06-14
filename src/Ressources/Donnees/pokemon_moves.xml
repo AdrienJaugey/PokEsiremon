@@ -1563,4 +1563,331 @@
         </effets>
     </capacite>
     
+    <capacite id="129">
+        <nom>Rugissement</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Atq</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="130">
+        <nom>Sacrifice</nom>
+        <type>Combat</type>
+        <puissance>80</puissance>
+        <precision>80</precision>
+        <pp>25</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special modifier="0.25">Contrecoup</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="131">
+        <nom>Sécrétion</nom>
+        <type>Insecte</type>
+        <precision>95</precision>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Vitesse</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="132">
+        <nom>Séisme</nom>
+        <type>Sol</type>
+        <puissance>100</puissance>
+        <pp>10</pp>
+    </capacite>
+    
+    <capacite id="133">
+        <nom>Soin</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="0.5">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="134">
+        <nom>Sonicboom</nom>
+        <type>Normal</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-20">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="135">
+        <nom>Souplesse</nom>
+        <type>Normal</type>
+        <puissance>80</puissance>
+        <precision>75</precision>
+        <pp>20</pp>
+    </capacite>
+    
+    <capacite id="136">
+        <nom>Spore</nom>
+        <type>Plante</type>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Sommeil</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="137">
+        <nom>Surf</nom>
+        <type>Eau</type>
+        <puissance>95</puissance>
+        <pp>15</pp>
+    </capacite>
+    
+    <capacite id="138">
+        <nom>Télékinésie</nom>
+        <type>Psy</type>
+        <precision>75</precision>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Precision</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="139">
+        <nom>Ténèbres</nom>
+        <type>Spectre</type>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-100">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="140">
+        <nom>Tonerre</nom>
+        <type>Electrik</type>
+        <puissance>95</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="141">
+        <nom>Torgnoles</nom>
+        <type>Normal</type>
+        <puissance>15</puissance>
+        <precision>85</precision>
+        <pp>10</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="142">
+        <nom>Tornade</nom>
+        <type>Vol</type>
+        <puissance>40</puissance>
+        <pp>35</pp>
+    </capacite>
+    
+    <capacite id="143">
+        <nom>Toxik</nom>
+        <type>Poison</type>
+        <precision>85</precision>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Empoisonnement</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="144">
+        <nom>Tranche</nom>
+        <type>Normal</type>
+        <puissance>70</puissance>
+        <pp>20</pp>
+        <boostCrit/>
+    </capacite>
+    
+    <capacite id="145">
+        <nom>Tranch'Herbe</nom>
+        <type>Plante</type>
+        <puissance>55</puissance>
+        <precision>95</precision>
+        <pp>25</pp>
+        <boostCrit/>
+    </capacite>
+    
+    <capacite id="146">
+        <nom>Trempette</nom>
+        <type>Eau</type>
+        <pp>40</pp>
+    </capacite>
+    
+    <capacite id="147">
+        <nom>Triplattaque</nom>
+        <type>Normal</type>
+        <puissance>80</puissance>
+        <pp>10</pp>
+    </capacite>
+    
+    <capacite id="148">
+        <nom>Tunnel</nom>
+        <type>Sol</type>
+        <puissance>100</puissance>
+        <pp>10</pp>
+        <tourAvant/>
+    </capacite>
+    
+    <capacite id="149">
+        <nom>Ultimapoing</nom>
+        <type>Normal</type>
+        <puissance>80</puissance>
+        <precision>85</precision>
+        <pp>20</pp>
+    </capacite>
+    
+    <capacite id="150">
+        <nom>Ultimawashi</nom>
+        <type>Normal</type>
+        <puissance>120</puissance>
+        <precision>75</precision>
+        <pp>5</pp>
+    </capacite>
+    
+    <capacite id="151">
+        <nom>Ultralaser</nom>
+        <type>Normal</type>
+        <puissance>150</puissance>
+        <precision>90</precision>
+        <pp>5</pp>
+        <tourApres/>
+    </capacite>
+    
+    <capacite id="152">
+        <nom>Ultrason</nom>
+        <type>Normal</type>
+        <precision>55</precision>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Confusion</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="153">
+        <nom>Uppercut</nom>
+        <type>Normal</type>
+        <puissance>70</puissance>
+        <pp>10</pp>
+    </capacite>
+    
+    <capacite id="154">
+        <nom>Vague Psy</nom>
+        <type>Psy</type>
+        <precision>80</precision>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-100">Vie</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="155">
+        <nom>Vampigraine</nom>
+        <type>Plante</type>
+        <precision>90</precision>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Vampigraine</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="156">
+        <nom>Vampirisme</nom>
+        <type>Insecte</type>
+        <puissance>20</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special modifier="0.5">Degats2vie</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="157">
+        <nom>Vive Attaque</nom>
+        <type>Normal</type>
+        <puissance>40</puissance>
+        <pp>30</pp>
+    </capacite>
+    
+    <capacite id="157">
+        <nom>Vol</nom>
+        <type>Vol</type>
+        <puissance>70</puissance>
+        <precision>95</precision>
+        <pp>15</pp>
+        <tourAvant/>
+    </capacite>
+    
+    <capacite id="158">
+        <nom>Vol-Vie</nom>
+        <type>Plante</type>
+        <puissance>20</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special modifier="0.5">Degats2vie</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="159">
+        <nom>Yoga</nom>
+        <type>Psy</type>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="1">Atq</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
 </capacites>
