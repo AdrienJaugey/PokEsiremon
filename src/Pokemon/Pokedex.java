@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
  */
 public class Pokedex {
     public static final int NB_POKEMON = 151;
-    public static final int NB_CAPACITE = 100;
+    public static final int NB_CAPACITE = 150;
     private static Pokedex _instance;
     private final String[] _pkmnNom;
     private final Enum_TypePokemon[][] _pkmnType;
@@ -171,6 +171,10 @@ public class Pokedex {
                                                     case "contrecoup": effetsCapa.add(new EffetSpecial(cible, chance, CONTRECOUP, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
                                                     case "entrave": effetsCapa.add(new EffetSpecial(cible, chance, ENTRAVE, 0)); break;
                                                     case "degats2vie": effetsCapa.add(new EffetSpecial(cible, chance, DEGATS2VIE, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
+                                                    case "metronome": effetsCapa.add(new EffetSpecial(cible, chance, METRONOME, 0)); break;
+                                                    case "mimique": effetsCapa.add(new EffetSpecial(cible, chance, MIMIQUE, 0)); break;
+                                                    case "renvoi_degat": effetsCapa.add(new EffetSpecial(cible, chance, RENVOI_DEGAT, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
+                                                    case "soin": effetsCapa.add(new EffetSpecial(cible, chance, SOIN, 0)); break;
                                                     default: System.out.println("[" + id + "] A implémenter : " + info.getTextContent());
                                                 }
                                             }

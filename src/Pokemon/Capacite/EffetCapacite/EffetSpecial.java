@@ -18,8 +18,10 @@
  */
 package Pokemon.Capacite.EffetCapacite;
 
+import Pokemon.Capacite.Capacite;
 import Pokemon.Capacite.Enum_Cible;
 import static Pokemon.Enum_Statistique.VIE;
+import Pokemon.Pokedex;
 import Pokemon.Pokemon;
 
 /**
@@ -67,6 +69,29 @@ public class EffetSpecial extends Effet{
                 int restaure = (int)Math.round(autre.getDernierDegats() * _modifier);
                 res = cible.modifierStatistique(VIE, restaure);
             } break;
+            case METRONOME: {
+                Pokedex pkdx = Pokedex.get();
+                int idCapa = (int)Math.round(1 + Math.random() * pkdx.NB_CAPACITE);
+                while(pkdx.getCapacite(idCapa) == null) idCapa = (int)Math.round(1 + Math.random() * pkdx.NB_CAPACITE);
+                Capacite capa = pkdx.getCapacite(idCapa);
+                res = cible.getNom() + " lance " + capa.getNom() + "." + capa.utiliser(cible, autre);
+            } break;
+            case MIMIQUE: {
+                Capacite capa = autre.getDerniereCapacite();
+                if (capa != null) {
+                    res = cible.getNom() + " lance " + capa.getNom() + ".\n";
+                    res += capa.utiliser(cible, autre);
+                } else {
+                    res = "Mimique a echoué";
+                }
+            } break;
+            case RENVOI_DEGAT:{
+                int degats = cible.getDernierDegats() * 2;
+                res = autre.perdreVie(degats);
+            } break;
+            case SOIN : {
+                res = cible.soigner();
+            } break;
         }
         return res;
     }
@@ -79,10 +104,14 @@ public class EffetSpecial extends Effet{
             case CLONAGE: res = "Crée un clone qui prend les dégats à la place du pokémon.\n\t  Retire 25% du maximum de PV qui deviennent la vie du clone"; break;
             case COPIE_TYPE: res = "Le pokémon prend le type du pokémon adverse"; break;
             case NO_STATUS_CHANGE: res = "Une brume se lève et empêche les changements de statistiques du pokémon lanceur"; break;
-            case CONTRECOUP: res = "Le lanceur se blesse a hauteur de " + (int)(_modifier*100) + "% des dégats"; break;
+            case CONTRECOUP: res = "Le lanceur se blesse a hauteur de " + (_modifier*100) + "% des dégats"; break;
+            case RENVOI_DEGAT: res = "Le pokémon " + _cible.toString() + " renvoit " + (_modifier * 100) + "% des dégats reçus"; break;
             case ENTRAVE: res = "La dernière attaque du pokémon " + _cible.toString() + " est entravée.\n\t  S'il n'y en a pas, la capacité échoue"; break;
-            case COPIE_CAPACITE : res = "Copie la dernière capacité utilisée par le pokémon adverse.\n\t  Echoue s'il n'y en a pas."; break;
-            case DEGATS2VIE : res = "Restaure " + (int)(_modifier * 100) + "% des dégats réalisés en tant que vie"; break;
+            case COPIE_CAPACITE : res = "Copie la dernière capacité utilisée par le pokémon adverse jusqu'à retrait du pokémon.\n\t  Echoue s'il n'y en a pas"; break;
+            case DEGATS2VIE : res = "Restaure " + (_modifier * 100) + "% des dégats réalisés en tant que vie"; break;
+            case METRONOME : res = "Lance une capacité aléatoire, parmi toutes celles existantes"; break;
+            case MIMIQUE : res = "Copie la dernière capacité utilisée par le pokémon adverse"; break;
+            case SOIN : res = "Le pokémon " + _cible.toString() + " récupère toute sa vie.\n\t  Les changements de statuts sont annulés"; break;
         }
         if(super._chance != 100) res += ", " + _chance + "% de chance de réussite.";
         else res += ".";

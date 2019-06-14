@@ -285,6 +285,14 @@ public class Pokemon{
         else return _niveauStat1[6 + _niveauStat[idStat]];
     }
     
+    /**
+     * Permet de récupérer la dernière capacité utilisée par le pokémon
+     * @return la capacite
+     */
+    public Capacite getDerniereCapacite(){
+        return _derniereCapaUtilisee;
+    }
+    
     /**************************
     *   Getters Propriétés    *
     **************************/
@@ -835,6 +843,18 @@ public class Pokemon{
         }
         return res;
     }
+    
+    /**
+     * Permet de soigner les changements de statut et 
+     * @return 
+     */
+    public String soigner(){
+        this.resetStatut();
+        this._vie = _vieMax;
+        return _nom + " a été soigné";
+    }
+    
+    
     /*************
     *   Resets   *
     *************/

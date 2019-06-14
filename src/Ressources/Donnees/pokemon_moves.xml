@@ -36,6 +36,7 @@
             <puissance></puissance>
             <precision></precision>
             <pp></pp>
+            <boostCrit/>
             <nbFrappe min="" max=""/>
             <tourAvant/>
             <tourApres/>
@@ -1130,6 +1131,434 @@
             <effet>
                 <cible>Adversaire</cible>
                 <special modifier="0.5">Degats2Vie</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="93">
+        <nom>Météores</nom>
+        <type>Normal</type>
+        <puissance>60</puissance>
+        <pp>20</pp>
+    </capacite>
+    
+    <capacite id="94">
+        <nom>Métronome</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special>Metronome</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="95">
+        <nom>Mimique</nom>
+        <type>Vol</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special>Mimique</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="96">
+        <nom>Mimi-queue</nom>
+        <type>Normal</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <!-- <capacite id="97">
+        <nom>Morphing</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special>Morphing</special>
+            </effet>
+        </effets>
+    </capacite> -->
+    
+    <capacite id="98">
+        <nom>Morsure</nom>
+        <type>Normal</type>
+        <puissance>60</puissance>
+        <pp>25</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <special>Peur</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="99">
+        <nom>Mur Lumière</nom>
+        <type>Psy</type>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>lanceur</cible>
+                <statistique modifier="2">DefSpe</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="100">
+        <nom>Onde Boréale</nom>
+        <type>Glace</type>
+        <puissance>65</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">Atq</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="101">
+        <nom>Onde Folie</nom>
+        <type>Spectre</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Confusion</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="102">
+        <nom>Osmerang</nom>
+        <type>Sol</type>
+        <puissance>50</puissance>
+        <precision>90</precision>
+        <pp>10</pp>
+        <nbFrappe min="2" max="2"/>
+    </capacite>
+    
+    <capacite id="103">
+        <nom>Para Spore</nom>
+        <type>Plante</type>
+        <precision>75</precision>
+        <pp>30</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="104">
+        <nom>Patience</nom>
+        <type>Normal</type>
+        <pp>10</pp>
+        <tourAvant/>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special modifier="2.0">RENVOI_DEGAT</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="105">
+        <nom>Picanon</nom>
+        <type>Normal</type>
+        <puissance>20</puissance>
+        <pp>15</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="106">
+        <nom>Picpic</nom>
+        <type>Vol</type>
+        <puissance>35</puissance>
+        <pp>35</pp>
+    </capacite>
+    
+    <capacite id="107">
+        <nom>Pied Sauté</nom>
+        <type>Combat</type>
+        <puissance>70</puissance>
+        <precision>95</precision>
+        <pp>25</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Lanceur</cible>
+                <special modifier="0.05">CONTRECOUP</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="108">
+        <nom>Pied Voltige</nom>
+        <type>Combat</type>
+        <puissance>85</puissance>
+        <precision>90</precision>
+        <pp>20</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Lanceur</cible>
+                <special modifier="0.125">CONTRECOUP</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="109">
+        <nom>Pilonnage</nom>
+        <type>Normal</type>
+        <puissance>15</puissance>
+        <precision>85</precision>
+        <pp>20</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="110">
+        <nom>Pince-Masse</nom>
+        <type>Eau</type>
+        <puissance>90</puissance>
+        <precision>85</precision>
+        <pp>10</pp>
+        <boostCrit/>
+    </capacite>
+    
+    <capacite id="111">
+        <nom>Piqué</nom>
+        <type>Vol</type>
+        <puissance>140</puissance>
+        <precision>90</precision>
+        <pp>5</pp>
+        <tourAvant/>
+    </capacite>
+    
+    <capacite id="111">
+        <nom>Pistolet à O</nom>
+        <type>Eau</type>
+        <puissance>40</puissance>
+        <pp>20</pp>
+    </capacite>
+    
+    <capacite id="112">
+        <nom>Plaquage</nom>
+        <type>Normal</type>
+        <puissance>85</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="113">
+        <nom>Poing Comète</nom>
+        <type>Normal</type>
+        <puissance>18</puissance>
+        <precision>85</precision>
+        <pp>15</pp>
+        <nbFrappe min="2" max="5"/>
+    </capacite>
+    
+    <capacite id="114">
+        <nom>Poing de Feu</nom>
+        <type>Feu</type>
+        <puissance>75</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Brulure</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="115">
+        <nom>Poing Karaté</nom>
+        <type>Normal</type>
+        <puissance>50</puissance>
+        <pp>25</pp>
+        <boostCrit/>
+    </capacite>
+    
+    <capacite id="116">
+        <nom>Poing-Eclair</nom>
+        <type>Electrik</type>
+        <puissance>75</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Paralysie</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="117">
+        <nom>Poinglace</nom>
+        <type>Glace</type>
+        <puissance>75</puissance>
+        <pp>15</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Gel</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="118">
+        <nom>Poudre Dodo</nom>
+        <type>Plante</type>
+        <precision>75</precision>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Sommeil</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="119">
+        <nom>Poudre Toxik</nom>
+        <type>Poison</type>
+        <precision>75</precision>
+        <pp>35</pp>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <statut>Empoisonnement</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="120">
+        <nom>Protection</nom>
+        <type>Psy</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="2">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="121">
+        <nom>Psyko</nom>
+        <type>Psy</type>
+        <puissance>90</puissance>
+        <pp>10</pp>
+        <effets>
+            <effet chance="33">
+                <cible>Adversaire</cible>
+                <statistique modifier="-1">DefSpe</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="122">
+        <nom>Puissance</nom>
+        <type>Normal</type>
+        <pp>30</pp>
+        <effets>
+            <effet chance="50">
+                <cible>Adversaire</cible>
+                <statistique modifier="1">Vitesse</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="123">
+        <nom>Puredpois</nom>
+        <type>Poison</type>
+        <puissance>20</puissance>
+        <precision>70</precision>
+        <pp>20</pp>
+        <effets>
+            <effet chance="50">
+                <cible>Adversaire</cible>
+                <statut>Empoisonnement</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="124">
+        <nom>Rafale Psy</nom>
+        <type>Psy</type>
+        <puissance>65</puissance>
+        <pp>20</pp>
+        <effets>
+            <effet chance="10">
+                <cible>Adversaire</cible>
+                <statut>Confusion</statut>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="125">
+        <nom>Reflet</nom>
+        <type>Normal</type>
+        <pp>15</pp>
+        <effets>
+            <effet>
+                <cible>lanceur</cible>
+                <statistique modifier="1">Esquive</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="126">
+        <nom>Repli</nom>
+        <type>Eau</type>
+        <pp>40</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statistique modifier="1">Def</statistique>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="127">
+        <nom>Repos</nom>
+        <type>Psy</type>
+        <pp>10</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <statut>Sommeil</statut>
+            </effet>
+            <effet>
+                <cible>Lanceur</cible>
+                <special>Soin</special>
+            </effet>
+        </effets>
+    </capacite>
+    
+    <capacite id="128">
+        <nom>Riposte</nom>
+        <type>Combat</type>
+        <pp>20</pp>
+        <effets>
+            <effet>
+                <cible>Lanceur</cible>
+                <special modifier="2">RENVOI_DEGAT</special>
             </effet>
         </effets>
     </capacite>
