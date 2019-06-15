@@ -391,13 +391,17 @@ public class Pokemon{
     
     @Override
     public String toString() {
-        String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") Niv. 100";
+        String res = _nom + " (" + _type[0] + (_type[1] != null ? "/" + _type[1] : "" ) + ") " + (_statut != NEUTRE ? _statut.toString() : "");
         res += "\n\tVie :\t " + getVie() + "/" + _vieMax;
         res += "\n\tAtq :\t " + getAtq() + "/" + _atqMax;
         res += "\n\tDef :\t " + getDef() + "/" + _defMax;
         res += "\n\tAtqSpe : " + getAtqSpe() + "/" + _atqSpeMax;
         res += "\n\tDefSpe : " + getDefSpe() + "/" + _defSpeMax;
         res += "\n\tVit :\t " + getVitesse() + "/" + _vitMax;
+        for(int i = 0; i < 4; i++){
+            if(_capacites[i] == null) continue;
+            res += "\n\t" + (i+1) + " - " + _capacites[i].getNom();
+        }
         return res;
     }
     
@@ -432,7 +436,7 @@ public class Pokemon{
      * @return une description de la modification apportée
      */
     public String modifierStatistique(Enum_Statistique stat, int delta){
-        String res = stat.toString();
+        String res = stat.toString() + " de " + _nom;
         switch(delta){
             case -3: res += " diminue énormément."; break;
             case -2: res += " diminue beaucoup."; break;
@@ -718,8 +722,9 @@ public class Pokemon{
         double modifierSTAB = (lanceur.isType(capa.getTypePkmn()) ? 1.5 : 1);
         
         double modifierType = (capa.getTypePkmn() != null ? this.getModifier(capa.getTypePkmn()) : 1);
-        if(modifierType <= 0.5) res+= "Ce n'est pas très efficace";
-        else if(modifierType >= 2.) res += "C'est très efficace !";
+        if(modifierType == 0) return "Ca n'a aucun effet";
+        else if(modifierType <= 0.5) res+= "Ce n'est pas très efficace\n";
+        else if(modifierType >= 2.) res += "C'est très efficace !\n";
         
         double modifierCrit = (Utils.chance(getChanceCrit(capa)) ? 1.5 : 1);
         if(modifierCrit == 1.5) res += "Coup critique !"; 
@@ -748,21 +753,24 @@ public class Pokemon{
     }
     
     /**
-     * Permet de gérer les actions de fin de tour (par ex. la perte de vie à 
+     * Permet de gérer les actions de fin de tour (par ex.la perte de vie à 
      * cause d'un statut...)
+     * @return Une description de ce qui s'est passé
      */
-    public void finTour(){
+    public String finTour(){
+        String res = "";
         for(int i = 0; i < 4; i++){
             if(_capaciteBloquee[i] > 0) _capaciteBloquee[i]--;
         }
         _peur = false;
         if(_statut == EMPOISONNEMENT || _statut == BRULURE || _statut == VAMPIGRAINE){
             int pv = Math.min(_vie, (int) (_vieMax / 16.));
-            this.perdreVie(pv);
+            res = this.perdreVie(pv);
             if(_statut == VAMPIGRAINE && _cibleVampigraine != null){
-                _cibleVampigraine.modifierStatistique(VIE, pv);
+                res += "\n" + _cibleVampigraine.modifierStatistique(VIE, pv);
             }
         }
+        return res;
     }
     
     
@@ -789,6 +797,8 @@ public class Pokemon{
         this.resetStats();
         this.retourSac();
         this._vie = 0;
+        _tourRepos = false;
+        _tourAttente = false;
     }
     
     
@@ -982,6 +992,7 @@ public class Pokemon{
     public boolean canAttack(Capacite capa){
         boolean res = true;
         switch(_statut){
+            case SOMMEIL: res = false; break;
             case GEL: res = capa.getTypePkmn() == FEU; break;
             case PARALYSIE: res = Utils.chance(75); break;
             case CONFUSION: res = Utils.chance(67); break;

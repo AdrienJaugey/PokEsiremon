@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
  */
 public class Pokedex {
     public static final int NB_POKEMON = 151;
-    public static final int NB_CAPACITE = 160;
+    public static final int NB_CAPACITE = 162;
     private static Pokedex _instance;
     private final String[] _pkmnNom;
     private final Enum_TypePokemon[][] _pkmnType;
@@ -254,7 +254,7 @@ public class Pokedex {
      * @return une ArrayList contenant les id des capacités
      */
     public ArrayList<Integer> getCapacitePokemon(int id){
-        return _pkmnCapacite[id-1];
+        return _pkmnCapacite[id - 1];
     }
     
     /**
@@ -288,7 +288,7 @@ public class Pokedex {
     public int[] getCapaciteId(int pokemonId, String search){
         ArrayList<Integer> res = new ArrayList<>();
         search = normalize(search);
-        ArrayList<Integer> listeCapa = _pkmnCapacite[pokemonId-1];
+        ArrayList<Integer> listeCapa = _pkmnCapacite[pokemonId - 1];
         for(int i = 0; i < listeCapa.size(); i++){
             int id = listeCapa.get(i);
             if(_capacite[id] == null) continue;

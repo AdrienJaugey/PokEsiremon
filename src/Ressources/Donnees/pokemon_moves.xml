@@ -1465,7 +1465,7 @@
         <pokemons>16,17,18,21,22,84,85,142,144,145,146,151</pokemons>
     </capacite>
     
-    <capacite id="111">
+    <capacite id="112">
         <nom>Pistolet à O</nom>
         <type>Eau</type>
         <puissance>40</puissance>
@@ -1474,7 +1474,7 @@
         <pokemons>116,117,118,119,120,121,124,130,131,134,138,139,140,141,143,144,147,148,149,150,151</pokemons>
     </capacite>
     
-    <capacite id="112">
+    <capacite id="113">
         <nom>Plaquage</nom>
         <type>Normal</type>
         <puissance>85</puissance>
@@ -1491,7 +1491,7 @@
         </effets>
     </capacite>
     
-    <capacite id="113">
+    <capacite id="114">
         <nom>Poing Comète</nom>
         <type>Normal</type>
         <puissance>18</puissance>
@@ -1501,7 +1501,7 @@
         <pokemons>107,115</pokemons>
     </capacite>
     
-    <capacite id="114">
+    <capacite id="115">
         <nom>Poing de Feu</nom>
         <type>Feu</type>
         <puissance>75</puissance>
@@ -1515,7 +1515,7 @@
         </effets>
     </capacite>
     
-    <capacite id="115">
+    <capacite id="116">
         <nom>Poing Karaté</nom>
         <type>Normal</type>
         <puissance>50</puissance>
@@ -1524,7 +1524,7 @@
         <pokemons>56,57,66,67,68</pokemons>
     </capacite>
     
-    <capacite id="116">
+    <capacite id="117">
         <nom>Poing-Eclair</nom>
         <type>Electrik</type>
         <puissance>75</puissance>
@@ -1538,7 +1538,7 @@
         </effets>
     </capacite>
     
-    <capacite id="117">
+    <capacite id="118">
         <nom>Poinglace</nom>
         <type>Glace</type>
         <puissance>75</puissance>
@@ -1552,7 +1552,7 @@
         </effets>
     </capacite>
     
-    <capacite id="118">
+    <capacite id="119">
         <nom>Poudre Dodo</nom>
         <type>Plante</type>
         <precision>75</precision>
@@ -1566,7 +1566,7 @@
         </effets>
     </capacite>
     
-    <capacite id="119">
+    <capacite id="120">
         <nom>Poudre Toxik</nom>
         <type>Poison</type>
         <precision>75</precision>
@@ -1580,7 +1580,7 @@
         </effets>
     </capacite>
     
-    <capacite id="120">
+    <capacite id="121">
         <nom>Protection</nom>
         <type>Psy</type>
         <pp>20</pp>
@@ -1595,7 +1595,7 @@
         </effets>
     </capacite>
     
-    <capacite id="121">
+    <capacite id="122">
         <nom>Psyko</nom>
         <type>Psy</type>
         <puissance>90</puissance>
@@ -1609,7 +1609,7 @@
         </effets>
     </capacite>
     
-    <capacite id="122">
+    <capacite id="123">
         <nom>Puissance</nom>
         <type>Normal</type>
         <pp>30</pp>
@@ -1622,7 +1622,7 @@
         </effets>
     </capacite>
     
-    <capacite id="123">
+    <capacite id="124">
         <nom>Puredpois</nom>
         <type>Poison</type>
         <puissance>20</puissance>
@@ -1637,7 +1637,7 @@
         </effets>
     </capacite>
     
-    <capacite id="124">
+    <capacite id="125">
         <nom>Rafale Psy</nom>
         <type>Psy</type>
         <puissance>65</puissance>
@@ -1651,7 +1651,7 @@
         </effets>
     </capacite>
     
-    <capacite id="125">
+    <capacite id="126">
         <nom>Reflet</nom>
         <type>Normal</type>
         <pp>15</pp>
@@ -1664,7 +1664,7 @@
         </effets>
     </capacite>
     
-    <capacite id="126">
+    <capacite id="127">
         <nom>Repli</nom>
         <type>Eau</type>
         <pp>40</pp>
@@ -1677,7 +1677,7 @@
         </effets>
     </capacite>
     
-    <capacite id="127">
+    <capacite id="128">
         <nom>Repos</nom>
         <type>Psy</type>
         <pp>10</pp>
@@ -1694,7 +1694,7 @@
         </effets>
     </capacite>
     
-    <capacite id="128">
+    <capacite id="129">
         <nom>Riposte</nom>
         <type>Combat</type>
         <pp>20</pp>
@@ -1708,7 +1708,7 @@
         </effets>
     </capacite>
     
-    <capacite id="129">
+    <capacite id="130">
         <nom>Rugissement</nom>
         <type>Normal</type>
         <pp>10</pp>
@@ -1721,7 +1721,7 @@
         </effets>
     </capacite>
     
-    <capacite id="130">
+    <capacite id="131">
         <nom>Sacrifice</nom>
         <type>Combat</type>
         <puissance>80</puissance>
@@ -1737,7 +1737,7 @@
         </effets>
     </capacite>
     
-    <capacite id="131">
+    <capacite id="132">
         <nom>Sécrétion</nom>
         <type>Insecte</type>
         <precision>95</precision>
@@ -1751,7 +1751,7 @@
         </effets>
     </capacite>
     
-    <capacite id="132">
+    <capacite id="133">
         <nom>Séisme</nom>
         <type>Sol</type>
         <puissance>100</puissance>
@@ -1759,7 +1759,7 @@
         <pokemons>6,9,23,24,27,28,31,34,50,51,61,62,66,67,68,74,75,76,79,80,95,104,105,108,111,112,115,128,143,151</pokemons>
     </capacite>
     
-    <capacite id="133">
+    <capacite id="134">
         <nom>Soin</nom>
         <type>Normal</type>
         <pp>10</pp>
@@ -1772,7 +1772,7 @@
         </effets>
     </capacite>
     
-    <capacite id="134">
+    <capacite id="135">
         <nom>Sonicboom</nom>
         <type>Normal</type>
         <pp>20</pp>
@@ -1785,7 +1785,7 @@
         </effets>
     </capacite>
     
-    <capacite id="135">
+    <capacite id="136">
         <nom>Souplesse</nom>
         <type>Normal</type>
         <puissance>80</puissance>
@@ -1794,7 +1794,7 @@
         <pokemons>25,26,69,70,95,98,99,108,114,147,148,149</pokemons>
     </capacite>
     
-    <capacite id="136">
+    <capacite id="137">
         <nom>Spore</nom>
         <type>Plante</type>
         <pp>15</pp>
@@ -1807,7 +1807,7 @@
         </effets>
     </capacite>
     
-    <capacite id="137">
+    <capacite id="138">
         <nom>Surf</nom>
         <type>Eau</type>
         <puissance>95</puissance>
@@ -1816,7 +1816,7 @@
         <pokemons>131,134,138,139,140,141,143,147,148,149,151</pokemons>
     </capacite>
     
-    <capacite id="138">
+    <capacite id="139">
         <nom>Télékinésie</nom>
         <type>Psy</type>
         <precision>75</precision>
@@ -1830,7 +1830,7 @@
         </effets>
     </capacite>
     
-    <capacite id="139">
+    <capacite id="140">
         <nom>Ténèbres</nom>
         <type>Spectre</type>
         <pp>15</pp>
@@ -1843,7 +1843,7 @@
         </effets>
     </capacite>
     
-    <capacite id="140">
+    <capacite id="141">
         <nom>Tonnerre</nom>
         <type>Electrik</type>
         <puissance>95</puissance>
@@ -1858,7 +1858,7 @@
         </effets>
     </capacite>
     
-    <capacite id="141">
+    <capacite id="142">
         <nom>Torgnoles</nom>
         <type>Normal</type>
         <puissance>15</puissance>
@@ -1868,7 +1868,7 @@
         <pokemons>35,36,39,40,60,61,62,113,122,124</pokemons>
     </capacite>
     
-    <capacite id="142">
+    <capacite id="143">
         <nom>Tornade</nom>
         <type>Vol</type>
         <puissance>40</puissance>
@@ -1876,7 +1876,7 @@
         <pokemons>12,16,17,18</pokemons>
     </capacite>
     
-    <capacite id="143">
+    <capacite id="144">
         <nom>Toxik</nom>
         <type>Poison</type>
         <precision>85</precision>
@@ -1890,7 +1890,7 @@
         </effets>
     </capacite>
     
-    <capacite id="144">
+    <capacite id="145">
         <nom>Tranche</nom>
         <type>Normal</type>
         <puissance>70</puissance>
@@ -1899,7 +1899,7 @@
         <pokemons>4,5,6,27,28,46,47,50,51,52,53,83,123,127,140,141</pokemons>
     </capacite>
     
-    <capacite id="145">
+    <capacite id="146">
         <nom>Tranch'Herbe</nom>
         <type>Plante</type>
         <puissance>55</puissance>
@@ -1909,14 +1909,14 @@
         <pokemons>1,2,3,69,70,71</pokemons>
     </capacite>
     
-    <capacite id="146">
+    <capacite id="147">
         <nom>Trempette</nom>
         <type>Eau</type>
         <pp>40</pp>
         <pokemons>129,130</pokemons>
     </capacite>
     
-    <capacite id="147">
+    <capacite id="148">
         <nom>Triplattaque</nom>
         <type>Normal</type>
         <puissance>80</puissance>
@@ -1924,7 +1924,7 @@
         <pokemons>35,36,39,40,63,64,65,79,80,84,85,90,91,96,97,113,120,121,137,150,151</pokemons>
     </capacite>
     
-    <capacite id="148">
+    <capacite id="149">
         <nom>Tunnel</nom>
         <type>Sol</type>
         <puissance>100</puissance>
@@ -1934,7 +1934,7 @@
         <pokemons>111,112,151</pokemons>
     </capacite>
     
-    <capacite id="149">
+    <capacite id="150">
         <nom>Ultimapoing</nom>
         <type>Normal</type>
         <puissance>80</puissance>
@@ -1944,7 +1944,7 @@
         <pokemons>105,106,107,108,112,113,115,122,124,125,126,143,150,151</pokemons>
     </capacite>
     
-    <capacite id="150">
+    <capacite id="151">
         <nom>Ultimawashi</nom>
         <type>Normal</type>
         <puissance>120</puissance>
@@ -1954,7 +1954,7 @@
         <pokemons>106,107,108,112,113,115,122,124,125,126,140,141,143,150,151</pokemons>
     </capacite>
     
-    <capacite id="151">
+    <capacite id="152">
         <nom>Ultralaser</nom>
         <type>Normal</type>
         <puissance>150</puissance>
@@ -1966,7 +1966,7 @@
         <pokemons>139,141,142,143,144,145,146,147,148,149,150,151</pokemons>
     </capacite>
     
-    <capacite id="152">
+    <capacite id="153">
         <nom>Ultrason</nom>
         <type>Normal</type>
         <precision>55</precision>
@@ -1980,7 +1980,7 @@
         </effets>
     </capacite>
     
-    <capacite id="153">
+    <capacite id="154">
         <nom>Uppercut</nom>
         <type>Normal</type>
         <puissance>70</puissance>
@@ -1988,7 +1988,7 @@
         <pokemons>115</pokemons>
     </capacite>
     
-    <capacite id="154">
+    <capacite id="155">
         <nom>Vague Psy</nom>
         <type>Psy</type>
         <precision>80</precision>
@@ -2002,7 +2002,7 @@
         </effets>
     </capacite>
     
-    <capacite id="155">
+    <capacite id="156">
         <nom>Vampigraine</nom>
         <type>Plante</type>
         <precision>90</precision>
@@ -2016,7 +2016,7 @@
         </effets>
     </capacite>
     
-    <capacite id="156">
+    <capacite id="157">
         <nom>Vampirisme</nom>
         <type>Insecte</type>
         <puissance>20</puissance>
@@ -2030,7 +2030,7 @@
         </effets>
     </capacite>
     
-    <capacite id="157">
+    <capacite id="158">
         <nom>Vive Attaque</nom>
         <type>Normal</type>
         <puissance>40</puissance>
@@ -2038,7 +2038,7 @@
         <pokemons>16,17,18,19,20,25,26,37,38,123,125,133,134,135,136</pokemons>
     </capacite>
     
-    <capacite id="157">
+    <capacite id="159">
         <nom>Vol</nom>
         <type>Vol</type>
         <puissance>70</puissance>
@@ -2048,7 +2048,7 @@
         <pokemons>6,16,17,18,21,22,83,84,85,142,144,146,146,151</pokemons>
     </capacite>
     
-    <capacite id="158">
+    <capacite id="160">
         <nom>Vol-Vie</nom>
         <type>Plante</type>
         <puissance>20</puissance>
@@ -2062,7 +2062,7 @@
         </effets>
     </capacite>
     
-    <capacite id="159">
+    <capacite id="161">
         <nom>Yoga</nom>
         <type>Psy</type>
         <pp>40</pp>
