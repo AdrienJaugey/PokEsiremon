@@ -38,9 +38,11 @@ public class Capacite {
     private final int _nbFrappeMin;
     private final int _nbFrappeMax;
     private final int _ppMax;
+    private final boolean _tourAvant;
+    private final boolean _tourApres;
     private final ArrayList<Effet> _effetCapacite;
 
-    public Capacite(String nom, Enum_TypePokemon typePkmn, int puissance, int precision, int ppMax, boolean boostCrit, int nbFrappeMin, int nbFrappeMax) {
+    public Capacite(String nom, Enum_TypePokemon typePkmn, int puissance, int precision, int ppMax, boolean boostCrit, int nbFrappeMin, int nbFrappeMax, boolean tourAvant, boolean tourApres) {
         _nom = nom;
         _typePkmn = typePkmn;
         _typeAtq = Enum_TypeAttaque.get(typePkmn);
@@ -51,37 +53,39 @@ public class Capacite {
         _nbFrappeMin = nbFrappeMin;
         _nbFrappeMax = nbFrappeMax;
         _effetCapacite = new ArrayList<>();
+        _tourAvant = tourAvant;
+        _tourApres = tourApres;
     }
 
-    public Enum_TypePokemon getTypePkmn() {
+    public final Enum_TypePokemon getTypePkmn() {
         return _typePkmn;
     }
 
-    public Enum_TypeAttaque getTypeAtq() {
+    public final Enum_TypeAttaque getTypeAtq() {
         return _typeAtq;
     }
     
-    public String getNom(){
+    public final String getNom(){
         return _nom;
     }
 
-    public int getPuissance() {
+    public final int getPuissance() {
         return _puissance;
     }
 
-    public int getPrecision() {
+    public final int getPrecision() {
         return _precision;
     }
     
-    public int getPPMax(){
+    public final int getPPMax(){
         return _ppMax;
     }
     
-    public void addEffet(Effet e){
+    public final void addEffet(Effet e){
         _effetCapacite.add(e);
     }
     
-    public String utiliser(Pokemon lanceur, Pokemon cible){
+    public final String utiliser(Pokemon lanceur, Pokemon cible){
         String res = "";
         int pReussite = (int) Math.round((lanceur.getPrecision() * (double) this.getPrecision()) / cible.getEsquive());
         if(Utils.chance(pReussite)){
@@ -108,25 +112,40 @@ public class Capacite {
     @Override
     public String toString() {
         String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ") " + _ppMax + " PP"
-                   + "\nPuissance : " + (_puissance == 0 ? " -" : _puissance)
-                   + "\nPrecision : " + _precision + "%";
+                   + "\nPuissance : ";
+        if(_nom.equals("Dévorêve")) res += "100";
+        else res += (_puissance == 0 ? " -" : _puissance);
+        res += "\nPrecision : " + _precision + "%";
         if(!_effetCapacite.isEmpty()) res += "\nEffets :";
         for(Effet e : _effetCapacite){
             res += "\n\t- " + e.toString();
         }
-        if(_critModifier == 8) res += "\nForte chance de coups critiques";
+        if(_critModifier == 8) res += "\nForte chance de coups critiques.";
         if(_nbFrappeMin > 1){
             if(_nbFrappeMin != _nbFrappeMax){
-                res += "\nFrappe entre " + _nbFrappeMin + " et " + _nbFrappeMax + " fois l'adversaire";
+                res += "\nFrappe entre " + _nbFrappeMin + " et " + _nbFrappeMax + " fois l'adversaire.";
             } else {
-                res += "\nFrappe " + _nbFrappeMin + " fois l'adversaire";
+                res += "\nFrappe " + _nbFrappeMin + " fois l'adversaire.";
             }
+        }
+        if(_tourAvant){
+            res += "\nL'utilisateur se prépare au premier tour et attaque au second.";
+        }
+        if(_tourApres){
+            res += "\nL'utilisateur se repose au tour suivant.";
         }
         return res;
     }
 
-    public double getModifierCrit() {
+    public final double getModifierCrit() {
         return _critModifier;
     }
+
+    public final boolean tourAttente(){
+        return _tourAvant;
+    }
     
+    public final boolean tourRepos(){
+        return _tourApres;
+    }
 }

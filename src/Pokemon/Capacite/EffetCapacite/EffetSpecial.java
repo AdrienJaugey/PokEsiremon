@@ -19,8 +19,11 @@
 package Pokemon.Capacite.EffetCapacite;
 
 import Pokemon.Capacite.Capacite;
+import static Pokemon.Capacite.EffetCapacite.Enum_EffetSpeciaux.DEGATS2VIE;
 import Pokemon.Capacite.Enum_Cible;
+import static Pokemon.Capacite.Enum_Cible.LANCEUR;
 import static Pokemon.Enum_Statistique.VIE;
+import static Pokemon.Enum_TypePokemon.PSY;
 import Pokemon.Pokedex;
 import Pokemon.Pokemon;
 
@@ -29,8 +32,8 @@ import Pokemon.Pokemon;
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
 public class EffetSpecial extends Effet{
-    private Enum_EffetSpeciaux _type;
-    private double _modifier;
+    private final Enum_EffetSpeciaux _type;
+    private final double _modifier;
 
     public EffetSpecial(Enum_Cible cible, int chance, Enum_EffetSpeciaux type, double modifier) {
         super(cible, chance);
@@ -92,6 +95,18 @@ public class EffetSpecial extends Effet{
             case SOIN : {
                 res = cible.soigner();
             } break;
+            case DEVOREVE:{
+                if(cible.isAsleep()){
+                    Capacite devoreve = new Capacite("Dévorêve", PSY, 100, 100, 1, false, 1, 1, false, false);
+                    EffetSpecial effet = new EffetSpecial(LANCEUR, 100, DEGATS2VIE, 0.5);
+                    devoreve.addEffet(effet);
+                    devoreve.utiliser(autre, cible);
+                    res = cible.getNom() + " perd " + cible.getDernierDegats() + " PV.";
+                    res += "\n" + autre.getNom() + " récupère " + (int)Math.round(cible.getDernierDegats() / 2) + " PV.";
+                } else {
+                    res = cible.getNom() + " n'est pas endormi, Dévorêve échoue.";
+                }
+            }break;
         }
         return res;
     }
@@ -112,6 +127,7 @@ public class EffetSpecial extends Effet{
             case METRONOME : res = "Lance une capacité aléatoire, parmi toutes celles existantes"; break;
             case MIMIQUE : res = "Copie la dernière capacité utilisée par le pokémon adverse"; break;
             case SOIN : res = "Le pokémon " + _cible.toString() + " récupère toute sa vie.\n\t  Les changements de statuts sont annulés"; break;
+            case DEVOREVE : res = "Attaque uniquement si le pokémon adverse dort.\n\t  Restaure 50% des dégats en tant que vie"; break;
         }
         if(super._chance != 100) res += ", " + _chance + "% de chance de réussite.";
         else res += ".";

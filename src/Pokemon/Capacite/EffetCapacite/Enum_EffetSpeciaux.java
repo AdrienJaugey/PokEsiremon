@@ -34,5 +34,6 @@ public enum Enum_EffetSpeciaux {
     DEGATS2VIE,
     METRONOME,
     MIMIQUE,
-    SOIN;
+    SOIN,
+    DEVOREVE;
 }

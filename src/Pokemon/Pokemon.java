@@ -35,7 +35,15 @@ public class Pokemon{
     private final int _id;
     private final Capacite[] _capacites;
     private final int[] _pp;
-    private int _capaciteBloquee[];
+    private Enum_Statut _statut;
+    Pokemon _cibleVampigraine; 
+    private int _tourStatut;
+    
+    private Capacite _capaEnAttente;
+    private boolean _tourAttente;
+    private boolean _tourRepos;
+    
+    private final int _capaciteBloquee[];
     private boolean _peur;
     private boolean _brume;
     private int _vieClone;
@@ -44,9 +52,7 @@ public class Pokemon{
     private Capacite _copie;
     private int _ppCopie;
     private int _emplacementCopie;
-    private Enum_Statut _statut;
-    Pokemon _cibleVampigraine; 
-    private int _tourStatut;
+    
     
     //Valeur des stats actuelles
     private int _vie;
@@ -96,6 +102,10 @@ public class Pokemon{
         _type = pkdx.getTypesPkmn(id);
         this._cibleVampigraine = null;
         this.resetStats();
+        
+        _capaEnAttente = null;
+        _tourAttente = false;
+        _tourRepos = false;
     }
     
     /**
@@ -578,67 +588,83 @@ public class Pokemon{
      * @return Une phrase descriptive
      * @throws java.lang.Exception
      */
-    public String utiliserCapacite(int choixCapacite, Pokemon cible) throws Exception{
+    public String utiliserCapacite(int choixCapacite, Pokemon cible){
         String res;
-        if (!_peur) {
-            if (_capaciteBloquee[choixCapacite] == 0) {
-                if (getPPCapacite(choixCapacite) > 0) {
-                    Capacite capa = getCapacite(choixCapacite);
-                    res = this._nom + " lance " + capa.getNom() + ".";
-                    switch (_statut) {
-                        case SOMMEIL: res = this._nom + " n'a pas pu attaquer."; break;
-                        case GEL: {
-                            if (capa.getTypePkmn() == FEU) {
-                                this.resetStatut();
-                                res += "\n" + capa.utiliser(this, cible);
-                                baisserPPCapacite(choixCapacite);
-                            } else {
-                                res = this._nom + " n'a pas pu attaquer.";
-                            }
-                        }
-                        break;
-                        case PARALYSIE: {
-                            if (Utils.chance(75)) {
-                                res += "\n" + capa.utiliser(this, cible);
-                                baisserPPCapacite(choixCapacite);
-                            } else {
-                                res = this._nom + " n'a pas pu attaquer.";
-                            }
-                        }
-                        break;
-                        case CONFUSION: {
-                            if (Utils.chance(33)) {
-                                int pvPerdus = (int) Math.round((((42. * this.getAtq() * 40) / (this.getDef() * 50.)) + 2) * (0.85 + Math.random() * 0.15));                                
-                                this.modifierStatistique(VIE, -pvPerdus);
-                                res = this._nom + " s'est blessé dans sa confusion.";
-                            } else {
-                                res += "\n" + capa.utiliser(this, cible);
-                                
-                            }
-                            baisserPPCapacite(choixCapacite);
-                        }
-                        break;
-                        default: {
-                            res += "\n" + capa.utiliser(this, cible);
-                            baisserPPCapacite(choixCapacite);
-                        }
-                        break;
-                    }
-                } else {
-                    if(!hasStillPP()){
-                        res = _nom + " lance Lutte.";
-                        res += "\n" + Pokedex.get().getCapacite(0).utiliser(this, cible);
-                    } else {
-                        res = _nom + " n'a pas pu attaquer.";
-                    }
-                }
-                
-            } else {
-                res = _nom + " n'a pas pu attaquer, la capacité est bloquée.";
-            }
-        } else {
-            res = _nom + " n'a pas pu attaquer à cause de la peur.";
+        
+        /****************
+        * N'attaque pas *
+        ****************/
+        //Si le pokémon doit se reposer
+        if(_tourRepos) {
+            _tourRepos = false;
+            return _nom + " se repose.";
         }
+        //Si le pokémon est apeuré, il n'attaque pas
+        if(_peur) return _nom + " est apeuré, il n'a pas pu attaquer.";
+        //Si la capacité est bloquée mais que le pokémon a encore d'autres capacités possibles
+        if (_capaciteBloquee[choixCapacite] != 0 && peutEncoreCombattre()){
+            return _nom + " n'a pas pu attaquer, la capacité est bloquée.";
+        }
+        
+        
+        /*******************
+        * Fait autre chose * 
+        *******************/
+        //Vient d'attendre pour lancer une capacité
+        if(_tourAttente && _capaEnAttente != null){
+            _tourAttente = false;
+            res = this._nom + " poursuit " + _capaEnAttente.getNom() + ".";
+            res += "\n" + _capaEnAttente.utiliser(this, cible);
+            _capaEnAttente = null;
+            return res;
+        }
+        //Ne peut plus combattre
+        if(!peutEncoreCombattre()){
+            res = _nom + " lance Lutte.";
+            res += "\n" + Pokedex.get().getCapacite(0).utiliser(this, cible);
+            return res;
+        }
+        
+        /*******************************
+        * Tente d'utiliser la capacité *
+        *******************************/
+        Capacite capa; 
+        //On vérifie que la capacité existe et qu'il lui reste des PP
+        try {
+            capa = getCapacite(choixCapacite);
+            if (getPPCapacite(choixCapacite) <= 0) {
+                return _nom + " n'a pas pu attaquer.";
+            }
+            baisserPPCapacite(choixCapacite);
+        } catch (Exception e) {
+            return _nom + " n'a pas pu attaquer.";
+        }
+        
+        //Si le pokémon ne peut attaquer à cause du statut
+        if(!canAttack(capa)) {
+            //Si c'est à cause de la confusion, il se blesse
+            if(_statut == CONFUSION) {
+                int pvPerdus = (int) Math.round((((42. * this.getAtq() * 40) / (this.getDef() * 50.)) + 2) * (0.85 + Math.random() * 0.15));                                
+                this.modifierStatistique(VIE, -pvPerdus);
+                return _nom + " s'est blessé dans sa confusion.";
+            }
+            return this._nom + " n'a pas pu attaquer.";
+        }
+        
+        //Le pokémon utilise la capacité
+        res = this._nom + " lance " + capa.getNom() + ".";
+        //Si la capacité nécessite un tour d'attente
+        if(capa.tourAttente()){
+            _tourAttente = true;
+            _capaEnAttente = capa;
+            res += "\n" + _nom + " se prépare.";
+            return res;
+        }
+        _tourRepos = capa.tourRepos();
+        //S'il est gelé et qu'il peut attaquer, la capacité est donc de type feu, il dégèle
+        if(_statut == GEL) res += this.resetStatut();
+        res += "\n" + capa.utiliser(this, cible);
+        
         return res;
     }
     
@@ -932,6 +958,21 @@ public class Pokemon{
     *   Méthodes de tests   *
     ************************/
     /**
+     * Permet de savoir si un pokémon peut attaquer
+     * @param capa la capacité a utiliser
+     * @return true s'il peut, false sinon
+     */
+    public boolean canAttack(Capacite capa){
+        boolean res = true;
+        switch(_statut){
+            case GEL: res = capa.getTypePkmn() == FEU; break;
+            case PARALYSIE: res = Utils.chance(75); break;
+            case CONFUSION: res = Utils.chance(67); break;
+        }
+        return res;
+    }
+    
+    /**
      * Permet de savoir si un pokémon est d'un type ou non
      * @param type le type à savoir
      * @return true s'il est de ce type, false sinon
@@ -964,10 +1005,45 @@ public class Pokemon{
         return _vieClone > 0;
     }
     
-    public boolean hasStillPP(){
-        for(int emplacement = 0; emplacement < 4; emplacement++){
-            try { if(getPPCapacite(emplacement) > 0) return true; } catch (Exception ex) { }
+    /**
+     * Permet de savoir si un pokémon peut encore combattre ou doit utiliser Lutte
+     * @return true s'il peut combattre, false sinon
+     */
+    public boolean peutEncoreCombattre(){
+        int i = 0;
+        boolean peutCombattre = false;
+        //Pour chaque capacité, tant que l'on n'a pas trouvé une capacité possible
+        while(i < 4 && !peutCombattre){
+            //S'il n'y a pas de capacité, on passe à la suivante
+            if(_capacites[i] == null) {
+                i++;
+                continue;
+            }
+            //On considère que le pokémon peut attaquer si une capacité n'est pas bloquée et qu'il reste des PP
+            boolean estBloquee = _capaciteBloquee[i] != 0;
+            boolean restePP = _pp[i] > 0;
+            //Si on se trouve sur l'emplacement de la copie et qu'il y a une capacité copiée
+            if(i == _emplacementCopie && _copie != null) restePP = _ppCopie > 0; 
+            peutCombattre = (!estBloquee && restePP); 
+            
+            i++;
         }
-        return false;
+        return peutCombattre;
+    }
+    
+    /**
+     * Permet de savoir si un pokémon a une attaque en cours et ne peut rien faire d'autre
+     * @return true s'il a une attaque en cours
+     */
+    public boolean attaqueEnCours(){
+        return _tourAttente || _tourRepos;
+    }
+    
+    /**
+     * Permet de savoir si le pokémon est endormi
+     * @return true s'il dort, false sinon
+     */
+    public boolean isAsleep() {
+        return _statut == SOMMEIL;
     }
 }

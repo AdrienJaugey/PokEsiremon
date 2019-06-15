@@ -101,7 +101,9 @@ public class Pokedex {
                         pp = 0,
                         nbFrappeMin = 1,
                         nbFrappeMax = 1;
-                    boolean boostCrit = false;
+                    boolean boostCrit = false,
+                            tourAvant = false,
+                            tourApres = false;
                     ArrayList<Effet> effetsCapa = new ArrayList<>();
                     
                     NodeList infos = capacite.getChildNodes();
@@ -115,12 +117,15 @@ public class Pokedex {
                             case "precision": precision = Integer.parseInt(n.getTextContent()); break;
                             case "pp": pp = Integer.parseInt(n.getTextContent()); break;
                             case "boostCrit": boostCrit = true; break;
+                            case "tourAvant": tourAvant = true; break;
+                            case "tourApres": tourApres = true; break;
                             case "nbFrappe": 
                                 nbFrappeMin = Integer.parseInt(n.getAttributes().item(1).getNodeValue()); 
                                 nbFrappeMax = Integer.parseInt(n.getAttributes().item(0).getNodeValue());
                                 break;
                             case "pokemons": //Dans ce cas, on récupère les id des pokémons pouvant utiliser la capacité
                                 String content = n.getTextContent();
+                                if(content.isBlank()) break;
                                 //Si on trouve une virgule, il y a plusieurs pokémons donc on split la chaîne, sinon on lit directement l'id
                                 if (content.contains(",")) {
                                     String[] pkmns = content.split(",");
@@ -175,6 +180,7 @@ public class Pokedex {
                                                     case "mimique": effetsCapa.add(new EffetSpecial(cible, chance, MIMIQUE, 0)); break;
                                                     case "renvoi_degat": effetsCapa.add(new EffetSpecial(cible, chance, RENVOI_DEGAT, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
                                                     case "soin": effetsCapa.add(new EffetSpecial(cible, chance, SOIN, 0)); break;
+                                                    case "devoreve": effetsCapa.add(new EffetSpecial(cible, chance, DEVOREVE, 0)); break;
                                                     default: System.out.println("[" + id + "] A implémenter : " + info.getTextContent());
                                                 }
                                             }
@@ -185,7 +191,7 @@ public class Pokedex {
                             default: break;
                         }                        
                     }
-                    _capacite[id] = new Capacite(nomCapa, type, puissance, precision, pp, boostCrit, nbFrappeMin, nbFrappeMax);
+                    _capacite[id] = new Capacite(nomCapa, type, puissance, precision, pp, boostCrit, nbFrappeMin, nbFrappeMax, tourAvant, tourApres);
                     for(Effet effet : effetsCapa)
                         _capacite[id].addEffet(effet);
                 }
@@ -251,5 +257,65 @@ public class Pokedex {
      */
     public Capacite getCapacite(int id){
         return _capacite[id];
+    }
+    
+    public int[] getPokemonId(String search){
+        ArrayList<Integer> id = new ArrayList<>();
+        search = normalize(search);
+        for(int i = 0; i < _pkmnNom.length; i++){
+            if(normalize(_pkmnNom[i]).contains(search)) id.add(i);
+        }
+        return convertToInt(id);
+    }
+    
+    public int[] getCapaciteId(String search){
+        ArrayList<Integer> id = new ArrayList<>();
+        search = normalize(search);
+        for(int i = 1; i < NB_CAPACITE; i++){
+            if(_capacite[i] == null) continue;
+            if(normalize(_capacite[i].getNom()).contains(search)) id.add(i);
+        }
+        return convertToInt(id);
+    }
+    
+    public int[] getCapaciteId(int pokemonId, String search){
+        ArrayList<Integer> res = new ArrayList<>();
+        search = normalize(search);
+        ArrayList<Integer> listeCapa = _pkmnCapacite[pokemonId];
+        for(int i = 0; i < listeCapa.size(); i++){
+            int id = listeCapa.get(i);
+            if(_capacite[id] == null) continue;
+            if(normalize(_capacite[id].getNom()).contains(search)) res.add(id);
+        }
+        return convertToInt(res);
+    }
+    
+    private static String normalize(String s){
+        s = s.toLowerCase();
+        String convert[][] = {
+            {"é", "e"},
+            {"è", "e"},
+            {"ê", "e"},
+            {"ë", "e"},
+            {"à", "a"},
+            {"â", "a"},
+            {"î", "i"},
+            {"ï", "i"},
+            {"ç", "c"},
+            {"ô", "o"},
+            {"ö", "o"},
+            {"'-_,?;.:/!§ ", ""}
+        };
+        
+        for(String[] conv : convert) s = s.replaceAll("[" + conv[0] + "]", conv[1]);
+        return s;
+    }
+    
+    private static int[] convertToInt(ArrayList<Integer> liste){
+        int[] res = new int[liste.size()];
+        for(int i = 0; i < liste.size(); i++){
+            res[i] = (int) liste.get(i);
+        }
+        return res;
     }
 }

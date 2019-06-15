@@ -63,6 +63,7 @@
         <puissance>50</puissance>
         <precision>100</precision>
         <pp>1</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -76,6 +77,7 @@
         <type>Sol</type>
         <precision>30</precision>
         <pp>5</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -88,6 +90,7 @@
         <nom>Acidarmure</nom>
         <type>Poison</type>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -101,6 +104,7 @@
         <type>Poison</type>
         <puissance>40</puissance>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -113,6 +117,7 @@
         <nom>Adaptation</nom>
         <type>Normal</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -125,6 +130,7 @@
         <nom>Affûtage</nom>
         <type>Normal</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -137,6 +143,7 @@
         <nom>Amnésie</nom>
         <type>Psy</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -149,6 +156,7 @@
         <nom>Armure</nom>
         <type>Normal</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -163,6 +171,7 @@
         <puissance>50</puissance>
         <precision>90</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -176,6 +185,7 @@
         <type>Vol</type>
         <puissance>80</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="10">
@@ -184,6 +194,7 @@
         <puissance>90</puissance>
         <precision>85</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -197,6 +208,7 @@
         <type>Normal</type>
         <precision>55</precision>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -211,6 +223,7 @@
         <puissance>120</puissance>
         <precision>90</precision>
         <pp>5</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -225,12 +238,14 @@
         <puissance>100</puissance>
         <precision>75</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="14">
         <nom>Bouclier</nom>
         <type>Psy</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -243,6 +258,7 @@
         <nom>Boul'armure</nom>
         <type>Normal</type>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -255,6 +271,7 @@
         <nom>Brouillard</nom>
         <type>Normal</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -267,6 +284,7 @@
         <nom>Brume</nom>
         <type>Glace</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -279,6 +297,7 @@
         <nom>Buée Noire</nom>
         <type>Glace</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -296,6 +315,7 @@
         <type>Eau</type>
         <puissance>65</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -308,6 +328,7 @@
         <nom>Cage-Eclair</nom>
         <type>Electrik</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -321,6 +342,7 @@
         <type>Eau</type>
         <puissance>80</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="22">
@@ -329,6 +351,7 @@
         <puissance>35</puissance>
         <precision>95</precision>
         <pp>35</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="23">
@@ -336,6 +359,7 @@
         <type>Psy</type>
         <puissance>50</puissance>
         <pp>25</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -344,26 +368,21 @@
         </effets>
     </capacite>
     
-    <!--
-        <capacite id="24">
-            <nom>Claquoir</nom>
-            <type>Eau</type>
-            <puissance>35</puissance>
-            <precision>75</precision>
-            <pp>10</pp>
-            <effets>
-                <effet>
-                    <cible>Adversaire</cible>
-                    <special>Claquoir</special>
-                </effet>
-            </effets>
-        </capacite> 
-    -->
+    <capacite id="24">
+        <nom>Claquoir</nom>
+        <type>Eau</type>
+        <puissance>35</puissance>
+        <precision>75</precision>
+        <pp>10</pp>
+        <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
+    </capacite> 
     
     <capacite id="25">
         <nom>Clonage</nom>
         <type>Normal</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>lanceur</cible>
@@ -379,6 +398,7 @@
         <precision>80</precision>
         <pp>15</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="27">
@@ -386,6 +406,7 @@
         <type>Normal</type>
         <puissance>10</puissance>
         <pp>35</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -398,6 +419,7 @@
         <nom>Copie</nom>
         <type>Normal</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -411,6 +433,7 @@
         <type>Normal</type>
         <puissance>70</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -425,6 +448,7 @@
         <puissance>100</puissance>
         <pp>15</pp>
         <tourAvant/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="31">
@@ -433,6 +457,7 @@
         <puissance>50</puissance>
         <precision>95</precision>
         <pp>30</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="32">
@@ -442,6 +467,7 @@
         <precision>75</precision>
         <pp>30</pp>
         <tourAvant/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="33">
@@ -450,6 +476,7 @@
         <puissance>80</puissance>
         <precision>70</precision>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -463,6 +490,7 @@
         <type>Normal</type>
         <precision>90</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -475,6 +503,7 @@
         <nom>Croissance</nom>
         <type>Normal</type>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -492,6 +521,7 @@
         <type>Vol</type>
         <puissance>35</puissance>
         <pp>35</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="37">
@@ -499,6 +529,7 @@
         <type>Normal</type>
         <puissance>100</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -512,8 +543,8 @@
         <type>Feu</type>
         <puissance>15</puissance>
         <precision>70</precision>
-        <pp>15</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="39">
@@ -522,6 +553,7 @@
         <puissance>120</puissance>
         <precision>75</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -534,6 +566,7 @@
         <nom>Danse-Lames</nom>
         <type>Normal</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -549,6 +582,7 @@
         <precision>85</precision>
         <pp>20</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="42">
@@ -557,6 +591,7 @@
         <puissance>15</puissance>
         <precision>100</precision>
         <pp>35</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="20">
                 <cible>Adversaire</cible>
@@ -571,6 +606,7 @@
         <puissance>120</puissance>
         <precision>85</precision>
         <pp>5</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -584,6 +620,7 @@
         <type>Normal</type>
         <puissance>260</puissance>
         <pp>5</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -597,6 +634,7 @@
         <type>Poison</type>
         <puissance>65</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="50">
                 <cible>Adversaire</cible>
@@ -605,12 +643,18 @@
         </effets>
     </capacite>
     
-    <!--<capacite id="46">
+    <capacite id="46">
         <nom>Dévorêve</nom>
         <type>Psy</type>
-        <puissance>100</puissance>
         <pp>15</pp>
-    </capacite>-->
+        <pokemons></pokemons>
+        <effets>
+            <effet>
+                <cible>Adversaire</cible>
+                <special>Devoreve</special>
+            </effet>
+        </effets>
+    </capacite>
     
     <capacite id="47">
         <nom>Double-Dard</nom>
@@ -618,6 +662,7 @@
         <puissance>25</puissance>
         <pp>20</pp>
         <nbFrappe min="2" max="2"/>
+        <pokemons></pokemons>
         <effets>
             <effet chance="36">
                 <cible>Adversaire</cible>
@@ -632,12 +677,14 @@
         <puissance>30</puissance>
         <pp>30</pp>
         <nbFrappe min="2" max="2"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="49">
         <nom>Draco-rage</nom>
         <type>Dragon</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -652,6 +699,7 @@
         <puissance>80</puissance>
         <precision>90</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="51">
@@ -672,6 +720,7 @@
         <nom>E-coque</nom>
         <type>Normal</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -685,6 +734,7 @@
         <type>Normal</type>
         <puissance>65</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -698,6 +748,7 @@
         <type>Normal</type>
         <puissance>40</puissance>
         <pp>35</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="55">
@@ -705,6 +756,7 @@
         <type>Eau</type>
         <puissance>20</puissance>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -718,6 +770,7 @@
         <type>Normal</type>
         <precision>30</precision>
         <pp>5</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -731,6 +784,7 @@
         <type>Normal</type>
         <precision>55</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -746,6 +800,7 @@
         <precision>75</precision>
         <pp>20</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -759,6 +814,7 @@
         <type>Normal</type>
         <puissance>340</puissance>
         <pp>5</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -773,6 +829,7 @@
         <puissance>120</puissance>
         <precision>70</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -786,6 +843,7 @@
         <type>Feu</type>
         <puissance>40</puissance>
         <pp>25</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -799,6 +857,7 @@
         <type>Normal</type>
         <precision>70</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -812,6 +871,7 @@
         <type>Normal</type>
         <puissance>80</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="64">
@@ -819,6 +879,7 @@
         <type>Normal</type>
         <puissance>55</puissance>
         <pp>30</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="65">
@@ -826,12 +887,14 @@
         <type>Plante</type>
         <puissance>35</puissance>
         <pp>10</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="66">
         <nom>Frappe-Atlas</nom>
         <type>Combat</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -845,6 +908,7 @@
         <type>Combat</type>
         <puissance>20</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="50">
                 <cible>Lanceur</cible>
@@ -860,6 +924,7 @@
         <precision>85</precision>
         <pp>20</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="69">
@@ -867,6 +932,7 @@
         <type>Poison</type>
         <precision>55</precision>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -880,6 +946,7 @@
         <type>Normal</type>
         <puissance>40</puissance>
         <pp>35</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="71">
@@ -887,6 +954,7 @@
         <type>Normal</type>
         <precision>85</precision>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -900,6 +968,7 @@
         <type>Normal</type>
         <precision>75</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -912,6 +981,7 @@
         <nom>Groz'Yeux</nom>
         <type>Normal</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -925,6 +995,7 @@
         <type>Normal</type>
         <precision>30</precision>
         <pp>5</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -937,6 +1008,7 @@
         <nom>Hate</nom>
         <type>Psy</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -951,6 +1023,7 @@
         <puissance>120</puissance>
         <precision>80</precision>
         <pp>5</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="77">
@@ -958,6 +1031,7 @@
         <type>Psy</type>
         <precision>60</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -971,6 +1045,7 @@
         <type>Normal</type>
         <precision>75</precision>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -984,12 +1059,14 @@
         <type>Normal</type>
         <puissance>40</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="80">
         <nom>Jet de sable</nom>
         <type>Normal</type>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1004,6 +1081,7 @@
         <puissance>50</puissance>
         <precision>75</precision>
         <pp>15</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="82">
@@ -1011,6 +1089,7 @@
         <type>Normal</type>
         <puissance>65</puissance>
         <pp>25</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="83">
@@ -1018,6 +1097,7 @@
         <type>Feu</type>
         <puissance>95</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1032,6 +1112,7 @@
         <puissance>120</puissance>
         <pp>10</pp>
         <tourAvant/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="85">
@@ -1039,6 +1120,7 @@
         <type>Glace</type>
         <puissance>95</puissance>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1052,6 +1134,7 @@
         <type>Spectre</type>
         <puissance>20</puissance>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -1067,12 +1150,14 @@
         <precision>85</precision>
         <pp>20</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="88">
         <nom>Liliput</nom>
         <type>Normal</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1086,6 +1171,7 @@
         <type>Normal</type>
         <puissance>90</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Lanceur</cible>
@@ -1100,6 +1186,7 @@
         <puissance>65</puissance>
         <precision>85</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1114,6 +1201,7 @@
         <puissance>60</puissance>
         <precision>80</precision>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="26">
                 <cible>Adversaire</cible>
@@ -1127,6 +1215,7 @@
         <type>Plante</type>
         <puissance>40</puissance>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1140,12 +1229,14 @@
         <type>Normal</type>
         <puissance>60</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="94">
         <nom>Métronome</nom>
         <type>Normal</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1158,6 +1249,7 @@
         <nom>Mimique</nom>
         <type>Vol</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1170,6 +1262,7 @@
         <nom>Mimi-queue</nom>
         <type>Normal</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1182,6 +1275,7 @@
         <nom>Morphing</nom>
         <type>Normal</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1195,6 +1289,7 @@
         <type>Normal</type>
         <puissance>60</puissance>
         <pp>25</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1207,6 +1302,7 @@
         <nom>Mur Lumière</nom>
         <type>Psy</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>lanceur</cible>
@@ -1220,6 +1316,7 @@
         <type>Glace</type>
         <puissance>65</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1232,6 +1329,7 @@
         <nom>Onde Folie</nom>
         <type>Spectre</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1247,6 +1345,7 @@
         <precision>90</precision>
         <pp>10</pp>
         <nbFrappe min="2" max="2"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="103">
@@ -1254,6 +1353,7 @@
         <type>Plante</type>
         <precision>75</precision>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1267,6 +1367,7 @@
         <type>Normal</type>
         <pp>10</pp>
         <tourAvant/>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1281,6 +1382,7 @@
         <puissance>20</puissance>
         <pp>15</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="106">
@@ -1288,6 +1390,7 @@
         <type>Vol</type>
         <puissance>35</puissance>
         <pp>35</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="107">
@@ -1296,6 +1399,7 @@
         <puissance>70</puissance>
         <precision>95</precision>
         <pp>25</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Lanceur</cible>
@@ -1310,6 +1414,7 @@
         <puissance>85</puissance>
         <precision>90</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Lanceur</cible>
@@ -1325,6 +1430,7 @@
         <precision>85</precision>
         <pp>20</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="110">
@@ -1334,6 +1440,7 @@
         <precision>85</precision>
         <pp>10</pp>
         <boostCrit/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="111">
@@ -1343,6 +1450,7 @@
         <precision>90</precision>
         <pp>5</pp>
         <tourAvant/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="111">
@@ -1350,6 +1458,7 @@
         <type>Eau</type>
         <puissance>40</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="112">
@@ -1357,6 +1466,7 @@
         <type>Normal</type>
         <puissance>85</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -1372,6 +1482,7 @@
         <precision>85</precision>
         <pp>15</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="114">
@@ -1379,6 +1490,7 @@
         <type>Feu</type>
         <puissance>75</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1393,6 +1505,7 @@
         <puissance>50</puissance>
         <pp>25</pp>
         <boostCrit/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="116">
@@ -1400,6 +1513,7 @@
         <type>Electrik</type>
         <puissance>75</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1413,6 +1527,7 @@
         <type>Glace</type>
         <puissance>75</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1426,6 +1541,7 @@
         <type>Plante</type>
         <precision>75</precision>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1439,6 +1555,7 @@
         <type>Poison</type>
         <precision>75</precision>
         <pp>35</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1451,6 +1568,7 @@
         <nom>Protection</nom>
         <type>Psy</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1464,6 +1582,7 @@
         <type>Psy</type>
         <puissance>90</puissance>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="33">
                 <cible>Adversaire</cible>
@@ -1476,6 +1595,7 @@
         <nom>Puissance</nom>
         <type>Normal</type>
         <pp>30</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="50">
                 <cible>Adversaire</cible>
@@ -1490,6 +1610,7 @@
         <puissance>20</puissance>
         <precision>70</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="50">
                 <cible>Adversaire</cible>
@@ -1503,6 +1624,7 @@
         <type>Psy</type>
         <puissance>65</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1515,6 +1637,7 @@
         <nom>Reflet</nom>
         <type>Normal</type>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>lanceur</cible>
@@ -1527,6 +1650,7 @@
         <nom>Repli</nom>
         <type>Eau</type>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1539,14 +1663,15 @@
         <nom>Repos</nom>
         <type>Psy</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <statut>Sommeil</statut>
+                <special>Soin</special>
             </effet>
             <effet>
                 <cible>Lanceur</cible>
-                <special>Soin</special>
+                <statut>Sommeil</statut>
             </effet>
         </effets>
     </capacite>
@@ -1555,6 +1680,7 @@
         <nom>Riposte</nom>
         <type>Combat</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1567,6 +1693,7 @@
         <nom>Rugissement</nom>
         <type>Normal</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1581,6 +1708,7 @@
         <puissance>80</puissance>
         <precision>80</precision>
         <pp>25</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1594,6 +1722,7 @@
         <type>Insecte</type>
         <precision>95</precision>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1607,12 +1736,14 @@
         <type>Sol</type>
         <puissance>100</puissance>
         <pp>10</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="133">
         <nom>Soin</nom>
         <type>Normal</type>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1625,6 +1756,7 @@
         <nom>Sonicboom</nom>
         <type>Normal</type>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1639,12 +1771,14 @@
         <puissance>80</puissance>
         <precision>75</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="136">
         <nom>Spore</nom>
         <type>Plante</type>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1658,6 +1792,7 @@
         <type>Eau</type>
         <puissance>95</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="138">
@@ -1665,6 +1800,7 @@
         <type>Psy</type>
         <precision>75</precision>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1677,6 +1813,7 @@
         <nom>Ténèbres</nom>
         <type>Spectre</type>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1690,6 +1827,7 @@
         <type>Electrik</type>
         <puissance>95</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet chance="10">
                 <cible>Adversaire</cible>
@@ -1705,6 +1843,7 @@
         <precision>85</precision>
         <pp>10</pp>
         <nbFrappe min="2" max="5"/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="142">
@@ -1712,6 +1851,7 @@
         <type>Vol</type>
         <puissance>40</puissance>
         <pp>35</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="143">
@@ -1719,6 +1859,7 @@
         <type>Poison</type>
         <precision>85</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1733,6 +1874,7 @@
         <puissance>70</puissance>
         <pp>20</pp>
         <boostCrit/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="145">
@@ -1742,12 +1884,14 @@
         <precision>95</precision>
         <pp>25</pp>
         <boostCrit/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="146">
         <nom>Trempette</nom>
         <type>Eau</type>
         <pp>40</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="147">
@@ -1755,6 +1899,7 @@
         <type>Normal</type>
         <puissance>80</puissance>
         <pp>10</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="148">
@@ -1763,6 +1908,7 @@
         <puissance>100</puissance>
         <pp>10</pp>
         <tourAvant/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="149">
@@ -1771,6 +1917,7 @@
         <puissance>80</puissance>
         <precision>85</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="150">
@@ -1779,6 +1926,7 @@
         <puissance>120</puissance>
         <precision>75</precision>
         <pp>5</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="151">
@@ -1788,6 +1936,7 @@
         <precision>90</precision>
         <pp>5</pp>
         <tourApres/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="152">
@@ -1795,6 +1944,7 @@
         <type>Normal</type>
         <precision>55</precision>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1808,6 +1958,7 @@
         <type>Normal</type>
         <puissance>70</puissance>
         <pp>10</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="154">
@@ -1815,6 +1966,7 @@
         <type>Psy</type>
         <precision>80</precision>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1828,6 +1980,7 @@
         <type>Plante</type>
         <precision>90</precision>
         <pp>10</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Adversaire</cible>
@@ -1841,6 +1994,7 @@
         <type>Insecte</type>
         <puissance>20</puissance>
         <pp>15</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1854,6 +2008,7 @@
         <type>Normal</type>
         <puissance>40</puissance>
         <pp>30</pp>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="157">
@@ -1863,6 +2018,7 @@
         <precision>95</precision>
         <pp>15</pp>
         <tourAvant/>
+        <pokemons></pokemons>
     </capacite>
     
     <capacite id="158">
@@ -1870,6 +2026,7 @@
         <type>Plante</type>
         <puissance>20</puissance>
         <pp>20</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>
@@ -1882,6 +2039,7 @@
         <nom>Yoga</nom>
         <type>Psy</type>
         <pp>40</pp>
+        <pokemons></pokemons>
         <effets>
             <effet>
                 <cible>Lanceur</cible>

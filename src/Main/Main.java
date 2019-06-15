@@ -18,9 +18,7 @@
  */
 package Main;
 
-import Pokemon.Capacite.Capacite;
 import Pokemon.Pokedex;
-import Pokemon.Pokemon;
 
 /**
  *
@@ -28,28 +26,13 @@ import Pokemon.Pokemon;
  */
 public class Main {
     public static void main(String[] args) {
-        clear();
-        Capacite c = null;
-        int lastIndex = 0;
-        for(int i = 0; i < Pokedex.NB_CAPACITE; i++){
-            if(i == 24 || i == 46 || i == 97) continue;
-            if(Pokedex.get().getCapacite(i) == null) break;
-            else c = Pokedex.get().getCapacite(i);
-            lastIndex = i;
-        }
-        System.out.println("[" + lastIndex + "]");
-        System.out.println(c);
-       
-        Pokemon pika = new Pokemon(25);
-        Pokemon carapuce = new Pokemon(7);
         try {
-            /*pika.setCapacite(51, 0);
-            carapuce.setCapacite(104, 0);
-            System.out.println(pika.utiliserCapacite(0, carapuce));
-            System.out.println(carapuce.utiliserCapacite(0, pika));
-            System.out.println(pika);
-            System.out.println(carapuce);
-            System.out.println("\n");*/
+            clear();
+            
+            Pokedex pkdx = Pokedex.get();
+            
+            
+            
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
@@ -58,8 +41,8 @@ public class Main {
     
     public static void clear(){
         try{
-            System.out.println("Clear");
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            System.out.println("Clear");
         } catch(Exception error){
             System.err.println(error.getLocalizedMessage());
         }
