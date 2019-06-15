@@ -60,4 +60,20 @@ public abstract class Effet {
     public String toString(){
         return description() + " au pokémon " + _cible + (_chance < 100 ? " avec " + _chance + "% de chance." : ".");
     }
+
+    /**
+     * Permet de savoir si l'effet soigne
+     * @return true si l'effet soigne les statuts, false sinon
+     */
+    public boolean soigne(){
+        return false;
+    }
+    
+    /**
+     * Permet de savoir si l'effet rend des PV
+     * @return true si l'effet rend des PV, false sinon
+     */
+    public boolean rendPV(){
+        return false;
+    }
 }

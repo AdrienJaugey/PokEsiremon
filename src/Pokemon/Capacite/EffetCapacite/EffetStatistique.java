@@ -76,5 +76,11 @@ public class EffetStatistique extends Effet {
         }
         return res;
     }
+
+    @Override
+    public boolean rendPV() {
+        return (_stat == VIE && (_modifier > 0 || _delta > 0));
+    }
+    
     
 }

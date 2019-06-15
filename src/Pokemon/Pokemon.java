@@ -618,28 +618,27 @@ public class Pokemon{
             _capaEnAttente = null;
             return res;
         }
-        //Ne peut plus combattre
-        if(!peutEncoreCombattre()){
-            res = _nom + " lance Lutte.";
-            res += "\n" + Pokedex.get().getCapacite(0).utiliser(this, cible);
-            return res;
-        }
         
-        /*******************************
-        * Tente d'utiliser la capacité *
-        *******************************/
+        
+        /********************************
+        * Essaye de lancer une capacité *
+        ********************************/
         Capacite capa; 
-        //On vérifie que la capacité existe et qu'il lui reste des PP
-        try {
-            capa = getCapacite(choixCapacite);
-            if (getPPCapacite(choixCapacite) <= 0) {
+        
+        if(!peutEncoreCombattre()){                     //Ne peut plus combattre
+            capa = Pokedex.get().getCapacite(0);
+        } else {                                        //Peut combattre
+            try {
+                capa = getCapacite(choixCapacite);
+                if (getPPCapacite(choixCapacite) <= 0) {
+                    return _nom + " n'a pas pu attaquer.";
+                }
+                baisserPPCapacite(choixCapacite);
+            } catch (Exception e) {
                 return _nom + " n'a pas pu attaquer.";
             }
-            baisserPPCapacite(choixCapacite);
-        } catch (Exception e) {
-            return _nom + " n'a pas pu attaquer.";
         }
-        
+              
         //Si le pokémon ne peut attaquer à cause du statut
         if(!canAttack(capa)) {
             //Si c'est à cause de la confusion, il se blesse
@@ -816,6 +815,24 @@ public class Pokemon{
     }
     
     /**
+     * Retire tous les changements de statistiques, de statut si ce n'est pas
+     * l'adversaire et annule les effets de brume
+     * @return Une description de ce qui s'est passé
+     */
+    public String bueeNoire(Pokemon lanceur) {
+        String res = "Les changements de statistiques de " + _nom + " sont annulés.";
+        for (int i = 0; i < _niveauStat.length; i++) {
+            _niveauStat[i] = 0;
+        }
+        if(this != lanceur) res += "\n" + this.resetStatut();
+        if(_brume){
+            _brume = false;
+            res += "\nLes effets de brume se dissipent.";
+        }
+        return res;
+    }
+    
+    /**
      * Permet de copier le(s) type(s) d'un pokémon autre
      * @param aCopier le pokémon dont on copie le(s) type(s)
      */
@@ -973,6 +990,17 @@ public class Pokemon{
     }
     
     /**
+     * Permet de savoir si la capacité se trouvant à un emplacement est bloquée
+     * ou non
+     * @param emplacement l'emplacement de la capacité (entre 0 et 3)
+     * @return true si elle est bloquée, false sinon
+     * @throws Exception 
+     */
+    public boolean capaciteBloquee(int emplacement) throws Exception{
+        return getPPCapacite(emplacement) == 0 || _capaciteBloquee[emplacement] > 0;
+    }
+    
+    /**
      * Permet de savoir si un pokémon est d'un type ou non
      * @param type le type à savoir
      * @return true s'il est de ce type, false sinon
@@ -1046,4 +1074,6 @@ public class Pokemon{
     public boolean isAsleep() {
         return _statut == SOMMEIL;
     }
+
+    
 }

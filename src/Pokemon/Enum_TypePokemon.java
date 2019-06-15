@@ -39,6 +39,11 @@ public enum Enum_TypePokemon {
     SPECTRE,
     DRAGON;
     
+    /**
+     * Permet d'obtenir un type
+     * @param type le type sous forme de chaîne de caractères
+     * @return le type
+     */
     public static Enum_TypePokemon get(String type){
         return Enum_TypePokemon.valueOf(type.toUpperCase());
     }
@@ -61,16 +66,28 @@ public enum Enum_TypePokemon {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2}                           //Dragon
     };
     
+    /**
+     * Permet d'obtenir le coefficient multiplicateur de dégats face à un autre type
+     * @param attackType le type qui attaque
+     * @return le coefficient multiplicateur
+     */
     public double dmgModifier(Enum_TypePokemon attackType){
         return modifier[attackType.ordinal()][this.ordinal()];
     }
     
     private final String displayColor[] = {"A8A878", "F08030", "6890F0", "78C850", "F8D030", "98D8D8", "C03028", "A040A0", "E0C068", "A890F0", "F85888", "A8B820", "B8A038", "705898", "7038F8"};
     
+    /**
+     * Permet d'obtenir le code couleur d'un type
+     * @return le code couleur au format RGB/Hexadecimal (ex : FF0000 pour Rouge)
+     */
     public String getDisplayColor(){
         return displayColor[this.ordinal()];
     }
     
+    /**
+     * Affiche une description des faiblesses et avantages d'un type
+     */
     public void descType(){
         String inefficace = "";
         String peuEfficace = "";

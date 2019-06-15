@@ -19,7 +19,7 @@
 package Pokemon.Capacite.EffetCapacite;
 
 import Pokemon.Capacite.Capacite;
-import static Pokemon.Capacite.EffetCapacite.Enum_EffetSpeciaux.DEGATS2VIE;
+import static Pokemon.Capacite.EffetCapacite.Enum_EffetSpeciaux.*;
 import Pokemon.Capacite.Enum_Cible;
 import static Pokemon.Capacite.Enum_Cible.LANCEUR;
 import static Pokemon.Enum_Statistique.VIE;
@@ -61,6 +61,10 @@ public class EffetSpecial extends Effet{
             } break;
             case NO_STATUS_CHANGE: {
                 res = cible.activerBrume();
+            } break;
+            case BUEENOIRE : {
+                res = cible.bueeNoire(cible);
+                res += autre.bueeNoire(autre); 
             } break;
             case CONTRECOUP: {
                 cible.perdreVie((int) Math.round(autre.getDernierDegats() * _modifier));
@@ -119,6 +123,8 @@ public class EffetSpecial extends Effet{
             case CLONAGE: res = "Crée un clone qui prend les dégats à la place du pokémon.\n\t  Retire 25% du maximum de PV qui deviennent la vie du clone"; break;
             case COPIE_TYPE: res = "Le pokémon prend le type du pokémon adverse"; break;
             case NO_STATUS_CHANGE: res = "Une brume se lève et empêche les changements de statistiques du pokémon lanceur"; break;
+            case BUEENOIRE: res = "Les changements de statistiques des deux pokémons sont annulés.\n\t  "
+                            + "Le changement de statut de l'adversaire et l'effet de brume aussi"; break;
             case CONTRECOUP: res = "Le lanceur se blesse a hauteur de " + (_modifier*100) + "% des dégats"; break;
             case RENVOI_DEGAT: res = "Le pokémon " + _cible.toString() + " renvoit " + (_modifier * 100) + "% des dégats reçus"; break;
             case ENTRAVE: res = "La dernière attaque du pokémon " + _cible.toString() + " est entravée.\n\t  S'il n'y en a pas, la capacité échoue"; break;
@@ -137,6 +143,16 @@ public class EffetSpecial extends Effet{
     @Override
     public String toString(){
         return this.description();
+    }
+
+    @Override
+    public boolean soigne() {
+        return _type == SOIN;
+    }
+    
+    @Override
+    public boolean rendPV(){
+        return _type == SOIN || _type == DEVOREVE ||_type == DEGATS2VIE;
     }
     
 }

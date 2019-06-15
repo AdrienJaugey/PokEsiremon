@@ -38,6 +38,8 @@ public class Capacite {
     private final int _nbFrappeMin;
     private final int _nbFrappeMax;
     private final int _ppMax;
+    private boolean _soigne;
+    private boolean _rendPV;
     private final boolean _tourAvant;
     private final boolean _tourApres;
     private final ArrayList<Effet> _effetCapacite;
@@ -55,6 +57,7 @@ public class Capacite {
         _effetCapacite = new ArrayList<>();
         _tourAvant = tourAvant;
         _tourApres = tourApres;
+        _soigne = false;
     }
 
     public final Enum_TypePokemon getTypePkmn() {
@@ -83,6 +86,11 @@ public class Capacite {
     
     public final void addEffet(Effet e){
         _effetCapacite.add(e);
+        if(e.soigne()) {
+            _soigne = true;
+            _rendPV = true;
+        }
+        if(e.rendPV()) _rendPV = true;
     }
     
     public final String utiliser(Pokemon lanceur, Pokemon cible){
@@ -147,5 +155,13 @@ public class Capacite {
     
     public final boolean tourRepos(){
         return _tourApres;
+    }
+    
+    public final boolean soigne(){
+        return _soigne;
+    }
+    
+    public final boolean rendPV(){
+        return _rendPV;
     }
 }

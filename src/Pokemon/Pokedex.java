@@ -126,11 +126,17 @@ public class Pokedex {
                             case "pokemons": //Dans ce cas, on récupère les id des pokémons pouvant utiliser la capacité
                                 String content = n.getTextContent();
                                 if(content.isBlank()) break;
+                                if(content.toLowerCase().equals("all")){
+                                    for (int k = 0; k < NB_POKEMON; k++) {
+                                        _pkmnCapacite[k].add(id);
+                                    }
+                                    break;
+                                }
                                 //Si on trouve une virgule, il y a plusieurs pokémons donc on split la chaîne, sinon on lit directement l'id
                                 if (content.contains(",")) {
                                     String[] pkmns = content.split(",");
-                                    for (String s : pkmns) { this._pkmnCapacite[Integer.parseInt(s)].add(id); }
-                                } else _pkmnCapacite[Integer.parseInt(content)].add(id);
+                                    for (String s : pkmns) { this._pkmnCapacite[Integer.parseInt(s)-1].add(id); }
+                                } else _pkmnCapacite[Integer.parseInt(content)-1].add(id);
                                 break;
                             case "effets": //Dans ce cas, on va ajouter des effets à la capacité
                                 NodeList effets = n.getChildNodes();
@@ -171,6 +177,7 @@ public class Pokedex {
                                                     case "peur": effetsCapa.add(new EffetSpecial(cible, chance, PEUR, 0)); break;
                                                     case "clonage": effetsCapa.add(new EffetSpecial(cible, chance, CLONAGE, 0)); break;
                                                     case "no_status_change": effetsCapa.add(new EffetSpecial(cible, chance, NO_STATUS_CHANGE, 0)); break;
+                                                    case "bueenoire": effetsCapa.add(new EffetSpecial(cible, chance, BUEENOIRE, 0)); break;
                                                     case "copie_type": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_TYPE, 0)); break;
                                                     case "copie_capacite": effetsCapa.add(new EffetSpecial(cible, chance, COPIE_CAPACITE, 0)); break;
                                                     case "contrecoup": effetsCapa.add(new EffetSpecial(cible, chance, CONTRECOUP, Double.parseDouble(info.getAttributes().item(0).getTextContent()))); break;
@@ -247,7 +254,7 @@ public class Pokedex {
      * @return une ArrayList contenant les id des capacités
      */
     public ArrayList<Integer> getCapacitePokemon(int id){
-        return _pkmnCapacite[id];
+        return _pkmnCapacite[id-1];
     }
     
     /**
@@ -281,7 +288,7 @@ public class Pokedex {
     public int[] getCapaciteId(int pokemonId, String search){
         ArrayList<Integer> res = new ArrayList<>();
         search = normalize(search);
-        ArrayList<Integer> listeCapa = _pkmnCapacite[pokemonId];
+        ArrayList<Integer> listeCapa = _pkmnCapacite[pokemonId-1];
         for(int i = 0; i < listeCapa.size(); i++){
             int id = listeCapa.get(i);
             if(_capacite[id] == null) continue;
