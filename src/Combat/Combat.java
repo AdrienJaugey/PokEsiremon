@@ -49,7 +49,7 @@ public class Combat {
         return res;
     }
     
-    public void debutNouveauTour(){
+    public String debutNouveauTour(){
         Enum_Action a1 = _joueurs[0].getAction(),
                     a2 = _joueurs[1].getAction();
         int info1 = _joueurs[0].getInfoAction(),
@@ -90,6 +90,8 @@ public class Combat {
                 }
             }
         }
+        String res = _joueurs[0].getPokemonActuel().debutTour();
+        return res + "\n" + _joueurs[1].getPokemonActuel().debutTour();
     }
     
     public String actionPremierJoueur(){

@@ -498,6 +498,9 @@ public class Pokemon{
      */
     public String setStatut(Enum_Statut statut, Pokemon cibleVampigraine){
         String res = "";
+        if(_tourAttente && (_capaEnAttente.getNom().equals("Vol") || _capaEnAttente.equals("Tunnel") )){
+            return _nom + " n'est pas présent sur le terrain.";
+        }
         //la confusion et vampigraine sont censés être des statuts secondaires 
         //(i.e. ils peuvent subvenir en même temps qu'un statut principal (gel...)
         if(this._statut != statut && this._statut == NEUTRE){
@@ -528,7 +531,7 @@ public class Pokemon{
                 } break;
                 case SOMMEIL: {
                     _statut = SOMMEIL;
-                    _tourStatut = 1 + (int)(Math.random() * 2);
+                    _tourStatut = 1 + (int)(Math.random() * 4);
                     res = _nom + " s'endort";
                 } break;
                 case CONFUSION: {
@@ -711,6 +714,9 @@ public class Pokemon{
                         (       DefCible * 50              )
         */
         String res = "";
+        if(_tourAttente && (_capaEnAttente.getNom().equals("Vol") || _capaEnAttente.equals("Tunnel") )){
+            return _nom + " n'est pas présent sur le terrain.";
+        }
         int attaque, defense, puissance = capa.getPuissance();
         if(capa.getTypeAtq() == PHYSIQUE){
             attaque = lanceur.getAtq();
@@ -742,14 +748,18 @@ public class Pokemon{
     **********************************/
     /**
      * Permet de gérer les actions de début de tour
+     * @return Une description
      */
-    public void debutTour(){
+    public String debutTour(){
         if(_statut == SOMMEIL || _statut == CONFUSION){
             _tourStatut--;
-            if(_tourStatut == 0) _statut = NEUTRE;
+            if(_tourStatut == 0){
+                return this.resetStatut();
+            }
         } else if(_statut == GEL){
-            if(Utils.chance(20)) _statut = NEUTRE;
+            if(Utils.chance(20)) return this.resetStatut();
         }
+        return "";
     }
     
     /**

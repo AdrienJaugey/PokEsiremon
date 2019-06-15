@@ -68,7 +68,7 @@ public class Dresseur_Ordi extends Dresseur {
     public void choixActionSuivante(){
         boolean switchPossible = switchPossible();
         _actionVoulue = ATTAQUER;
-        if(switchPossible) {
+        if(!_pkmnActuel.attaqueEnCours() && switchPossible) {
             if(_pkmnActuel.isKO()){
                 _actionVoulue = SWITCHER;
                 _infoAction = choixSwitch();

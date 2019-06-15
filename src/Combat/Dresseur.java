@@ -116,15 +116,15 @@ public class Dresseur {
     }
     
     public final String changerPokemon(int emplacement) throws Exception{
-        String res = "";
+        String res = _nom;
         if(_pkmnActuel != null){
                 if(_pkmnActuel.attaqueEnCours()) throw new Exception("Le pokémon est en train d'attaquer");
                 _pkmnActuel.retourSac();
-                res = _nom + " retire " + _pkmnActuel.getNom() + " du combat.\n";
+                res = _nom + " retire " + _pkmnActuel.getNom() + " et";
         }
         if(getPokemon(emplacement).isKO()) throw new Exception("Le pokémon est KO !");
         _pkmnActuel = getPokemon(emplacement);
-        res += _nom + " envoie " + _pkmnActuel.getNom() + " au combat.";
+        res += " envoie " + _pkmnActuel.getNom() + " au combat.";
         return res;
     }
 
@@ -140,6 +140,12 @@ public class Dresseur {
         return res;
     }
     
-    
+    public int getNbPokemonRestant(){
+        int res = 0;
+        for(int i = 0; i < 6; i++){
+            if(_equipe[i] != null && !_equipe[i].isKO()) res++;
+        }
+        return res;
+    }
     
 }

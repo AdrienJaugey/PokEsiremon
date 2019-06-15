@@ -73,35 +73,44 @@ public class Main {
             joueur.setCapacitePokemon(5, 51, 2);
             joueur.setCapacitePokemon(5, 51, 3);*/
             
-            for(int i : pkdx.getCapacitePokemon(20)){
+            /*for(int i : pkdx.getCapacitePokemon(20)){
                 System.out.println(pkdx.getCapacite(i).getNom());
-            }
+            }*/
             
             
             
-            if(false){
+            if(true){
                 Scanner scan = new Scanner(System.in);
                 clear();
                 System.out.println(combat.lancerCombat());
                 boolean first = true;
+                int i = 0; 
                 while(!combat.isDone()){
                     if(first) first = false; else clear();
-                    System.out.println("#################################################");
+                    System.out.println("##################### TOUR " + ++i + " ###################");
+                    System.out.println("### JOUEUR 1 " + combat.getDresseur(0).getNbPokemonRestant() + "/6 ###");
+                    System.out.println(combat.getDresseur(0).getPokemonActuel());
+                    System.out.println("");
+                    System.out.println("### JOUEUR 2 " + combat.getDresseur(1).getNbPokemonRestant() + "/6 ###");
+                    System.out.println(combat.getDresseur(1).getPokemonActuel());
+                    System.out.println("");
+                    System.out.println("### Recap ###");
                     ((Dresseur_Ordi)combat.getDresseur(0)).choixActionSuivante();
                     ((Dresseur_Ordi)combat.getDresseur(1)).choixActionSuivante();
-                    combat.debutNouveauTour();
-                    System.out.println(combat.getDresseur(0).getPokemonActuel());
-                    System.out.println(combat.getDresseur(1).getPokemonActuel());
+                    System.out.println(combat.debutNouveauTour());
                     System.out.println(combat.actionPremierJoueur());
                     if(combat.pokemonKO()) {
-                        combat.changerKO();
+                        System.out.println(combat.changerKO());
                         System.out.println(combat.terminerTour());
                         continue;
                     }
                     System.out.println(combat.actionSecondJoueur());
+                    if(combat.pokemonKO()) {
+                        System.out.println(combat.changerKO());
+                        
+                    }
                     System.out.println(combat.terminerTour());
-                    /*scan.nextLine();
-                    scan.nextLine();*/
+                    scan.nextLine();
                 }
             }
         } catch (Exception ex) {
