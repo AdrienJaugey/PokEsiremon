@@ -25,12 +25,16 @@ import Pokemon.Pokemon;
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
 public class Dresseur {
-    private String _nom;
-    private Pokemon _pkmnActuel = null;
-    private final Pokemon[] _equipe = new Pokemon[6];
+    protected String _nom;
+    protected Pokemon _pkmnActuel = null;
+    protected final Pokemon[] _equipe = new Pokemon[6];
+    protected Enum_Action _actionVoulue;
+    protected int _infoAction;
 
     public Dresseur(String _nom) {
         this._nom = _nom;
+        _actionVoulue = null;
+        _infoAction = -1;
     }
 
     public String getNom() {
@@ -46,22 +50,34 @@ public class Dresseur {
         return emplacement;
     }
     
-    public Pokemon getPokemon(int emplacement) throws Exception{
+    public final Pokemon getPokemon(int emplacement) throws Exception{
         checkEmplacement(emplacement);
         return _equipe[emplacement];
     }
     
-    public void setPokemon(int idPokemon, int emplacement) throws Exception{
+    public final Pokemon getPokemonActuel(){
+        return _pkmnActuel;
+    }
+    
+    public final void setPokemon(int idPokemon, int emplacement) throws Exception{
         checkEmplacement(emplacement);
         _equipe[emplacement] = new Pokemon(idPokemon);
     }
     
-    public void setCapacitePokemon(int emplacementEquipe, int idCapacite, int emplacementCapa) throws Exception{
+    public final void setCapacitePokemon(int emplacementEquipe, int idCapacite, int emplacementCapa) throws Exception{
         checkEmplacement(emplacementEquipe);
         _equipe[emplacementEquipe].setCapacite(idCapacite, emplacementCapa);
     }
     
-    public boolean isOut(){
+    public final Enum_Action getAction(){
+        return _actionVoulue;
+    }
+    
+    public final int getInfoAction(){
+        return _infoAction;
+    }
+    
+    public final boolean isOut(){
         int i = 0;
         while(i < 6){
             if(!_equipe[i].isKO()) return false;
@@ -70,7 +86,7 @@ public class Dresseur {
         return true;
     }
     
-    public boolean canStart(){
+    public final boolean canStart(){
         boolean res = true;
         int i = 0, j;
         while(i < 6 && res){
@@ -89,7 +105,7 @@ public class Dresseur {
         return res;
     }
     
-    public String debuterCombat(){
+    public final String debuterCombat(){
         String res = "";
         try {
             return changerPokemon(0);
@@ -99,7 +115,7 @@ public class Dresseur {
         return res;
     }
     
-    public String changerPokemon(int emplacement) throws Exception{
+    public final String changerPokemon(int emplacement) throws Exception{
         String res = "";
         if(_pkmnActuel != null){
                 if(_pkmnActuel.attaqueEnCours()) throw new Exception("Le pokémon est en train d'attaquer");
@@ -113,13 +129,13 @@ public class Dresseur {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         String res = _nom;
         for(Pokemon p : _equipe){
             if(p == null) continue;
-            res += "\n\t" + p.getNom() + " [" + p.getType()[0].toString() 
-                + (p.getType()[1] != null ? "/" + p.getType()[1].toString():"") + "]"
-                + p.getVie() + "/" + p.getVieMax() + " PV";
+            String type = "[" + p.getType()[0].toString() + (p.getType()[1] != null ? "/" + p.getType()[1].toString():"") + "]";
+            res += "\n\t" + p.getNom() + "\t" + (p.getNom().length() < 8 ? "\t":"") + type + "\t"
+                + (type.length() < 8 ? "\t":"") + p.getVie() + "/" + p.getVieMax() + " PV";
         }
         return res;
     }

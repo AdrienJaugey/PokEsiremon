@@ -18,7 +18,10 @@
  */
 package Main;
 
+import Combat.Combat;
+import Combat.Dresseur_Ordi;
 import Pokemon.Pokedex;
+import java.util.Scanner;
 
 /**
  *
@@ -28,11 +31,79 @@ public class Main {
     public static void main(String[] args) {
         try {
             clear();
-            
             Pokedex pkdx = Pokedex.get();
+            System.out.println("coucou");
+            Combat combat = new Combat();
+            Dresseur_Ordi joueur = new Dresseur_Ordi();
+            combat.ajouterHumain(joueur);
+            joueur.setAdversaire(combat.getDresseur(1));
+            /*joueur.setPokemon(25, 0);
+            joueur.setCapacitePokemon(0, 51, 0);
+            joueur.setCapacitePokemon(0, 51, 1);
+            joueur.setCapacitePokemon(0, 51, 2);
+            joueur.setCapacitePokemon(0, 51, 3);
+            
+            joueur.setPokemon(144, 1);
+            joueur.setCapacitePokemon(1, 51, 0);
+            joueur.setCapacitePokemon(1, 51, 1);
+            joueur.setCapacitePokemon(1, 51, 2);
+            joueur.setCapacitePokemon(1, 51, 3);
+            
+            joueur.setPokemon(145, 2);
+            joueur.setCapacitePokemon(2, 51, 0);
+            joueur.setCapacitePokemon(2, 51, 1);
+            joueur.setCapacitePokemon(2, 51, 2);
+            joueur.setCapacitePokemon(2, 51, 3);
+            
+            joueur.setPokemon(146, 3);
+            joueur.setCapacitePokemon(3, 51, 0);
+            joueur.setCapacitePokemon(3, 51, 1);
+            joueur.setCapacitePokemon(3, 51, 2);
+            joueur.setCapacitePokemon(3, 51, 3);
+            
+            joueur.setPokemon(150, 4);
+            joueur.setCapacitePokemon(4, 51, 0);
+            joueur.setCapacitePokemon(4, 51, 1);
+            joueur.setCapacitePokemon(4, 51, 2);
+            joueur.setCapacitePokemon(4, 51, 3);
+            
+            joueur.setPokemon(151, 5);
+            joueur.setCapacitePokemon(5, 51, 0);
+            joueur.setCapacitePokemon(5, 51, 1);
+            joueur.setCapacitePokemon(5, 51, 2);
+            joueur.setCapacitePokemon(5, 51, 3);*/
+            
+            for(int i : pkdx.getCapacitePokemon(20)){
+                System.out.println(pkdx.getCapacite(i).getNom());
+            }
             
             
             
+            if(false){
+                Scanner scan = new Scanner(System.in);
+                clear();
+                System.out.println(combat.lancerCombat());
+                boolean first = true;
+                while(!combat.isDone()){
+                    if(first) first = false; else clear();
+                    System.out.println("#################################################");
+                    ((Dresseur_Ordi)combat.getDresseur(0)).choixActionSuivante();
+                    ((Dresseur_Ordi)combat.getDresseur(1)).choixActionSuivante();
+                    combat.debutNouveauTour();
+                    System.out.println(combat.getDresseur(0).getPokemonActuel());
+                    System.out.println(combat.getDresseur(1).getPokemonActuel());
+                    System.out.println(combat.actionPremierJoueur());
+                    if(combat.pokemonKO()) {
+                        combat.changerKO();
+                        System.out.println(combat.terminerTour());
+                        continue;
+                    }
+                    System.out.println(combat.actionSecondJoueur());
+                    System.out.println(combat.terminerTour());
+                    /*scan.nextLine();
+                    scan.nextLine();*/
+                }
+            }
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
