@@ -16,23 +16,37 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon;
+package PokEsiremon.Capacite.EffetCapacite;
+
+import PokEsiremon.Capacite.Enum_Cible;
+import PokEsiremon.Pokemon.Enum_Statut;
+import static PokEsiremon.Pokemon.Enum_Statut.NEUTRE;
+import PokEsiremon.Pokemon.Pokemon;
 
 /**
  *
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public enum Enum_Statut {
-    NEUTRE,
-    BRULURE,
-    GEL,
-    PARALYSIE,
-    EMPOISONNEMENT,
-    SOMMEIL,
-    CONFUSION,
-    VAMPIGRAINE;
+public class EffetStatut extends Effet {
+    private final Enum_Statut _statut;
     
-    public static Enum_Statut get(String statut){
-        return Enum_Statut.valueOf(statut.toUpperCase());
+    public EffetStatut(Enum_Cible cible, int chance, Enum_Statut statut) {
+        super(cible, chance);
+        _statut = statut;
     }
+
+    @Override
+    public String effet(Pokemon cible, Pokemon autre) {
+        return cible.setStatut(_statut, autre);
+    }
+
+    @Override
+    public String description() {
+        if(_statut == NEUTRE){
+            return "Annule le changement de statut infligé";
+        } else {
+            return "Inflige le statut " + _statut.toString();
+        }
+    }
+    
 }

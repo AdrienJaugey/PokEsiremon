@@ -16,12 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite;
+package PokEsiremon.Capacite;
 
-import Pokemon.Capacite.EffetCapacite.Effet;
-import Pokemon.Enum_TypePokemon;
-import Pokemon.Pokemon;
-import Pokemon.Utils;
+import PokEsiremon.Capacite.EffetCapacite.Effet;
+import PokEsiremon.Pokemon.Enum_TypePokemon;
+import PokEsiremon.Pokemon.Pokemon;
+import PokEsiremon.Pokemon.Utils;
 import java.util.ArrayList;
 
 /**
@@ -107,11 +107,11 @@ public class Capacite {
             }
             if(!cible.isKO()){
                 for(Effet e : _effetCapacite){
-                    res += "\n" + e.agir(lanceur, cible);
+                    res += e.agir(lanceur, cible);
                 }
             }
         } else {
-            res = lanceur.getNom() + " n'a pas pu attaquer.";
+            res = lanceur.getNom() + " n'a pas pu attaquer.\n";
         }
         
         return res;
@@ -119,28 +119,28 @@ public class Capacite {
 
     @Override
     public String toString() {
-        String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ") " + _ppMax + " PP"
-                   + "\nPuissance : ";
+        String res = _nom + " (" + _typePkmn + "/" + _typeAtq + ") " + _ppMax + " PP\n"
+                   + "Puissance : ";
         if(_nom.equals("Dévorêve")) res += "100";
         else res += (_puissance == 0 ? " -" : _puissance);
-        res += "\nPrecision : " + _precision + "%";
-        if(!_effetCapacite.isEmpty()) res += "\nEffets :";
+        res += "\nPrecision : " + _precision + "%\n";
+        if(!_effetCapacite.isEmpty()) res += "Effets :\n";
         for(Effet e : _effetCapacite){
-            res += "\n\t- " + e.toString();
+            res += "\t- " + e.toString();
         }
-        if(_critModifier == 8) res += "\nForte chance de coups critiques.";
+        if(_critModifier == 8) res += "Forte chance de coups critiques.\n";
         if(_nbFrappeMin > 1){
             if(_nbFrappeMin != _nbFrappeMax){
-                res += "\nFrappe entre " + _nbFrappeMin + " et " + _nbFrappeMax + " fois l'adversaire.";
+                res += "Frappe entre " + _nbFrappeMin + " et " + _nbFrappeMax + " fois l'adversaire.\n";
             } else {
-                res += "\nFrappe " + _nbFrappeMin + " fois l'adversaire.";
+                res += "Frappe " + _nbFrappeMin + " fois l'adversaire.\n";
             }
         }
         if(_tourAvant){
-            res += "\nL'utilisateur se prépare au premier tour et attaque au second.";
+            res += "L'utilisateur se prépare au premier tour et attaque au second.\n";
         }
         if(_tourApres){
-            res += "\nL'utilisateur se repose au tour suivant.";
+            res += "L'utilisateur se repose au tour suivant.\n";
         }
         return res;
     }

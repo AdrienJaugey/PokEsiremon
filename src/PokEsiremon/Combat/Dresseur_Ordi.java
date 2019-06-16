@@ -16,16 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Combat;
+package PokEsiremon.Combat;
 
-import static Combat.Enum_Action.*;
-import Pokemon.Capacite.Capacite;
-import static Pokemon.Enum_Statut.*;
-import Pokemon.Enum_TypePokemon;
-import static Pokemon.Enum_TypePokemon.*;
-import Pokemon.Pokedex;
-import Pokemon.Pokemon;
-import Pokemon.Utils;
+import PokEsiremon.Capacite.Capacite;
+import static PokEsiremon.Combat.Enum_Action.*;
+import static PokEsiremon.Pokemon.Enum_Statut.*;
+import PokEsiremon.Pokemon.Enum_TypePokemon;
+import static PokEsiremon.Pokemon.Enum_TypePokemon.*;
+import PokEsiremon.Pokemon.Utils;
 import java.util.ArrayList;
 
 /**
@@ -46,19 +44,7 @@ public class Dresseur_Ordi extends Dresseur {
     public Dresseur_Ordi() {
         super("");
         _nom = nomPossibles[(int)Math.floor(Math.random() * (nomPossibles.length))];
-        Pokedex pkdx = Pokedex.get();
-        for(int pkmn = 0; pkmn < 6; pkmn++){
-            int idPkmn = 1 + (int)Math.floor(Math.random() * Pokedex.NB_POKEMON);
-            _equipe[pkmn] = new Pokemon(idPkmn);
-            ArrayList<Integer> listeCapa = (ArrayList<Integer>) pkdx.getCapacitePokemon(idPkmn).clone();
-            for(int capa = 0; capa < 4; capa++){
-                int idCapa = listeCapa.get((int)Math.floor(Math.random() * listeCapa.size()));
-                try {
-                    _equipe[pkmn].setCapacite(idCapa, capa);
-                    listeCapa.remove(Integer.valueOf(idCapa));
-                } catch (Exception ex) { }
-            }
-        }
+        genererEquipeAlea();
     }
     
     public void setAdversaire(Dresseur d){
@@ -97,7 +83,7 @@ public class Dresseur_Ordi extends Dresseur {
             }
             //Si on en a trouvé au moins une, on en tire une au hasard parmi toutes
             if(!aChoisir.isEmpty()){
-                return aChoisir.get((int) Math.floor(Math.random() * aChoisir.size()));
+                return choisir(aChoisir);
             }
         }
         
@@ -118,9 +104,9 @@ public class Dresseur_Ordi extends Dresseur {
                 } catch (Exception ex) { }
             }
             if(!aChoisir2.isEmpty()){ //On choisit en priorité dans les attaques super/très efficaces
-                return aChoisir2.get((int) Math.floor(Math.random() * aChoisir2.size()));
+                return choisir(aChoisir2);
             } else if(!aChoisir1.isEmpty()){ //Si toujours pas de capacité, on choisit parmi les efficaces
-                return aChoisir1.get((int) Math.floor(Math.random() * aChoisir1.size()));
+                return choisir(aChoisir1);
             }
         }
         
@@ -137,7 +123,7 @@ public class Dresseur_Ordi extends Dresseur {
                 } catch (Exception ex) { }
             }
             if(!aChoisir.isEmpty()){
-                return aChoisir.get((int) Math.floor(Math.random() * aChoisir.size()));
+                return choisir(aChoisir);
             }
         }
         
@@ -150,7 +136,7 @@ public class Dresseur_Ordi extends Dresseur {
             } catch (Exception ex) { }
         }
         if(!aChoisir.isEmpty()){
-            return aChoisir.get((int) Math.floor(Math.random() * aChoisir.size()));
+            return choisir(aChoisir);
         }
         return 0;
     }
@@ -162,32 +148,18 @@ public class Dresseur_Ordi extends Dresseur {
         return res;
     }
     
+    private <T> T choisir(ArrayList<T> liste){
+        return liste.get((int) Math.floor(Math.random() * liste.size()));
+    }
+    
     /**
      * Permet de choisir le pokémon avec lequel l'ordi va changer
      * @return l'emplacement du pokémon a envoyer au combat
      */
     private int choixSwitch(){
-        ArrayList<Integer> possible = new ArrayList<>();
-        int i = 0;
-        while(i < 6){
-            if(_equipe[i] != _pkmnActuel && _equipe[i] != null && !_equipe[i].isKO()) possible.add(i);
-            i++;
-        }
-        return possible.get((int)Math.floor(Math.random() * possible.size()));
+        return choisir(switchPossibles());
     }
 
-    /**
-     * Permet de savoir si le joueur peut changer de pokémon
-     * @return true s'il peut, false sinon
-     */
-    private boolean switchPossible() {
-        boolean res = false;
-        int i = 0;
-        while(i < 6 && !res){
-            if(_equipe[i] != null && !_equipe[i].isKO()) res |= true;
-            i++;
-        }
-        return res;
-    }
+    
     
 }

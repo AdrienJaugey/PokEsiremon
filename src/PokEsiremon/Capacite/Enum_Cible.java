@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey.
+ * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,34 +16,17 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite;
-
-import Pokemon.Enum_TypePokemon;
-import static Pokemon.Enum_TypePokemon.*;
+package PokEsiremon.Capacite;
 
 /**
  *
- * @author AdrienJaugey
+ * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public enum Enum_TypeAttaque {
-    PHYSIQUE,
-    SPECIALE;
+public enum Enum_Cible {
+    LANCEUR,
+    ADVERSAIRE;
     
-    public static Enum_TypeAttaque get(Enum_TypePokemon type){
-        if(type == PLANTE 
-        || type == EAU 
-        || type == FEU 
-        || type == ELECTRIK 
-        || type == PSY 
-        || type == GLACE 
-        || type == DRAGON){
-            return SPECIALE;
-        } else {
-            return PHYSIQUE;
-        }
-    }
-    
-    public static Enum_TypeAttaque get(String type){
-        return Enum_TypeAttaque.valueOf(type.toUpperCase());
+    public static Enum_Cible get(String cible){
+        return Enum_Cible.valueOf(cible.toUpperCase());
     }
 }

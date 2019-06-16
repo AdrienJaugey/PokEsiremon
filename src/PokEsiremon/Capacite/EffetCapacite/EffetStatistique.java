@@ -16,12 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite.EffetCapacite;
+package PokEsiremon.Capacite.EffetCapacite;
 
-import Pokemon.Capacite.Enum_Cible;
-import Pokemon.Enum_Statistique;
-import static Pokemon.Enum_Statistique.VIE;
-import Pokemon.Pokemon;
+import PokEsiremon.Capacite.Enum_Cible;
+import PokEsiremon.Pokemon.Enum_Statistique;
+import static PokEsiremon.Pokemon.Enum_Statistique.VIE;
+import PokEsiremon.Pokemon.Pokemon;
 
 /**
  *
@@ -55,21 +55,21 @@ public class EffetStatistique extends Effet {
     public String description() {
         String res = "";
         if(_modifier > 0){
-            res = "Ajoute " + (int)(_modifier * 100) + "% de " + _stat.toString();
+            res = "Ajoute " + (int)(_modifier * 100) + "% de " + _stat.toString() + ".\n";
         } else if(_modifier < 0){
-            res = "Retire " + (int)(-_modifier * 100) + "% de "  + _stat.toString();
+            res = "Retire " + (int)(-_modifier * 100) + "% de "  + _stat.toString() + ".\n";
         } else{
             if(_stat == VIE){
                 if(_delta > 0){
-                    res = "Ajoute " + _delta + " points de vie";
-                } else {
-                    res = "Retire " + (-_delta) + " points de vie";
+                    res = "Ajoute " + _delta + " points de vie.\n";
+                } else if(_delta < 0){
+                    res = "Retire " + (-_delta) + " points de vie.\n";
                 }
             } else {
                 if(_delta > 0){
-                    res = "Ajoute " + _delta + " niveau" + (_delta > 1 ? "x" : "") + " de " + _stat.toString();
-                } else {
-                    res = "Retire " + (-_delta) + " niveau" + (_delta < -1 ? "x" : "") + " de " + _stat.toString();
+                    res = "Ajoute " + _delta + " niveau" + (_delta > 1 ? "x" : "") + " de " + _stat.toString() + ".\n";
+                } else if(_delta < 0){
+                    res = "Retire " + (-_delta) + " niveau" + (_delta < -1 ? "x" : "") + " de " + _stat.toString() + ".\n";
                 }
             }
             

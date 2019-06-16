@@ -16,9 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Combat;
+package PokEsiremon.Combat;
 
-import Pokemon.Pokemon;
+import PokEsiremon.Pokemon.Pokedex;
+import PokEsiremon.Pokemon.Pokemon;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,6 +37,22 @@ public class Dresseur {
         this._nom = _nom;
         _actionVoulue = null;
         _infoAction = -1;
+    }
+    
+    public final void genererEquipeAlea(){
+        Pokedex pkdx = Pokedex.get();
+        for(int pkmn = 0; pkmn < 6; pkmn++){
+            int idPkmn = 1 + (int)Math.floor(Math.random() * Pokedex.NB_POKEMON);
+            _equipe[pkmn] = new Pokemon(idPkmn);
+            ArrayList<Integer> listeCapa = (ArrayList<Integer>) pkdx.getCapacitePokemon(idPkmn).clone();
+            for(int capa = 0; capa < 4; capa++){
+                int idCapa = listeCapa.get((int)Math.floor(Math.random() * listeCapa.size()));
+                try {
+                    _equipe[pkmn].setCapacite(idCapa, capa);
+                    listeCapa.remove(Integer.valueOf(idCapa));
+                } catch (Exception ex) { }
+            }
+        }
     }
 
     public String getNom() {
@@ -69,8 +87,16 @@ public class Dresseur {
         _equipe[emplacementEquipe].setCapacite(idCapacite, emplacementCapa);
     }
     
+    public final void setAction(Enum_Action action){
+        _actionVoulue = action;
+    }
+    
     public final Enum_Action getAction(){
         return _actionVoulue;
+    }
+    
+    public final void setInfoAction(int info){
+        _infoAction = info;
     }
     
     public final int getInfoAction(){
@@ -124,7 +150,7 @@ public class Dresseur {
         }
         if(getPokemon(emplacement).isKO()) throw new Exception("Le pokémon est KO !");
         _pkmnActuel = getPokemon(emplacement);
-        res += " envoie " + _pkmnActuel.getNom() + " au combat.";
+        res += " envoie " + _pkmnActuel.getNom() + " au combat.\n";
         return res;
     }
 
@@ -146,6 +172,24 @@ public class Dresseur {
             if(_equipe[i] != null && !_equipe[i].isKO()) res++;
         }
         return res;
+    }
+    
+    /**
+     * Permet de savoir si le joueur peut changer de pokémon
+     * @return true s'il peut, false sinon
+     */
+    public boolean switchPossible() {
+        return getNbPokemonRestant() - 1 > 0;
+    }
+    
+    public ArrayList<Integer> switchPossibles(){
+        ArrayList<Integer> possible = new ArrayList<>();
+        int i = 0;
+        while(i < 6){
+            if(_equipe[i] != _pkmnActuel && _equipe[i] != null && !_equipe[i].isKO()) possible.add(i);
+            i++;
+        }
+        return possible;
     }
     
 }

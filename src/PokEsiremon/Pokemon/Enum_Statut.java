@@ -16,17 +16,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite;
+package PokEsiremon.Pokemon;
 
 /**
  *
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public enum Enum_Cible {
-    LANCEUR,
-    ADVERSAIRE;
+public enum Enum_Statut {
+    NEUTRE,
+    BRULURE,
+    GEL,
+    PARALYSIE,
+    EMPOISONNEMENT,
+    SOMMEIL,
+    CONFUSION,
+    VAMPIGRAINE;
     
-    public static Enum_Cible get(String cible){
-        return Enum_Cible.valueOf(cible.toUpperCase());
+    public static Enum_Statut get(String statut){
+        return Enum_Statut.valueOf(statut.toUpperCase());
     }
 }

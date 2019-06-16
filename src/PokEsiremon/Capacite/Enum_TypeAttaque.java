@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 AdrienJaugey <a.jaugey@gmail.com>.
+ * Copyright (C) 2019 AdrienJaugey.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,25 +16,34 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite.EffetCapacite;
+package PokEsiremon.Capacite;
+
+import PokEsiremon.Pokemon.Enum_TypePokemon;
+import static PokEsiremon.Pokemon.Enum_TypePokemon.*;
 
 /**
  *
- * @author AdrienJaugey <a.jaugey@gmail.com>
+ * @author AdrienJaugey
  */
-public enum Enum_EffetSpeciaux {
-    PEUR,
-    CLONAGE,
-    COPIE_TYPE,
-    COPIE_CAPACITE,
-    NO_STATUS_CHANGE,
-    BUEENOIRE,
-    CONTRECOUP,
-    RENVOI_DEGAT,
-    ENTRAVE,
-    DEGATS2VIE,
-    METRONOME,
-    MIMIQUE,
-    SOIN,
-    DEVOREVE;
+public enum Enum_TypeAttaque {
+    PHYSIQUE,
+    SPECIALE;
+    
+    public static Enum_TypeAttaque get(Enum_TypePokemon type){
+        if(type == PLANTE 
+        || type == EAU 
+        || type == FEU 
+        || type == ELECTRIK 
+        || type == PSY 
+        || type == GLACE 
+        || type == DRAGON){
+            return SPECIALE;
+        } else {
+            return PHYSIQUE;
+        }
+    }
+    
+    public static Enum_TypeAttaque get(String type){
+        return Enum_TypeAttaque.valueOf(type.toUpperCase());
+    }
 }

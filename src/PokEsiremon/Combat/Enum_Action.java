@@ -16,18 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon;
+package PokEsiremon.Combat;
 
 /**
- *  Méthodes basiques/utiles
+ *
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public abstract class Utils {
-    public static boolean chance(int chance){
-        return (Math.random() * 100) <= chance;
-    }
-    
-    public static int borne(int min, int value, int max){
-        return Math.max(min, Math.min(value, max));
-    }
+public enum Enum_Action {
+    SWITCHER,
+    ATTAQUER;
 }

@@ -1229,7 +1229,7 @@
         <pokemons>1,2,3,12,15,23,24,41,42,43,44,45,46,47,48,49,69,70,71,72,73,88,89,92,93,94,103,114,151</pokemons>
         <effets>
             <effet>
-                <cible>Adversaire</cible>
+                <cible>Lanceur</cible>
                 <special modifier="0.5">Degats2Vie</special>
             </effet>
         </effets>

@@ -16,15 +16,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon;
+package PokEsiremon.Pokemon;
 
-import Pokemon.Capacite.Capacite;
-import Pokemon.Capacite.EffetCapacite.Effet;
-import Pokemon.Capacite.EffetCapacite.EffetSpecial;
-import Pokemon.Capacite.EffetCapacite.EffetStatistique;
-import Pokemon.Capacite.EffetCapacite.EffetStatut;
-import static Pokemon.Capacite.EffetCapacite.Enum_EffetSpeciaux.*;
-import Pokemon.Capacite.Enum_Cible;
+import PokEsiremon.Capacite.Capacite;
+import PokEsiremon.Capacite.EffetCapacite.Effet;
+import PokEsiremon.Capacite.EffetCapacite.EffetSpecial;
+import PokEsiremon.Capacite.EffetCapacite.EffetStatistique;
+import PokEsiremon.Capacite.EffetCapacite.EffetStatut;
+import static PokEsiremon.Capacite.EffetCapacite.Enum_EffetSpeciaux.*;
+import PokEsiremon.Capacite.Enum_Cible;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.xml.parsers.DocumentBuilder;
@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
  *
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public class Pokedex {
+public class Pokedex{
     public static final int NB_POKEMON = 151;
     public static final int NB_CAPACITE = 162;
     private static Pokedex _instance;
@@ -56,15 +56,15 @@ public class Pokedex {
         _pkmnType = new Enum_TypePokemon[NB_POKEMON][2];
         _pkmnCapacite = new ArrayList[NB_POKEMON];
         _capacite = new Capacite[NB_CAPACITE];
-        
+    
         /*******************************
         *   Importation des pokémons   *
         *******************************/
-        String line = "";
+        Scanner scan;
         int i = 0;
         Enum_TypePokemon types[] = Enum_TypePokemon.values();
         try {
-            Scanner scan = new Scanner(getClass().getResourceAsStream("../Ressources/Donnees/pokemon_base_stats.csv"));
+            scan = new Scanner(Pokedex.class.getResourceAsStream("pokemon_base_stats.csv"));
             while (scan.hasNextLine()) {
                 String[] pkmn = scan.nextLine().split(";");
                 _pkmnNom[i] = pkmn[1];
@@ -86,7 +86,7 @@ public class Pokedex {
             ********************************/
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document xml = builder.parse(getClass().getResourceAsStream("../Ressources/Donnees/pokemon_moves.xml"));
+            Document xml = builder.parse(Pokedex.class.getResourceAsStream("pokemon_moves.xml"));
             NodeList capacites = xml.getDocumentElement().getChildNodes();
             Node capacite;
             for(i = 0; i < capacites.getLength() - 1; i++){
@@ -205,8 +205,6 @@ public class Pokedex {
             }
         } catch (Exception e) {
             System.err.println(e.getLocalizedMessage());
-        } finally {
-            
         }
     }
     
@@ -285,7 +283,7 @@ public class Pokedex {
         return convertToInt(id);
     }
     
-    public int[] getCapaciteId(int pokemonId, String search){
+    public ArrayList<Integer> getCapaciteId(int pokemonId, String search){
         ArrayList<Integer> res = new ArrayList<>();
         search = normalize(search);
         ArrayList<Integer> listeCapa = _pkmnCapacite[pokemonId - 1];
@@ -294,7 +292,25 @@ public class Pokedex {
             if(_capacite[id] == null) continue;
             if(normalize(_capacite[id].getNom()).contains(search)) res.add(id);
         }
-        return convertToInt(res);
+        return res;
+    }
+    
+    public String[] getListePokemon(){
+        String res[] = new String[NB_POKEMON];
+        for(int i = 0; i < NB_POKEMON; i++){
+            res[i] = _pkmnNom[i] + " (" + _pkmnType[i][0].toString() + (_pkmnType[i][1]!=null?"/"+_pkmnType[i][1].toString():"") + ")";
+        }
+        return res;
+    }
+    
+    public ArrayList<String> getListeCapacite(Pokemon pk){
+        ArrayList<Integer> idCapa = getCapaciteId(pk.getId(), "");
+        ArrayList<String> res = new ArrayList<>();
+        for(int i : idCapa){
+            res.add(_capacite[i].getNom() + " (" + _capacite[i].getTypePkmn().toString() 
+                             + "/" + _capacite[i].getTypeAtq().toString() + ") " + _capacite[i].getPPMax() + " PP");
+        }
+        return res;
     }
     
     private static String normalize(String s){

@@ -1,3 +1,0 @@
-Ajout de lutte quand 0 pp
-Implémentation des effets spéciaux de capacités
-Implémentation du nombre de tour avant/après une capacité

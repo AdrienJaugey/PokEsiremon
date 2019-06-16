@@ -16,9 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Combat;
+package PokEsiremon.Combat;
 
-import static Combat.Enum_Action.*;
+import static PokEsiremon.Combat.Enum_Action.*;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Combat {
         _joueurs[1] = new Dresseur_Ordi();
     }
     
-    public void ajouterHumain(Dresseur d){
+    public void ajouterJoueur1(Dresseur d){
         _joueurs[0] = d;
         ((Dresseur_Ordi)_joueurs[1]).setAdversaire(d);
     }
@@ -49,7 +49,14 @@ public class Combat {
         return res;
     }
     
+    private void genererActionOrdi(){
+        for(Dresseur d : _joueurs){
+            if(d instanceof Dresseur_Ordi) ((Dresseur_Ordi)d).choixActionSuivante();
+        }
+    }
+    
     public String debutNouveauTour(){
+        genererActionOrdi();
         Enum_Action a1 = _joueurs[0].getAction(),
                     a2 = _joueurs[1].getAction();
         int info1 = _joueurs[0].getInfoAction(),
@@ -120,8 +127,10 @@ public class Combat {
     public String changerKO(){
         String res = "";
         for(int i = 0; i < 2; i++){
-            if(_joueurs[i] instanceof Dresseur_Ordi && _joueurs[i].getPokemonActuel().isKO()){
+            if(_joueurs[i] instanceof Dresseur_Ordi){
                 ((Dresseur_Ordi)_joueurs[i]).choixActionSuivante();
+            }
+            if(_joueurs[i].getPokemonActuel().isKO()){
                 try {
                     res += _joueurs[i].changerPokemon(_joueurs[i].getInfoAction());
                 } catch (Exception ex) { }
@@ -151,6 +160,10 @@ public class Combat {
         } else if(_joueurs[0].isOut()){ //Les deux joueurs ont perdus
             return "Match nul";
         } else return "";
+    }
+    
+    public boolean canStart(){
+        return _joueurs[0].canStart() && _joueurs[1].canStart();
     }
     
     public boolean isDone(){

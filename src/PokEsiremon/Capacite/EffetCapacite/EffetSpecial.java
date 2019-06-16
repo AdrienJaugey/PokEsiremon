@@ -16,16 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite.EffetCapacite;
+package PokEsiremon.Capacite.EffetCapacite;
 
-import Pokemon.Capacite.Capacite;
-import static Pokemon.Capacite.EffetCapacite.Enum_EffetSpeciaux.*;
-import Pokemon.Capacite.Enum_Cible;
-import static Pokemon.Capacite.Enum_Cible.LANCEUR;
-import static Pokemon.Enum_Statistique.VIE;
-import static Pokemon.Enum_TypePokemon.PSY;
-import Pokemon.Pokedex;
-import Pokemon.Pokemon;
+import PokEsiremon.Capacite.Capacite;
+import static PokEsiremon.Capacite.EffetCapacite.Enum_EffetSpeciaux.*;
+import PokEsiremon.Capacite.Enum_Cible;
+import static PokEsiremon.Capacite.Enum_Cible.LANCEUR;
+import static PokEsiremon.Pokemon.Enum_Statistique.VIE;
+import static PokEsiremon.Pokemon.Enum_TypePokemon.PSY;
+import PokEsiremon.Pokemon.Pokedex;
+import PokEsiremon.Pokemon.Pokemon;
 
 /**
  *
@@ -53,7 +53,7 @@ public class EffetSpecial extends Effet{
                 if(cible.getVie() > vieClone){
                     cible.modifierStatistique(VIE, -vieClone);
                     cible.creerClone();
-                    res = cible.getNom() + " a créé un clone";
+                    res = cible.getNom() + " a créé un clone.\n";
                 }
             } break;
             case COPIE_TYPE: {
@@ -68,7 +68,7 @@ public class EffetSpecial extends Effet{
             } break;
             case CONTRECOUP: {
                 cible.perdreVie((int) Math.round(autre.getDernierDegats() * _modifier));
-                res = cible.getNom() + " se blesse en attaquant";
+                res = cible.getNom() + " se blesse en attaquant\n";
             } break;
             case COPIE_CAPACITE: res = cible.copierCapacite(autre); break;
             case ENTRAVE: res = cible.bloquerCapacite(2, 8); break;
@@ -81,7 +81,7 @@ public class EffetSpecial extends Effet{
                 int idCapa = (int)Math.round(1 + Math.random() * pkdx.NB_CAPACITE);
                 while(pkdx.getCapacite(idCapa) == null) idCapa = (int)Math.round(1 + Math.random() * pkdx.NB_CAPACITE);
                 Capacite capa = pkdx.getCapacite(idCapa);
-                res = cible.getNom() + " lance " + capa.getNom() + "." + capa.utiliser(cible, autre);
+                res = cible.getNom() + " lance " + capa.getNom() + ".\n" + capa.utiliser(cible, autre);
             } break;
             case MIMIQUE: {
                 Capacite capa = autre.getDerniereCapacite();
@@ -89,7 +89,7 @@ public class EffetSpecial extends Effet{
                     res = cible.getNom() + " lance " + capa.getNom() + ".\n";
                     res += capa.utiliser(cible, autre);
                 } else {
-                    res = "Mimique a echoué";
+                    res = "Mimique a echoué.\n";
                 }
             } break;
             case RENVOI_DEGAT:{
@@ -105,10 +105,10 @@ public class EffetSpecial extends Effet{
                     EffetSpecial effet = new EffetSpecial(LANCEUR, 100, DEGATS2VIE, 0.5);
                     devoreve.addEffet(effet);
                     devoreve.utiliser(autre, cible);
-                    res = cible.getNom() + " perd " + cible.getDernierDegats() + " PV.";
-                    res += "\n" + autre.getNom() + " récupère " + (int)Math.round(cible.getDernierDegats() / 2) + " PV.";
+                    res = cible.getNom() + " perd " + cible.getDernierDegats() + " PV.\n";
+                    res += autre.getNom() + " récupère " + (int)Math.round(cible.getDernierDegats() / 2) + " PV.\n";
                 } else {
-                    res = cible.getNom() + " n'est pas endormi, Dévorêve échoue.";
+                    res = cible.getNom() + " n'est pas endormi, Dévorêve échoue.\n";
                 }
             }break;
         }
@@ -136,7 +136,7 @@ public class EffetSpecial extends Effet{
             case DEVOREVE : res = "Attaque uniquement si le pokémon adverse dort.\n\t  Restaure 50% des dégats en tant que vie"; break;
         }
         if(super._chance != 100) res += ", " + _chance + "% de chance de réussite.";
-        else res += ".";
+        else res += ".\n";
         return res;
     }
     

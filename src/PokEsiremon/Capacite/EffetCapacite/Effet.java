@@ -16,13 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite.EffetCapacite;
+package PokEsiremon.Capacite.EffetCapacite;
 
-import Pokemon.Capacite.Enum_Cible;
-import static Pokemon.Capacite.Enum_Cible.LANCEUR;
-import Pokemon.Pokemon;
-import Pokemon.Utils;
-import static Pokemon.Utils.chance;
+import PokEsiremon.Capacite.Enum_Cible;
+import static PokEsiremon.Capacite.Enum_Cible.LANCEUR;
+import PokEsiremon.Pokemon.Pokemon;
+import PokEsiremon.Pokemon.Utils;
+import static PokEsiremon.Pokemon.Utils.chance;
 
 /**
  *
@@ -58,7 +58,7 @@ public abstract class Effet {
     
     @Override
     public String toString(){
-        return description() + " au pokémon " + _cible + (_chance < 100 ? " avec " + _chance + "% de chance." : ".");
+        return description() + " au pokémon " + _cible + (_chance < 100 ? " avec " + _chance + "% de chance." : ".") + "\n";
     }
 
     /**

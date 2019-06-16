@@ -16,37 +16,25 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon.Capacite.EffetCapacite;
-
-import Pokemon.Capacite.Enum_Cible;
-import Pokemon.Enum_Statut;
-import static Pokemon.Enum_Statut.NEUTRE;
-import Pokemon.Pokemon;
+package PokEsiremon.Capacite.EffetCapacite;
 
 /**
  *
  * @author AdrienJaugey <a.jaugey@gmail.com>
  */
-public class EffetStatut extends Effet {
-    private final Enum_Statut _statut;
-    
-    public EffetStatut(Enum_Cible cible, int chance, Enum_Statut statut) {
-        super(cible, chance);
-        _statut = statut;
-    }
-
-    @Override
-    public String effet(Pokemon cible, Pokemon autre) {
-        return cible.setStatut(_statut, autre);
-    }
-
-    @Override
-    public String description() {
-        if(_statut == NEUTRE){
-            return "Annule le changement de statut infligé";
-        } else {
-            return "Inflige le statut " + _statut.toString();
-        }
-    }
-    
+public enum Enum_EffetSpeciaux {
+    PEUR,
+    CLONAGE,
+    COPIE_TYPE,
+    COPIE_CAPACITE,
+    NO_STATUS_CHANGE,
+    BUEENOIRE,
+    CONTRECOUP,
+    RENVOI_DEGAT,
+    ENTRAVE,
+    DEGATS2VIE,
+    METRONOME,
+    MIMIQUE,
+    SOIN,
+    DEVOREVE;
 }

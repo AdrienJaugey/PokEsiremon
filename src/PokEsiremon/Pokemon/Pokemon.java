@@ -16,13 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package Pokemon;
+package PokEsiremon.Pokemon;
 
-import Pokemon.Capacite.Capacite;
-import static Pokemon.Capacite.Enum_TypeAttaque.*;
-import static Pokemon.Enum_Statistique.VIE;
-import static Pokemon.Enum_Statut.*;
-import static Pokemon.Enum_TypePokemon.*;
+import PokEsiremon.Capacite.Capacite;
+import static PokEsiremon.Capacite.Enum_TypeAttaque.*;
+import PokEsiremon.Combat.Dresseur;
+import static PokEsiremon.Pokemon.Enum_Statistique.VIE;
+import static PokEsiremon.Pokemon.Enum_Statut.*;
+import static PokEsiremon.Pokemon.Enum_TypePokemon.*;
 import java.util.ArrayList;
 
 /**
@@ -154,6 +155,10 @@ public class Pokemon{
      */
     public String getNom() {
         return _nom;
+    }
+    
+    public int getId(){
+        return _id;
     }
     
     /**
@@ -321,7 +326,7 @@ public class Pokemon{
     public int getAtq() {
         double atq = getNiveauStat(0) * _atqMax;
         if(_statut == BRULURE) atq /= 2; 
-        return (int)Math.round(atq);
+        return Math.min(999, (int)Math.round(atq));
     }
 
     /**
@@ -330,7 +335,7 @@ public class Pokemon{
      */
     public int getDef() {
         double def = getNiveauStat(1) * _defMax;
-        return (int)Math.round(def);
+        return Math.min(999, (int)Math.round(def));
     }
 
     /**
@@ -339,7 +344,7 @@ public class Pokemon{
      */
     public int getAtqSpe() {
         double atqSpe = getNiveauStat(2) * _atqSpeMax;
-        return (int)Math.round(atqSpe);
+        return Math.min(999, (int)Math.round(atqSpe));
     }
 
     /**
@@ -348,7 +353,7 @@ public class Pokemon{
      */
     public int getDefSpe() {
         double defSpe = getNiveauStat(3) * _defSpeMax;
-        return (int)Math.round(defSpe);
+        return Math.min(999, (int)Math.round(defSpe));
     }
 
     /**
@@ -358,7 +363,7 @@ public class Pokemon{
     public int getVitesse() {
         double vitesse = getNiveauStat(4) * _vitMax;
         if(_statut == PARALYSIE)  vitesse /= 2;
-        return (int)Math.round(vitesse);
+        return Math.min(999, (int)Math.round(vitesse));
     }
     
     /**
@@ -402,7 +407,7 @@ public class Pokemon{
             if(_capacites[i] == null) continue;
             res += "\n\t" + (i+1) + " - " + _capacites[i].getNom();
         }
-        return res;
+        return res + "\n";
     }
     
     /**
@@ -438,29 +443,36 @@ public class Pokemon{
     public String modifierStatistique(Enum_Statistique stat, int delta){
         String res = stat.toString() + " de " + _nom;
         switch(delta){
-            case -3: res += " diminue énormément."; break;
-            case -2: res += " diminue beaucoup."; break;
-            case -1: res += " diminue."; break;
-            case 1:  res += " augmente."; break;
-            case 2:  res += " augmente beaucoup."; break;
-            case 3:  res += " augmente énormément."; break;
+            case -3: res += " diminue énormément.\n"; break;
+            case -2: res += " diminue beaucoup.\n"; break;
+            case -1: res += " diminue.\n"; break;
+            case 1:  res += " augmente.\n"; break;
+            case 2:  res += " augmente beaucoup.\n"; break;
+            case 3:  res += " augmente énormément.\n"; break;
         }
         switch(stat){
             case VIE : {
                 if(delta < 0) res = perdreVie(-delta);
                 else {
-                    res = _nom + " récupère " + delta + " PV.";
+                    res = _nom + " récupère " + delta + " PV.\n";
                     _vie = Math.min(_vieMax, _vie + delta);
                 }
             } break;
             default: 
                 if(!isThereClone() && !_brume){
-                    _niveauStat[stat.ordinal() - 1] = Utils.borne(-6, _niveauStat[stat.ordinal() - 1] + delta, 6);
+                    if(_niveauStat[stat.ordinal() - 1] == Utils.borne(-6, _niveauStat[stat.ordinal() - 1] + delta, 6)){
+                        res = stat.toString() + " de " + _nom + " ne peut plus ";
+                        if(delta < 0) res += "diminuer";
+                        else if (delta > 0) res += "augmenter";
+                        res += ".\n";
+                    } else {
+                        _niveauStat[stat.ordinal() - 1] = Utils.borne(-6, _niveauStat[stat.ordinal() - 1] + delta, 6);
+                    }
                 } else {
                     if(_brume){
-                        res = "Aucun changement de statistiques ne peut affecter " + _nom + ".";
+                        res = "Aucun changement de statistiques ne peut affecter " + _nom + ".\n";
                     } else if(isThereClone()){
-                        res = "Cela affecte le clone.";
+                        res = "Cela affecte le clone.\n";
                     }
                 }
         }
@@ -498,8 +510,8 @@ public class Pokemon{
      */
     public String setStatut(Enum_Statut statut, Pokemon cibleVampigraine){
         String res = "";
-        if(_tourAttente && (_capaEnAttente.getNom().equals("Vol") || _capaEnAttente.equals("Tunnel") )){
-            return _nom + " n'est pas présent sur le terrain.";
+        if(_tourAttente && (_capaEnAttente.getNom().equals("Vol") || _capaEnAttente.getNom().equals("Tunnel") )){
+            return _nom + " n'est pas présent sur le terrain.\n";
         }
         //la confusion et vampigraine sont censés être des statuts secondaires 
         //(i.e. ils peuvent subvenir en même temps qu'un statut principal (gel...)
@@ -508,42 +520,42 @@ public class Pokemon{
                 case BRULURE: {
                     if(!isType(FEU)){
                         _statut = BRULURE;
-                        res = _nom + " est brûlé";
+                        res = _nom + " est brûlé.\n";
                     }
                 } break;
                 case GEL: {
                     if(!isType(GLACE)) {
                         _statut = GEL;
-                        res = _nom + " est gelé";
+                        res = _nom + " est gelé.\n";
                     }
                 } break;
                 case PARALYSIE: {
                     if(!isType(ELECTRIK)) {
                         _statut = PARALYSIE;
-                        res = _nom + " est paralysé";
+                        res = _nom + " est paralysé.\n";
                     }
                 } break;
                 case EMPOISONNEMENT: {
                     if(!isType(POISON)) {
                         _statut = EMPOISONNEMENT;
-                        res = _nom + " est empoisonné";
+                        res = _nom + " est empoisonné.\n";
                     }
                 } break;
                 case SOMMEIL: {
                     _statut = SOMMEIL;
                     _tourStatut = 1 + (int)(Math.random() * 4);
-                    res = _nom + " s'endort";
+                    res = _nom + " s'endort.\n";
                 } break;
                 case CONFUSION: {
                     _statut = CONFUSION;
                     _tourStatut = 1 + (int)(Math.random() * 3);
-                    res = _nom + " est confus";
+                    res = _nom + " est confus.\n";
                 } break;
                 case VAMPIGRAINE: {
                     if(!isType(PLANTE)) {
                         _statut = VAMPIGRAINE;
                         _cibleVampigraine = cibleVampigraine;
-                        res = _nom + " est infecté";
+                        res = _nom + " est infecté.\n";
                     }
                 } break;
                 default : { } break;
@@ -558,7 +570,8 @@ public class Pokemon{
      * @return Une phrase descriptive
      */
     public String perdreVie(int degats){
-        String res = "";
+        String res;
+        if(degats == 0) return "Rien ne se passe.\n";
         if(isThereClone()){
             _vieClone -= degats;
             _dernierDegats = degats;
@@ -566,21 +579,21 @@ public class Pokemon{
                 this.resetStatut();
                 _vieClone = 0;
                 _dernierDegats = 0;
-                res += "Le clone a disparu";
+                res = "Le clone a disparu.";
             } else {
-                res += "Le clone a absorbé les dégats";
+                res = "Le clone a absorbé les dégats.";
             }
         } else {
             _dernierDegats = Math.min(_vie, degats);
             _vie -= degats;
             if(isKO()){
                 gererKO();
-                res = _nom + " est KO";
+                res = _nom + " est KO.";
             } else {
-                res = _nom + " perd " + _dernierDegats + " PV";
+                res = _nom + " perd " + _dernierDegats + " PV.";
             }
         }
-        return res;
+        return res + "\n";
     }
     
     
@@ -604,13 +617,13 @@ public class Pokemon{
         //Si le pokémon doit se reposer
         if(_tourRepos) {
             _tourRepos = false;
-            return _nom + " se repose.";
+            return _nom + " se repose.\n";
         }
         //Si le pokémon est apeuré, il n'attaque pas
-        if(_peur) return _nom + " est apeuré, il n'a pas pu attaquer.";
+        if(_peur) return _nom + " est apeuré, il n'a pas pu attaquer.\n";
         //Si la capacité est bloquée mais que le pokémon a encore d'autres capacités possibles
         if (_capaciteBloquee[choixCapacite] != 0 && peutEncoreCombattre()){
-            return _nom + " n'a pas pu attaquer, la capacité est bloquée.";
+            return _nom + " n'a pas pu attaquer, la capacité est bloquée.\n";
         }
         
         
@@ -620,8 +633,8 @@ public class Pokemon{
         //Vient d'attendre pour lancer une capacité
         if(_tourAttente && _capaEnAttente != null){
             _tourAttente = false;
-            res = this._nom + " poursuit " + _capaEnAttente.getNom() + ".";
-            res += "\n" + _capaEnAttente.utiliser(this, cible);
+            res = this._nom + " poursuit " + _capaEnAttente.getNom() + ".\n";
+            res += _capaEnAttente.utiliser(this, cible);
             _capaEnAttente = null;
             return res;
         }
@@ -638,11 +651,11 @@ public class Pokemon{
             try {
                 capa = getCapacite(choixCapacite);
                 if (getPPCapacite(choixCapacite) <= 0) {
-                    return _nom + " n'a pas pu attaquer.";
+                    return _nom + " n'a pas pu attaquer.\n";
                 }
                 baisserPPCapacite(choixCapacite);
             } catch (Exception e) {
-                return _nom + " n'a pas pu attaquer.";
+                return _nom + " n'a pas pu attaquer.\n";
             }
         }
               
@@ -651,25 +664,27 @@ public class Pokemon{
             //Si c'est à cause de la confusion, il se blesse
             if(_statut == CONFUSION) {
                 int pvPerdus = (int) Math.round((((42. * this.getAtq() * 40) / (this.getDef() * 50.)) + 2) * (0.85 + Math.random() * 0.15));                                
-                this.modifierStatistique(VIE, -pvPerdus);
-                return _nom + " s'est blessé dans sa confusion.";
+                res = this.modifierStatistique(VIE, -pvPerdus);
+                res += _nom + " s'est blessé dans sa confusion.\n";
+                return res;
             }
-            return this._nom + " n'a pas pu attaquer.";
+            return this._nom + " n'a pas pu attaquer.\n";
         }
         
+        if(capa.getNom().equals("Patience")) _dernierDegats = 0;
         //Le pokémon utilise la capacité
-        res = this._nom + " lance " + capa.getNom() + ".";
+        res = this._nom + " lance " + capa.getNom() + ".\n";
         //Si la capacité nécessite un tour d'attente
         if(capa.tourAttente()){
             _tourAttente = true;
             _capaEnAttente = capa;
-            res += "\n" + _nom + " se prépare.";
+            res += _nom + " se prépare.\n";
             return res;
         }
         _tourRepos = capa.tourRepos();
         //S'il est gelé et qu'il peut attaquer, la capacité est donc de type feu, il dégèle
         if(_statut == GEL) res += this.resetStatut();
-        res += "\n" + capa.utiliser(this, cible);
+        res += capa.utiliser(this, cible);
         
         return res;
     }
@@ -714,8 +729,8 @@ public class Pokemon{
                         (       DefCible * 50              )
         */
         String res = "";
-        if(_tourAttente && (_capaEnAttente.getNom().equals("Vol") || _capaEnAttente.equals("Tunnel") )){
-            return _nom + " n'est pas présent sur le terrain.";
+        if(_tourAttente && (_capaEnAttente.getNom().equals("Vol") || _capaEnAttente.getNom().equals("Tunnel") )){
+            return _nom + " n'est pas présent sur le terrain.\n";
         }
         int attaque, defense, puissance = capa.getPuissance();
         if(capa.getTypeAtq() == PHYSIQUE){
@@ -728,17 +743,17 @@ public class Pokemon{
         double modifierSTAB = (lanceur.isType(capa.getTypePkmn()) ? 1.5 : 1);
         
         double modifierType = (capa.getTypePkmn() != null ? this.getModifier(capa.getTypePkmn()) : 1);
-        if(modifierType == 0) return "Ca n'a aucun effet";
-        else if(modifierType <= 0.5) res+= "Ce n'est pas très efficace\n";
+        if(modifierType == 0) return "Ca n'a aucun effet\n";
+        else if(modifierType <= 0.5) res += "Ce n'est pas très efficace\n";
         else if(modifierType >= 2.) res += "C'est très efficace !\n";
         
         double modifierCrit = (Utils.chance(getChanceCrit(capa)) ? 1.5 : 1);
-        if(modifierCrit == 1.5) res += "Coup critique !"; 
+        if(modifierCrit == 1.5) res += "Coup critique !\n"; 
         
         double modifierAlea = 0.85 + Math.random() * 0.15;
         
         int pvPerdus = (int) Math.round((((42. * attaque * puissance) / (defense * 50.)) + 2) * modifierSTAB * modifierType * modifierCrit * modifierAlea); 
-        res += "\n" + this.modifierStatistique(VIE, -pvPerdus);
+        res += this.modifierStatistique(VIE, -pvPerdus);
         return res;
     }
     
@@ -777,7 +792,7 @@ public class Pokemon{
             int pv = Math.min(_vie, (int) (_vieMax / 16.));
             res = this.perdreVie(pv);
             if(_statut == VAMPIGRAINE && _cibleVampigraine != null){
-                res += "\n" + _cibleVampigraine.modifierStatistique(VIE, pv);
+                res += _cibleVampigraine.modifierStatistique(VIE, pv);
             }
         }
         return res;
@@ -822,7 +837,7 @@ public class Pokemon{
      */
     public String apeurer(){
         _peur = true;
-        return _nom + " est apeuré.";
+        return _nom + " est apeuré.\n";
     }
     
     /**
@@ -831,23 +846,24 @@ public class Pokemon{
      */
     public String activerBrume(){
         _brume = true;
-        return "Une brume se lève, aucun changement de statistiques ne peut affecter " + _nom + ".";
+        return "Une brume se lève, aucun changement de statistiques ne peut affecter " + _nom + ".\n";
     }
     
     /**
      * Retire tous les changements de statistiques, de statut si ce n'est pas
      * l'adversaire et annule les effets de brume
+     * @param lanceur le pokémon qui lance Buée Noire
      * @return Une description de ce qui s'est passé
      */
     public String bueeNoire(Pokemon lanceur) {
-        String res = "Les changements de statistiques de " + _nom + " sont annulés.";
+        String res = "Les changements de statistiques de " + _nom + " sont annulés.\n";
         for (int i = 0; i < _niveauStat.length; i++) {
             _niveauStat[i] = 0;
         }
-        if(this != lanceur) res += "\n" + this.resetStatut();
+        if(this != lanceur) res += this.resetStatut();
         if(_brume){
             _brume = false;
-            res += "\nLes effets de brume se dissipent.";
+            res += "Les effets de brume se dissipent.\n";
         }
         return res;
     }
@@ -878,14 +894,14 @@ public class Pokemon{
         if(aCopier._derniereCapaUtilisee != null){
             _copie = aCopier._derniereCapaUtilisee;
             _ppCopie = 10;
-            return _nom + " apprend " + _copie.getNom() + ".";
+            return _nom + " apprend " + _copie.getNom() + ".\n";
         } else {
-            return "Copie a échoué.";
+            return "Copie a échoué.\n";
         }
     }
     
     public String bloquerCapacite(int minTour, int maxTour){
-        String res = "";
+        String res;
         if(_derniereCapaUtilisee != null){
             res = _derniereCapaUtilisee.getNom();
             try {
@@ -901,10 +917,12 @@ public class Pokemon{
                 }
                 else res = "L'entrave a échouée.";
             } catch (Exception ex) { 
-                res = "L'entrave a échoué.";
+                res = "L'entrave a échouée.";
             }
+        } else {
+            res = "L'entrave a echouée";
         }
-        return res;
+        return res + "\n";
     }
     
     /**
@@ -912,9 +930,9 @@ public class Pokemon{
      * @return 
      */
     public String soigner(){
-        this.resetStatut();
+        String res = _nom + " a été soigné\n" + this.resetStatut();
         this._vie = _vieMax;
-        return _nom + " a été soigné";
+        return res;
     }
     
     
@@ -942,6 +960,7 @@ public class Pokemon{
      * @return Une phrase descriptive
      */
     public String resetStatut(){
+        if(_statut == NEUTRE) return "";
         String res = _nom + " n'est plus ";
         switch(_statut){
             case BRULURE: { res += "brûlé."; } break;
@@ -952,6 +971,7 @@ public class Pokemon{
             case CONFUSION: { res += "confus."; } break;
             case VAMPIGRAINE: { res += "infecté."; } break;
         }
+        res += "\n";
         _statut = NEUTRE;
         _tourStatut = 0;
         resetCibleVampigraine();
@@ -1094,6 +1114,38 @@ public class Pokemon{
      */
     public boolean isAsleep() {
         return _statut == SOMMEIL;
+    }
+    
+    public static String affichageCombat(Dresseur j1, Dresseur j2){
+        Pokemon p1 = j1.getPokemonActuel(), p2 = j2.getPokemonActuel();
+        String res = "";
+        res += "################################################################\n";
+        res += "#" + normaliserAffichage(j1.getNom() + " (" + j1.getNbPokemonRestant() + "/6)") + "##" + normaliserAffichage(j2.getNom() + " (" + j2.getNbPokemonRestant() + "/6)") + "#\n";
+        res += "################################################################\n";
+        res += "#" + normaliserAffichage(p1.getNom() + (p1._statut != NEUTRE?" "+ p1.getStatut().toString():"")) + "##" + normaliserAffichage(p2.getNom() + (p2._statut != NEUTRE?" " + p2.getStatut().toString():"")) + "#\n";
+        res += "#" + normaliserAffichage("Vie :     " + (p1.getVie()<100?" ":"") + (p1.getVie()<10?" ":"") + p1.getVie() + "/" + p1.getVieMax()) + "#" 
+             + "#" + normaliserAffichage("Vie :     " + (p2.getVie()<100?" ":"") + (p2.getVie()<10?" ":"") + p2.getVie() + "/" + p2.getVieMax()) + "#\n";
+        res += "#" + normaliserAffichage("Atq :     " + (p1.getAtq()<100?" ":"") + (p1.getAtq()<10?" ":"") + p1.getAtq() + "/" + p1.getAtqMax()) + "#" 
+             + "#" + normaliserAffichage("Atq :     " + (p2.getAtq()<100?" ":"") + (p2.getAtq()<10?" ":"") + p2.getAtq() + "/" + p2.getAtqMax()) + "#\n";
+        res += "#" + normaliserAffichage("Def :     " + (p1.getDef()<100?" ":"") + (p1.getDef()<10?" ":"") + p1.getDef() + "/" + p1.getDefMax()) + "#" 
+             + "#" + normaliserAffichage("Def :     " + (p2.getDef()<100?" ":"") + (p2.getDef()<10?" ":"") + p2.getDef() + "/" + p2.getDefMax()) + "#\n";
+        res += "#" + normaliserAffichage("AtqSpe :  " + (p1.getAtqSpe()<100?" ":"") + (p1.getAtqSpe()<10?" ":"") + p1.getAtqSpe() + "/" + p1.getAtqSpeMax()) + "#" 
+             + "#" + normaliserAffichage("AtqSpe :  " + (p2.getAtqSpe()<100?" ":"") + (p2.getAtqSpe()<10?" ":"") + p2.getAtqSpe() + "/" + p2.getAtqSpeMax()) + "#\n";
+        res += "#" + normaliserAffichage("DefSpe :  " + (p1.getDefSpe()<100?" ":"") + (p1.getDefSpe()<10?" ":"") + p1.getDefSpe() + "/" + p1.getDefSpeMax()) + "#" 
+             + "#" + normaliserAffichage("DefSpe :  " + (p2.getDefSpe()<100?" ":"") + (p2.getDefSpe()<10?" ":"") + p2.getDefSpe() + "/" + p2.getDefSpeMax()) + "#\n";
+        res += "#" + normaliserAffichage("Vitesse : " + (p1.getVitesse()<100?" ":"") + (p1.getVitesse()<10?" ":"") + p1.getVitesse() + "/" + p1.getVitesseMax()) + "#" 
+             + "#" + normaliserAffichage("Vitesse : " + (p2.getVitesse()<100?" ":"") + (p2.getVitesse()<10?" ":"") + p2.getVitesse() + "/" + p2.getVitesseMax()) + "#\n";
+        res += "################################################################\n";
+        return res;
+    }
+    
+    private static String normaliserAffichage(String aAfficher){
+        int taille = 30 - aAfficher.length();
+        int ajoutGauche = taille/2;
+        int ajoutDroite = taille - ajoutGauche;
+        for(int i = 0; i < ajoutGauche; i++) aAfficher = " " + aAfficher;
+        for(int i = 0; i < ajoutDroite; i++) aAfficher += " ";
+        return aAfficher;
     }
 
     
