@@ -1680,7 +1680,7 @@
     <capacite id="128">
         <nom>Repos</nom>
         <type>Psy</type>
-        <pp>10</pp>
+        <pp>3</pp>
         <pokemons>All</pokemons>
         <effets>
             <effet>
@@ -1767,7 +1767,7 @@
         <effets>
             <effet>
                 <cible>Lanceur</cible>
-                <statistique modifier="0.5">Vie</statistique>
+                <statistique modifier="0.5">VieMax</statistique>
             </effet>
         </effets>
     </capacite>

@@ -21,6 +21,7 @@ package PokEsiremon.Capacite.EffetCapacite;
 import PokEsiremon.Capacite.Enum_Cible;
 import PokEsiremon.Pokemon.Enum_Statistique;
 import static PokEsiremon.Pokemon.Enum_Statistique.VIE;
+import static PokEsiremon.Pokemon.Enum_Statistique.VIEMAX;
 import PokEsiremon.Pokemon.Pokemon;
 
 /**
@@ -43,7 +44,8 @@ public class EffetStatistique extends Effet {
     public String effet(Pokemon cible, Pokemon autre) {
         String res = "";
         if(_delta == 0) try {
-            res = cible.modifierStatistique(_stat, _modifier);
+            if(_stat == VIEMAX) res = cible.modifierStatistique(VIE, (int)Math.round(cible.getVieMax()*_modifier));
+            else res = cible.modifierStatistique(_stat, _modifier);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
@@ -54,7 +56,13 @@ public class EffetStatistique extends Effet {
     @Override
     public String description() {
         String res = "";
-        if(_modifier > 0){
+        if(_stat == VIEMAX){
+            if(_delta < 0 || _modifier < 0){
+                res = "Retire " + (_modifier*100) + "% de la Vie max du pokémon " + _cible.toString() + " en tant que vie.";
+            } else {
+                
+            }
+        } else if(_modifier > 0){
             res = "Ajoute " + (int)(_modifier * 100) + "% de " + _stat.toString() + ".\n";
         } else if(_modifier < 0){
             res = "Retire " + (int)(-_modifier * 100) + "% de "  + _stat.toString() + ".\n";

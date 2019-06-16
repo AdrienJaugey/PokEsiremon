@@ -813,6 +813,8 @@ public class Pokemon{
         resetType();
         resetClone();
         resetCopie();
+        _tourRepos = false;
+        _tourAttente = false;
     }
     
     /**
@@ -822,8 +824,6 @@ public class Pokemon{
         this.resetStats();
         this.retourSac();
         this._vie = 0;
-        _tourRepos = false;
-        _tourAttente = false;
     }
     
     
@@ -1063,7 +1063,7 @@ public class Pokemon{
      * @return true si le pokémon est KO, false sinon
      */
     public boolean isKO() {
-        return this.getVie() <= 0;
+        return _vie <= 0;
     }
     
     /**

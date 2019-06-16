@@ -24,6 +24,7 @@ package PokEsiremon.Pokemon;
  */
 public enum Enum_Statistique {
     VIE,
+    VIEMAX,
     ATQ,
     DEF,
     ATQSPE,

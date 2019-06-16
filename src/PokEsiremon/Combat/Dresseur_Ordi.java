@@ -37,7 +37,7 @@ public class Dresseur_Ordi extends Dresseur {
     private final int CHANCE_SWITCH_BASE = 5;
     
     private final int CHANCE_CAPA_FEU_GEL = 50;
-    private final int CHANCE_CAPA_SOIN60 = 30;
+    private final int CHANCE_CAPA_SOIN60 = 20;
     private final int CHANCE_CAPA_SOIN30 = 60;
     private final int CHANCE_CAPA_EFFICACE = 20;
    
@@ -54,14 +54,15 @@ public class Dresseur_Ordi extends Dresseur {
     public void choixActionSuivante(){
         boolean switchPossible = switchPossible();
         _actionVoulue = ATTAQUER;
-        if(!_pkmnActuel.attaqueEnCours() && switchPossible) {
-            if(_pkmnActuel.isKO()){
-                _actionVoulue = SWITCHER;
-                _infoAction = choixSwitch();
-            }
-            if (_pkmnActuel.getStatut() == VAMPIGRAINE && Utils.chance(CHANCE_SWITCH_VAMPIGRAINE)) {
-                _actionVoulue = SWITCHER;
-            } else if(Utils.chance(CHANCE_SWITCH_BASE)) _actionVoulue = SWITCHER;
+        if(_pkmnActuel.isKO()){
+            _actionVoulue = SWITCHER;
+            _infoAction = choixSwitch();
+        } else {
+            if(!_pkmnActuel.attaqueEnCours() && switchPossible) {
+                if (_pkmnActuel.getStatut() == VAMPIGRAINE && Utils.chance(CHANCE_SWITCH_VAMPIGRAINE)) {
+                    _actionVoulue = SWITCHER;
+                } else if(Utils.chance(CHANCE_SWITCH_BASE)) _actionVoulue = SWITCHER;
+             }
         }
         if(_actionVoulue == ATTAQUER) _infoAction = choixCapacite();
         else _infoAction = choixSwitch();

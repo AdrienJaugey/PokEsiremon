@@ -152,7 +152,6 @@ public class Main {
                                 demanderChangement(joueur);
                             }
                             System.out.print(combat.changerKO());
-
                         }
                     }
                     System.out.print(combat.terminerTour());
